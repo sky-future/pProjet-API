@@ -6,7 +6,7 @@ namespace Infrastructure.SqlServer.Users
 {
     public class SqlServerUserRepository: IUserRepository
     {
-        public static readonly string TableName = "User";
+        public static readonly string TableName = "test";
         public static readonly string ColId = "id";
         public static readonly string ColMail = "mail";
         public static readonly string ColPassword = "password";
