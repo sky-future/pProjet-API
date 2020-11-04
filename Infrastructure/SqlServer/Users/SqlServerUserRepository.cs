@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Net;
 using Domain.Users;
 
 namespace Infrastructure.SqlServer.Users
@@ -14,6 +15,10 @@ namespace Infrastructure.SqlServer.Users
         public static readonly string ColAdmin = "admin";
 
         public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
+        public static readonly string ReqCreate = $@"
+            INSERT INTO {TableName}({ColMail},{ColPassword},{ColLastConnexion},{ColAdmin})
+            OUTPUT INSERTED.{ColId}
+            VALUES(@{ColMail},@{ColPassword},@{ColLastConnexion},0)";
         
         private IUserFactory _userFactory = new UserFactory();
         
@@ -50,7 +55,21 @@ namespace Infrastructure.SqlServer.Users
 
         public IUser Create(IUser user)
         {
-            throw new System.NotImplementedException();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = ReqCreate;
+
+                command.Parameters.AddWithValue($"@{ColMail}", user.Mail);
+                command.Parameters.AddWithValue($"@{ColPassword}",user.Password);
+                command.Parameters.AddWithValue($"@{ColLastConnexion}", user.LastConnexion);
+                //command.Parameters.AddWithValue($"@{ColAdmin}", user.Admin);
+
+                user.Id = (int)command.ExecuteScalar();
+            }
+
+            return user;
         }
 
         public bool Delete(int id)

@@ -18,5 +18,12 @@ namespace pAPI.Controllers
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
             return Ok(_userRepository.Query());
         }
+
+        //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
+        [HttpPost]
+        public ActionResult<IUser> Create([FromBody]User user)
+        {
+            return Ok(_userRepository.Create(user));
+        }
     }
 }
