@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Net;
 using Domain.Users;
@@ -7,7 +8,7 @@ namespace Infrastructure.SqlServer.Users
 {
     public class SqlServerUserRepository: IUserRepository
     {
-        public static readonly string TableName = "test";
+        public static readonly string TableName = "UserLa";
         public static readonly string ColId = "id";
         public static readonly string ColMail = "mail";
         public static readonly string ColPassword = "password";
@@ -15,10 +16,21 @@ namespace Infrastructure.SqlServer.Users
         public static readonly string ColAdmin = "admin";
 
         public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
+        public static readonly string ReqGet = ReqQuery + $" WHERE {ColId} = @{ColId}";
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName}({ColMail},{ColPassword},{ColLastConnexion},{ColAdmin})
             OUTPUT INSERTED.{ColId}
             VALUES(@{ColMail},@{ColPassword},@{ColLastConnexion},0)";
+
+        public static readonly string ReqDelete = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
+        public static readonly string ReqUpdate = $@"
+            UPDATE {TableName} SET
+            {ColMail} = @{ColMail},
+            {ColPassword} = @{ColPassword},
+            {ColLastConnexion} = @{ColLastConnexion},
+            {ColAdmin} = @{ColAdmin}
+            WHERE {ColId} = @{ColId}
+        ";
         
         private IUserFactory _userFactory = new UserFactory();
         
@@ -50,7 +62,18 @@ namespace Infrastructure.SqlServer.Users
 
         public IUser Get(int id)
         {
-            throw new System.NotImplementedException();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = ReqGet;
+
+                command.Parameters.AddWithValue($"@{ColId}", id);
+
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                return reader.Read() ? _userFactory.CreateFromReader(reader) : null;
+            }
         }
 
         public IUser Create(IUser user)
@@ -66,7 +89,15 @@ namespace Infrastructure.SqlServer.Users
                 command.Parameters.AddWithValue($"@{ColLastConnexion}", user.LastConnexion);
                 //command.Parameters.AddWithValue($"@{ColAdmin}", user.Admin);
 
-                user.Id = (int)command.ExecuteScalar();
+                try
+                {
+                    user.Id = (int) command.ExecuteScalar();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return null;
+                }
             }
 
             return user;
@@ -74,12 +105,44 @@ namespace Infrastructure.SqlServer.Users
 
         public bool Delete(int id)
         {
-            throw new System.NotImplementedException();
+            bool hasBeenDeleted = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = ReqDelete;
+
+                command.Parameters.AddWithValue($"@{ColId}", id);
+
+                hasBeenDeleted = command.ExecuteNonQuery() == 1;
+
+            }
+
+            return hasBeenDeleted;
         }
 
         public bool Update(int id, IUser user)
         {
-            throw new System.NotImplementedException();
+            bool hasBeenChanged = false;
+            
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = ReqUpdate;
+                
+                command.Parameters.AddWithValue($"@{ColMail}", user.Mail);
+                command.Parameters.AddWithValue($"@{ColPassword}",user.Password);
+                command.Parameters.AddWithValue($"@{ColLastConnexion}", user.LastConnexion);
+                command.Parameters.AddWithValue($"@{ColAdmin}", user.Admin);
+                command.Parameters.AddWithValue($"@{ColId}", id);
+
+                hasBeenChanged = command.ExecuteNonQuery() == 1;
+            }
+
+            return hasBeenChanged;
         }
     }
 }
