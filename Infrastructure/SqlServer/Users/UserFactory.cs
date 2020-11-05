@@ -12,7 +12,7 @@ namespace Infrastructure.SqlServer.Users
                 Id = reader.GetInt32(reader.GetOrdinal(SqlServerUserRepository.ColId)),
                 Mail = reader.GetString(reader.GetOrdinal(SqlServerUserRepository.ColMail)),
                 Password = reader.GetString(reader.GetOrdinal(SqlServerUserRepository.ColPassword)),
-                LastConnexion = reader.GetDateTime(reader.GetOrdinal(SqlServerUserRepository.ColLastConnexion)),
+                LastConnexion = reader.GetString(reader.GetOrdinal(SqlServerUserRepository.ColLastConnexion)),
                 Admin = reader.GetBoolean(reader.GetOrdinal(SqlServerUserRepository.ColAdmin))
             };
         }

@@ -8,10 +8,10 @@ namespace Domain.Users
         public int Id { get; set; }
         public string Mail { get; set; }
         public string Password { get; set; }
-        public DateTime LastConnexion { get; set; }
+        public string LastConnexion { get; set; }
         public bool Admin { get; set; }
 
-        public User(int id, string mail, string password, DateTime lastConnexion, bool admin)
+        public User(int id, string mail, string password, string lastConnexion, bool admin)
         {
             Id = id;
             Mail = mail;

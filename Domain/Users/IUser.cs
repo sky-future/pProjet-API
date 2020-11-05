@@ -7,7 +7,7 @@ namespace Domain.Users
     {
         string Mail { get; set; }
         string Password { get; set; }
-        DateTime LastConnexion { get; set; }
+        string LastConnexion { get; set; }
         bool Admin { get; set; }
         
     }

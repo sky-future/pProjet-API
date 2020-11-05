@@ -15,6 +15,7 @@ namespace pAPI
 {
     public class Startup
     {
+        public static readonly string MyOrigins = "MyOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +26,14 @@ namespace pAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Uniquement en développement pas en production !!!
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyOrigins, builder =>
+                {
+                    builder.WithOrigins("https://localhost:4200");
+                });
+            });
             services.AddControllers();
         }
 
@@ -37,6 +46,8 @@ namespace pAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(MyOrigins);
 
             app.UseRouting();
 

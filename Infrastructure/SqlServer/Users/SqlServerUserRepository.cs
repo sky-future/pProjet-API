@@ -20,7 +20,7 @@ namespace Infrastructure.SqlServer.Users
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName}({ColMail},{ColPassword},{ColLastConnexion},{ColAdmin})
             OUTPUT INSERTED.{ColId}
-            VALUES(@{ColMail},@{ColPassword},@{ColLastConnexion},0)";
+            VALUES(@{ColMail},@{ColPassword},@{ColLastConnexion},@{ColAdmin})";
 
         public static readonly string ReqDelete = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
         public static readonly string ReqUpdate = $@"
@@ -87,7 +87,7 @@ namespace Infrastructure.SqlServer.Users
                 command.Parameters.AddWithValue($"@{ColMail}", user.Mail);
                 command.Parameters.AddWithValue($"@{ColPassword}",user.Password);
                 command.Parameters.AddWithValue($"@{ColLastConnexion}", user.LastConnexion);
-                //command.Parameters.AddWithValue($"@{ColAdmin}", user.Admin);
+                command.Parameters.AddWithValue($"@{ColAdmin}", user.Admin);
 
                 try
                 {
