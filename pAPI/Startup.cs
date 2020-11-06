@@ -26,12 +26,13 @@ namespace pAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Uniquement en développement pas en production !!!
+            // Uniquement en développement !!!!
             services.AddCors(options =>
             {
+                
                 options.AddPolicy(MyOrigins, builder =>
                 {
-                    builder.WithOrigins("https://localhost:4200");
+                    builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
                 });
             });
             services.AddControllers();
