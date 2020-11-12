@@ -9,6 +9,6 @@ namespace Domain.Users
         string Password { get; set; }
         string LastConnexion { get; set; }
         bool Admin { get; set; }
-        
+        string Token { get; set; }
     }
 }

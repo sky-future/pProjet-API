@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using Domain.Shared;
 using Domain.Users;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using pAPI.Extensions;
 
 namespace pAPI.Controllers
 {
@@ -11,6 +16,7 @@ namespace pAPI.Controllers
     public class UserController : ControllerBase
     {
         private IUserRepository _userRepository = new SqlServerUserRepository();
+        //private ISqlServerUserRepository _userRepository = new SqlServerUserRepository();
 
         //ActionResult renvoie un code http et entre <> c'est les données qui vont être renvoyées
         [HttpGet]
@@ -57,6 +63,23 @@ namespace pAPI.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody] AuthenticateModel model)
+        {
+            Debug.Assert(_userRepository != null, nameof(_userRepository) + " != null");
+            var user = _userRepository.Authenticate(model.Mail, model.Password);
+
+            if (user == null)
+            {
+                return BadRequest(new {message = "L'adresse e-mail ou le mot de passe est incorrect."});
+            }
+            
+            Console.WriteLine(user.Id);
+            Console.WriteLine(user.Mail);
+
+            return Ok(user);
         }
     }
 }

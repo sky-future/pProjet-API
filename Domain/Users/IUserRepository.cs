@@ -9,5 +9,6 @@ namespace Domain.Users
         IUser Create(IUser user);
         bool Delete(int id);
         bool Update(int id, IUser user);
+        IUser Authenticate(string mail, string password);
     }
 }

@@ -10,6 +10,7 @@ namespace Domain.Users
         public string Password { get; set; }
         public string LastConnexion { get; set; }
         public bool Admin { get; set; }
+        public string Token { get; set; }
 
         public User(int id, string mail, string password, string lastConnexion, bool admin)
         {

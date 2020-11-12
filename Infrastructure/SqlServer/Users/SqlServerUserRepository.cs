@@ -1,14 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Net;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using Domain.Users;
+using Microsoft.IdentityModel.Tokens;
+using pAPI.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Infrastructure.SqlServer.Users
 {
-    public class SqlServerUserRepository: IUserRepository
+    public interface ISqlServerUserRepository
     {
-        public static readonly string TableName = "UserLa";
+        IUser Authenticate(string mail, string password);
+        IEnumerable<IUser> Query();
+    }
+    public class SqlServerUserRepository: IUserRepository, ISqlServerUserRepository
+    {
+        public static readonly string TableName = "userLa";
         public static readonly string ColId = "id";
         public static readonly string ColMail = "mail";
         public static readonly string ColPassword = "password";
@@ -33,6 +44,8 @@ namespace Infrastructure.SqlServer.Users
         ";
         
         private IUserFactory _userFactory = new UserFactory();
+
+        //private readonly AppSettings _appSettings;
         
         //Renvoie toutes les données de la table
         public IEnumerable<IUser> Query()
@@ -143,6 +156,40 @@ namespace Infrastructure.SqlServer.Users
             }
 
             return hasBeenChanged;
+        }
+        
+        /*public SqlServerUserRepository(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }*/
+
+        public IUser Authenticate(string mail, string password)
+        {
+            IUser _user = Query().SingleOrDefault(x=>x.Mail == mail && x.Password == password);
+
+            //Null si pas d'utilisateur trouvé
+            if (_user == null)
+            {
+                return null;
+            }
+
+            //Génération d'un JWT Token
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("E1CA8D28EBE516DBEA0A2D6019CD8B559C788912360FB8FB7A4C0F3BEB5B59FA");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, _user.Id.ToString()) 
+                }),
+                Expires = DateTime.UtcNow.AddDays(30),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            _user.Token = tokenHandler.WriteToken(token);
+
+            return _user.WithoutPassword();
         }
     }
 }
