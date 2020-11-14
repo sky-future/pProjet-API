@@ -1,5 +1,4 @@
-﻿using System;
-using Domain.Shared;
+﻿using Domain.Shared;
 
 namespace Domain.Users
 {

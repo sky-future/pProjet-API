@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using Application.Services.Users;
+using Application.Services.Users.Dto;
 using Domain.Shared;
 using Domain.Users;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using pAPI.Extensions;
 
 namespace pAPI.Controllers
 {
@@ -15,15 +13,22 @@ namespace pAPI.Controllers
     [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private IUserRepository _userRepository = new SqlServerUserRepository();
-        //private ISqlServerUserRepository _userRepository = new SqlServerUserRepository();
+        private readonly IUserService _userService;
+        private UserRepository _userRepository = new UserRepository();
+
+        public UserController(IUserService userService)
+        {
+            Console.WriteLine("Constructeur controller");
+            _userService = userService;
+        }
 
         //ActionResult renvoie un code http et entre <> c'est les données qui vont être renvoyées
         [HttpGet]
-        public ActionResult<IEnumerable<IUser>> Query()
+        public ActionResult<OutputDtoQueryUser> Query()
         {
+            Console.Write("Controller query");
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
-            return Ok(_userRepository.Query().Cast<User>());
+            return Ok(_userService.Query());
         }
 
         [HttpGet]
@@ -31,14 +36,14 @@ namespace pAPI.Controllers
         public ActionResult<User> GetById(int id)
         {
             IUser user = (User) _userRepository.Get(id);
-            return _userRepository != null ? (ActionResult<User>) Ok(user) : NotFound();
+            return _userService!= null ? (ActionResult<User>) Ok(user) : NotFound();
         }
 
         //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
         [HttpPost]
-        public ActionResult<IUser> Create([FromBody]User user)
+        public ActionResult<OutputDtoAddUser> Create([FromBody]InputDtoAddUser inputDtoAddUser)
         {
-            return Ok(_userRepository.Create(user));
+            return Ok(_userService.Create(inputDtoAddUser));
         }
 
         [HttpDelete]
@@ -55,9 +60,9 @@ namespace pAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public ActionResult Put(int id,[FromBody]User user)
+        public ActionResult Put(int id,[FromBody]InputDtoUpdateUser inputDtoUpdateUser)
         {
-            if (_userRepository.Update(id, user))
+            if (_userService.Update(id, inputDtoUpdateUser))
             {
                 return Ok();
             }

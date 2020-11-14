@@ -1,4 +1,6 @@
 using System.Text;
+using Application.Repositories;
+using Application.Services.Users;
 using Domain.Users;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -39,6 +41,9 @@ namespace pAPI
             });
             services.AddControllers();
             
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -63,10 +68,6 @@ namespace pAPI
                         ValidateAudience = false
                     };
                 });
-            
-            // configure DI for application services
-            services.AddScoped<ISqlServerUserRepository, SqlServerUserRepository>();
-            //services.AddSpaStaticFiles(spa => spa.RootPath = PATH_ANGULAR);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
