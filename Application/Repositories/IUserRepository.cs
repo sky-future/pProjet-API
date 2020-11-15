@@ -6,9 +6,9 @@ namespace Application.Repositories
     public interface IUserRepository
     {
         IEnumerable<IUser> Query();
-        IUser Get(int id);
+        IUser GetById(int id);
         IUser Create(IUser user);
-        bool Delete(int id);
+        bool DeleteById(int id);
         bool Update(int id, IUser user);
         IUser Authenticate(string mail, string password);
     }

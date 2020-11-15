@@ -21,8 +21,13 @@
           <e p="Users" t="Include">
             <e p="Dto" t="Include">
               <e p="InputDtoAddUser.cs" t="Include" />
+              <e p="InputDtoAuthenticate.cs" t="Include" />
+              <e p="InputDtoDeleteById.cs" t="Include" />
+              <e p="InputDtoGetById.cs" t="Include" />
               <e p="InputDtoUpdateUser.cs" t="Include" />
               <e p="OutputDtoAddUser.cs" t="Include" />
+              <e p="OutputDtoAuthenticate.cs" t="Include" />
+              <e p="OutputDtoGetById.cs" t="Include" />
               <e p="OutputDtoQueryUser.cs" t="Include" />
             </e>
             <e p="IUserService.cs" t="Include" />
@@ -46,7 +51,6 @@
           </e>
         </e>
         <e p="Shared" t="Include">
-          <e p="AuthenticateModel.cs" t="Include" />
           <e p="IEntity.cs" t="Include" />
         </e>
         <e p="Users" t="Include">

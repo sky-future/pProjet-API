@@ -23,28 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dabc75a-5d02-403b-a166-a01df15708b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Application/Application.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoAddUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoUpdateUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoAddUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoQueryUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/UserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Users/IUserFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Users/UserFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/IInstanceFromReaderFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/UserFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserSqlServer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoAuthenticate.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteById.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetById.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoAuthenticate.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetById.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Users/IUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Users/IUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Users/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Database.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Shared/Database.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/IUserFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/SqlServerUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pAPI.sln" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Users/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Shared/AuthenticateModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Startup.cs" afterDir="false" />
     </list>
@@ -88,14 +78,19 @@
         <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoAddUser.cs" />
         <option value="$PROJECT_DIR$/Domain/Users/IUserFactory.cs" />
         <option value="$PROJECT_DIR$/Domain/Users/UserFactory.cs" />
-        <option value="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" />
         <option value="$PROJECT_DIR$/Domain/Users/IUser.cs" />
-        <option value="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" />
-        <option value="$PROJECT_DIR$/Application/Services/Users/UserService.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Shared/Database.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Startup.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetById.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetById.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteById.cs" />
+        <option value="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoAuthenticate.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoAuthenticate.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" />
+        <option value="$PROJECT_DIR$/pAPI/Startup.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/UserService.cs" />
+        <option value="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" />
       </list>
     </option>
   </component>
@@ -174,7 +169,7 @@
       <workItem from="1605206236988" duration="142000" />
       <workItem from="1605212443471" duration="6566000" />
       <workItem from="1605282505340" duration="3995000" />
-      <workItem from="1605387306100" duration="5080000" />
+      <workItem from="1605387306100" duration="10432000" />
     </task>
     <task id="LOCAL-00001" summary="User Controller-DAO : Step 1">
       <created>1604430913548</created>
@@ -225,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605206323555</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Change Arborescence and somes modifs">
+      <created>1605392573102</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605392573102</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,25 +257,26 @@
     <MESSAGE value="Add somes modification" />
     <MESSAGE value="change Cors Configuration" />
     <MESSAGE value="Authenticate Method Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Authenticate Method Done" />
+    <MESSAGE value="Change Arborescence and somes modifs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change Arborescence and somes modifs" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="121" key="GridCell.Tab.0.bottom" timestamp="1605392234500">
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom" timestamp="1605400196417">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605392234500" />
-    <state width="1493" height="121" key="GridCell.Tab.0.center" timestamp="1605392234499">
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
+    <state width="1493" height="121" key="GridCell.Tab.0.center" timestamp="1605400196417">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605392234499" />
-    <state width="1493" height="121" key="GridCell.Tab.0.left" timestamp="1605392234499">
+    <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
+    <state width="1493" height="121" key="GridCell.Tab.0.left" timestamp="1605400196417">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605392234499" />
-    <state width="1493" height="121" key="GridCell.Tab.0.right" timestamp="1605392234500">
+    <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
+    <state width="1493" height="121" key="GridCell.Tab.0.right" timestamp="1605400196417">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605392234500" />
+    <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
     <state width="1493" height="188" key="GridCell.Tab.1.bottom" timestamp="1605286621488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -346,10 +349,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="863" y="94" key="RiderGenerateDialog/0.0.1536.824@0.0.1536.824" timestamp="1605215906356" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605206326171">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605392577793">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605206326171" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605392577793" />
     <state x="322" y="142" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605285318324">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

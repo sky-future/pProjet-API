@@ -50,7 +50,7 @@ namespace Infrastructure.SqlServer.Users
             return users;
         }
 
-        public IUser Get(int id)
+        public IUser GetById(int id)
         {
             using (var connection = Database.GetConnection())
             {
@@ -73,8 +73,6 @@ namespace Infrastructure.SqlServer.Users
                 connection.Open();
                 var command = connection.CreateCommand();
                 command.CommandText = UserSqlServer.ReqCreate;
-                
-                Console.WriteLine("test");
 
                 command.Parameters.AddWithValue($"@{UserSqlServer.ColMail}", user.Mail);
                 command.Parameters.AddWithValue($"@{UserSqlServer.ColPassword}",user.Password);
@@ -95,7 +93,7 @@ namespace Infrastructure.SqlServer.Users
             return user;
         }
 
-        public bool Delete(int id)
+        public bool DeleteById(int id)
         {
             bool hasBeenDeleted = false;
 

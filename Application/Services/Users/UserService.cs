@@ -55,5 +55,43 @@ namespace Application.Services.Users
 
             return _userRepository.Update(id, userFromDto);
         }
+
+        public OutputDtoGetById GetById(InputDtoGetById inputDtoGetById)
+        {
+            var userInDb = _userRepository.GetById(inputDtoGetById.id);
+            
+            return new OutputDtoGetById
+            {
+                id = userInDb.Id,
+                mail = userInDb.Mail,
+                password = userInDb.Password,
+                lastConnexion = userInDb.LastConnexion,
+                admin = userInDb.Admin
+            };
+        }
+
+        public bool DeleteById(InputDtoDeleteById inputDtoDeleteById)
+        {
+            return _userRepository.DeleteById(inputDtoDeleteById.id);
+        }
+
+        public OutputDtoAuthenticate Authenticate(InputDtoAuthenticate inputDtoAuthenticate)
+        {
+            var userInDb = _userRepository.Authenticate(inputDtoAuthenticate.mail, inputDtoAuthenticate.password);
+
+            if (userInDb == null)
+            {
+                return null;
+            }
+            return new OutputDtoAuthenticate
+            {
+                id = userInDb.Id,
+                mail = userInDb.Mail,
+                password = userInDb.Password,
+                lastConnexion = userInDb.LastConnexion,
+                admin = userInDb.Admin,
+                token = userInDb.Token
+            };
+        }
     }
 }

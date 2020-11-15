@@ -14,11 +14,9 @@ namespace pAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private UserRepository _userRepository = new UserRepository();
 
         public UserController(IUserService userService)
         {
-            Console.WriteLine("Constructeur controller");
             _userService = userService;
         }
 
@@ -26,17 +24,22 @@ namespace pAPI.Controllers
         [HttpGet]
         public ActionResult<OutputDtoQueryUser> Query()
         {
-            Console.Write("Controller query");
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
             return Ok(_userService.Query());
         }
 
+        //TODO : Vérifier le passage de l'id par la route sans utiliser inputDto
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<User> GetById(int id)
+        public ActionResult<OutputDtoGetById> GetById(int id)
         {
-            IUser user = (User) _userRepository.Get(id);
-            return _userService!= null ? (ActionResult<User>) Ok(user) : NotFound();
+            var inputDtoGetById = new InputDtoGetById
+            {
+                id = id
+            };
+            
+            OutputDtoGetById user = _userService.GetById(inputDtoGetById);
+            return _userService!= null ? (ActionResult<OutputDtoGetById>) Ok(user) : NotFound();
         }
 
         //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
@@ -48,9 +51,14 @@ namespace pAPI.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteById(int id)
         {
-            if (_userRepository.Delete(id))
+            var inputDtoDeleteById = new InputDtoDeleteById()
+            {
+                id = id
+            };
+            
+            if (_userService.DeleteById(inputDtoDeleteById))
             {
                 return Ok();
             }
@@ -60,7 +68,7 @@ namespace pAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public ActionResult Put(int id,[FromBody]InputDtoUpdateUser inputDtoUpdateUser)
+        public ActionResult Update(int id,[FromBody]InputDtoUpdateUser inputDtoUpdateUser)
         {
             if (_userService.Update(id, inputDtoUpdateUser))
             {
@@ -71,18 +79,15 @@ namespace pAPI.Controllers
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] AuthenticateModel model)
+        public IActionResult Authenticate([FromBody] InputDtoAuthenticate inputDtoAuthenticate)
         {
-            Debug.Assert(_userRepository != null, nameof(_userRepository) + " != null");
-            var user = _userRepository.Authenticate(model.Mail, model.Password);
+            Debug.Assert(_userService != null, nameof(_userService) + " != null");
+            var user = _userService.Authenticate(inputDtoAuthenticate);
 
             if (user == null)
             {
                 return BadRequest(new {message = "L'adresse e-mail ou le mot de passe est incorrect."});
             }
-            
-            Console.WriteLine(user.Id);
-            Console.WriteLine(user.Mail);
 
             return Ok(user);
         }
