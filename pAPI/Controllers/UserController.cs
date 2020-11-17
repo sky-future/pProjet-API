@@ -22,7 +22,7 @@ namespace pAPI.Controllers
 
         //ActionResult renvoie un code http et entre <> c'est les données qui vont être renvoyées
         [HttpGet]
-        public ActionResult<OutputDtoQueryUser> Query()
+        public ActionResult<OutputDtoQueryUser> QueryUser()
         {
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
             return Ok(_userService.Query());
@@ -31,29 +31,29 @@ namespace pAPI.Controllers
         //TODO : Vérifier le passage de l'id par la route sans utiliser inputDto
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<OutputDtoGetById> GetById(int id)
+        public ActionResult<OutputDtoGetByIdUser> GetByIdUser(int id)
         {
-            var inputDtoGetById = new InputDtoGetById
+            var inputDtoGetById = new InputDtoGetByIdUser
             {
                 id = id
             };
             
-            OutputDtoGetById user = _userService.GetById(inputDtoGetById);
-            return _userService!= null ? (ActionResult<OutputDtoGetById>) Ok(user) : NotFound();
+            OutputDtoGetByIdUser user = _userService.GetById(inputDtoGetById);
+            return _userService!= null ? (ActionResult<OutputDtoGetByIdUser>) Ok(user) : NotFound();
         }
 
         //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
         [HttpPost]
-        public ActionResult<OutputDtoAddUser> Create([FromBody]InputDtoAddUser inputDtoAddUser)
+        public ActionResult<OutputDtoAddUser> CreateUser([FromBody]InputDtoAddUser inputDtoAddUser)
         {
             return Ok(_userService.Create(inputDtoAddUser));
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public ActionResult DeleteById(int id)
+        public ActionResult DeleteByIdUser(int id)
         {
-            var inputDtoDeleteById = new InputDtoDeleteById()
+            var inputDtoDeleteById = new InputDtoDeleteByIdUser()
             {
                 id = id
             };
@@ -68,7 +68,7 @@ namespace pAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public ActionResult Update(int id,[FromBody]InputDtoUpdateUser inputDtoUpdateUser)
+        public ActionResult UpdateUser(int id,[FromBody]InputDtoUpdateUser inputDtoUpdateUser)
         {
             if (_userService.Update(id, inputDtoUpdateUser))
             {
@@ -79,7 +79,7 @@ namespace pAPI.Controllers
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] InputDtoAuthenticate inputDtoAuthenticate)
+        public IActionResult AuthenticateUser([FromBody] InputDtoAuthenticate inputDtoAuthenticate)
         {
             Debug.Assert(_userService != null, nameof(_userService) + " != null");
             var user = _userService.Authenticate(inputDtoAuthenticate);

@@ -1,6 +1,6 @@
 ﻿namespace Application.Services.Users.Dto
 {
-    public class OutputDtoGetById
+    public class OutputDtoGetByIdUser
     {
         public int id { get; set; }
         public string mail { get; set; }

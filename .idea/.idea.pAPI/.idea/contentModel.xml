@@ -15,19 +15,33 @@
           </e>
         </e>
         <e p="Repositories" t="Include">
+          <e p="ICarRepository.cs" t="Include" />
           <e p="IUserRepository.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
+          <e p="Cars" t="Include">
+            <e p="CarService.cs" t="Include" />
+            <e p="Dto" t="Include">
+              <e p="InputDtoAddCar.cs" t="Include" />
+              <e p="InputDtoDeleteByIdCar.cs" t="Include" />
+              <e p="InputDtoGetByIdCar.cs" t="Include" />
+              <e p="InputDtoUpdateCar.cs" t="Include" />
+              <e p="OutputDtoAddCar.cs" t="Include" />
+              <e p="OutputDtoGetByIdCar.cs" t="Include" />
+              <e p="OutputDtoQueryCar.cs" t="Include" />
+            </e>
+            <e p="ICarService.cs" t="Include" />
+          </e>
           <e p="Users" t="Include">
             <e p="Dto" t="Include">
               <e p="InputDtoAddUser.cs" t="Include" />
               <e p="InputDtoAuthenticate.cs" t="Include" />
-              <e p="InputDtoDeleteById.cs" t="Include" />
-              <e p="InputDtoGetById.cs" t="Include" />
+              <e p="InputDtoDeleteByIdUser.cs" t="Include" />
+              <e p="InputDtoGetByIdUser.cs" t="Include" />
               <e p="InputDtoUpdateUser.cs" t="Include" />
               <e p="OutputDtoAddUser.cs" t="Include" />
               <e p="OutputDtoAuthenticate.cs" t="Include" />
-              <e p="OutputDtoGetById.cs" t="Include" />
+              <e p="OutputDtoGetByIdUser.cs" t="Include" />
               <e p="OutputDtoQueryUser.cs" t="Include" />
             </e>
             <e p="IUserService.cs" t="Include" />
@@ -37,6 +51,12 @@
       </e>
       <e p="Domain" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Cars" t="Include">
+          <e p="Car.cs" t="Include" />
+          <e p="CarFactory.cs" t="Include" />
+          <e p="ICar.cs" t="Include" />
+          <e p="ICarFactory.cs" t="Include" />
+        </e>
         <e p="Domain.csproj" t="IncludeRecursive" />
         <e p="Extensions" t="Include">
           <e p="AppSettings.cs" t="Include" />
@@ -71,7 +91,12 @@
           </e>
         </e>
         <e p="SqlServer" t="Include">
+          <e p="Cars" t="Include">
+            <e p="CarRepository.cs" t="Include" />
+            <e p="CarSqlServer.cs" t="Include" />
+          </e>
           <e p="Factory" t="Include">
+            <e p="CarFactory.cs" t="Include" />
             <e p="IInstanceFromReaderFactory.cs" t="Include" />
             <e p="UserFactory.cs" t="Include" />
           </e>
@@ -90,6 +115,7 @@
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
+          <e p="CarController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
           <e p="WeatherForecastController.cs" t="Include" />
         </e>

@@ -1,6 +1,6 @@
 ﻿namespace Application.Services.Users.Dto
 {
-    public class InputDtoGetById
+    public class InputDtoDeleteByIdUser
     {
         public int id { get; set; }
     }

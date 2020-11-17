@@ -8,9 +8,9 @@ namespace Application.Services.Users
         IEnumerable<OutputDtoQueryUser> Query();
         OutputDtoAddUser Create(InputDtoAddUser inputDtoAddUser);
         bool Update(int id, InputDtoUpdateUser inputDtoUpdateUser);
-        OutputDtoGetById GetById(InputDtoGetById inputDtoGetById);
+        OutputDtoGetByIdUser GetById(InputDtoGetByIdUser inputDtoGetById);
 
-        bool DeleteById(InputDtoDeleteById inputDtoDeleteById);
+        bool DeleteById(InputDtoDeleteByIdUser inputDtoDeleteById);
         OutputDtoAuthenticate Authenticate(InputDtoAuthenticate inputDtoAuthenticate);
     }
 }

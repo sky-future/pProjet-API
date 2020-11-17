@@ -23,18 +23,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dabc75a-5d02-403b-a166-a01df15708b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoAuthenticate.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteById.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetById.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoAuthenticate.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetById.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Repositories/ICarRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/CarService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoAddCar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoDeleteByIdCar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoGetByIdCar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoUpdateCar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoAddCar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoGetByIdCar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoQueryCar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/ICarService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Cars/Car.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Cars/CarFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Cars/ICar.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Cars/ICarFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Cars/CarRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Cars/CarSqlServer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/CarFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pAPI/Controllers/CarController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteByIdUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetByIdUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetByIdUser.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Services/Users/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Shared/AuthenticateModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Startup.cs" afterDir="false" />
     </list>
@@ -52,20 +65,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Domain/Class1.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/Class1.cs" />
-        <option value="$PROJECT_DIR$/Domain/Shared/IEntity.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/SqlServerUserRepository.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Users/IUserFactory.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Properties/launchSettings.json" />
-        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Database.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Extensions/AppSettings.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Extensions/SHA256Hasher.cs" />
-        <option value="$PROJECT_DIR$/Domain/Users/User.cs" />
-        <option value="$PROJECT_DIR$/Domain/Shared/AuthenticateModel.cs" />
-        <option value="$PROJECT_DIR$/Domain/Extensions/Methods.cs" />
-        <option value="$PROJECT_DIR$/Domain/Users/IUserRepository.cs" />
-        <option value="$PROJECT_DIR$/pAPI/appsettings.json" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserSqlServer.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/IInstanceFromReaderFactory.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/UserFactory.cs" />
@@ -87,9 +86,35 @@
         <option value="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoAuthenticate.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoAuthenticate.cs" />
+        <option value="$PROJECT_DIR$/Domain/Car/ICar.cs" />
+        <option value="$PROJECT_DIR$/Domain/Car/Car.cs" />
+        <option value="$PROJECT_DIR$/Domain/Car/ICarFactory.cs" />
+        <option value="$PROJECT_DIR$/Domain/Car/CarFactory.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Cars/CarSqlServer.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/CarFactory.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Cars/CarRepository.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoDeleteById.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputGetById.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputUpdateUser.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoGetById.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetByIdUser.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetByIdUser.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteByIdUser.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Startup.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Users/UserService.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputGetByIdCar.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoAddCar.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoDeleteByIdCar.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoGetByIdCar.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoUpdateCar.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoAddCar.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoGetByIdCar.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoQueryCar.cs" />
+        <option value="$PROJECT_DIR$/pAPI/Startup.cs" />
+        <option value="$PROJECT_DIR$/Application/Repositories/ICarRepository.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/CarService.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Cars/ICarService.cs" />
+        <option value="$PROJECT_DIR$/pAPI/Controllers/CarController.cs" />
         <option value="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" />
       </list>
     </option>
@@ -169,7 +194,10 @@
       <workItem from="1605206236988" duration="142000" />
       <workItem from="1605212443471" duration="6566000" />
       <workItem from="1605282505340" duration="3995000" />
-      <workItem from="1605387306100" duration="10432000" />
+      <workItem from="1605387306100" duration="10710000" />
+      <workItem from="1605473938522" duration="27000" />
+      <workItem from="1605559969643" duration="3884000" />
+      <workItem from="1605642433738" duration="990000" />
     </task>
     <task id="LOCAL-00001" summary="User Controller-DAO : Step 1">
       <created>1604430913548</created>
@@ -227,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605392573102</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="All methods with new arborescence are OK !">
+      <created>1605400672420</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1605400672420</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,25 +293,26 @@
     <MESSAGE value="change Cors Configuration" />
     <MESSAGE value="Authenticate Method Done" />
     <MESSAGE value="Change Arborescence and somes modifs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change Arborescence and somes modifs" />
+    <MESSAGE value="All methods with new arborescence are OK !" />
+    <option name="LAST_COMMIT_MESSAGE" value="All methods with new arborescence are OK !" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="121" key="GridCell.Tab.0.bottom" timestamp="1605400196417">
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom" timestamp="1605400693089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
-    <state width="1493" height="121" key="GridCell.Tab.0.center" timestamp="1605400196417">
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
+    <state width="1493" height="121" key="GridCell.Tab.0.center" timestamp="1605400693089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
-    <state width="1493" height="121" key="GridCell.Tab.0.left" timestamp="1605400196417">
+    <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
+    <state width="1493" height="121" key="GridCell.Tab.0.left" timestamp="1605400693089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
-    <state width="1493" height="121" key="GridCell.Tab.0.right" timestamp="1605400196417">
+    <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
+    <state width="1493" height="121" key="GridCell.Tab.0.right" timestamp="1605400693089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605400196417" />
+    <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
     <state width="1493" height="188" key="GridCell.Tab.1.bottom" timestamp="1605286621488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -345,14 +381,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="722" y="144" key="Rider.ProjectTemplateDialog.Size/0.0.1536.824@0.0.1536.824" timestamp="1605214198558" />
-    <state x="863" y="94" key="RiderGenerateDialog" timestamp="1605215906356">
+    <state x="863" y="94" key="RiderGenerateDialog" timestamp="1605562989138">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="863" y="94" key="RiderGenerateDialog/0.0.1536.824@0.0.1536.824" timestamp="1605215906356" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605392577793">
+    <state x="863" y="94" key="RiderGenerateDialog/0.0.1536.824@0.0.1536.824" timestamp="1605562989138" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605400675355">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605392577793" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605400675355" />
     <state x="322" y="142" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605285318324">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

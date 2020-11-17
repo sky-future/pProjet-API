@@ -56,11 +56,11 @@ namespace Application.Services.Users
             return _userRepository.Update(id, userFromDto);
         }
 
-        public OutputDtoGetById GetById(InputDtoGetById inputDtoGetById)
+        public OutputDtoGetByIdUser GetById(InputDtoGetByIdUser inputDtoGetById)
         {
             var userInDb = _userRepository.GetById(inputDtoGetById.id);
             
-            return new OutputDtoGetById
+            return new OutputDtoGetByIdUser
             {
                 id = userInDb.Id,
                 mail = userInDb.Mail,
@@ -70,7 +70,7 @@ namespace Application.Services.Users
             };
         }
 
-        public bool DeleteById(InputDtoDeleteById inputDtoDeleteById)
+        public bool DeleteById(InputDtoDeleteByIdUser inputDtoDeleteById)
         {
             return _userRepository.DeleteById(inputDtoDeleteById.id);
         }
