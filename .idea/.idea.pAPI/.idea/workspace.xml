@@ -23,33 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dabc75a-5d02-403b-a166-a01df15708b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Application/Repositories/ICarRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/CarService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoAddCar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoDeleteByIdCar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoGetByIdCar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/InputDtoUpdateCar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoAddCar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoGetByIdCar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoQueryCar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Cars/ICarService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Cars/Car.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Cars/CarFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Cars/ICar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Cars/ICarFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Cars/CarRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Cars/CarSqlServer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/CarFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pAPI/Controllers/CarController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoDeleteByIdUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetByIdUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetByIdUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Services/Users/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Users/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +171,8 @@
       <workItem from="1605387306100" duration="10710000" />
       <workItem from="1605473938522" duration="27000" />
       <workItem from="1605559969643" duration="3884000" />
-      <workItem from="1605642433738" duration="990000" />
+      <workItem from="1605642433738" duration="1170000" />
+      <workItem from="1605690797207" duration="3395000" />
     </task>
     <task id="LOCAL-00001" summary="User Controller-DAO : Step 1">
       <created>1604430913548</created>
@@ -262,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605400672420</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add car request">
+      <created>1605643930295</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1605643930295</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,25 +276,26 @@
     <MESSAGE value="Authenticate Method Done" />
     <MESSAGE value="Change Arborescence and somes modifs" />
     <MESSAGE value="All methods with new arborescence are OK !" />
-    <option name="LAST_COMMIT_MESSAGE" value="All methods with new arborescence are OK !" />
+    <MESSAGE value="Add car request" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add car request" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="121" key="GridCell.Tab.0.bottom" timestamp="1605400693089">
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom" timestamp="1605701886794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
-    <state width="1493" height="121" key="GridCell.Tab.0.center" timestamp="1605400693089">
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605701886794" />
+    <state width="1493" height="121" key="GridCell.Tab.0.center" timestamp="1605701886794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
-    <state width="1493" height="121" key="GridCell.Tab.0.left" timestamp="1605400693089">
+    <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605701886794" />
+    <state width="1493" height="121" key="GridCell.Tab.0.left" timestamp="1605701886794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
-    <state width="1493" height="121" key="GridCell.Tab.0.right" timestamp="1605400693089">
+    <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605701886794" />
+    <state width="1493" height="121" key="GridCell.Tab.0.right" timestamp="1605701886794">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605400693089" />
+    <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605701886794" />
     <state width="1493" height="188" key="GridCell.Tab.1.bottom" timestamp="1605286621488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -385,10 +368,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="863" y="94" key="RiderGenerateDialog/0.0.1536.824@0.0.1536.824" timestamp="1605562989138" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605400675355">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1605643935094">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605400675355" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605643935094" />
     <state x="322" y="142" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605285318324">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
