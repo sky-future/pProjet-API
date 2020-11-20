@@ -15,10 +15,24 @@
           </e>
         </e>
         <e p="Repositories" t="Include">
+          <e p="IAddressRepository.cs" t="Include" />
           <e p="ICarRepository.cs" t="Include" />
           <e p="IUserRepository.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
+          <e p="Address" t="Include">
+            <e p="AddressService.cs" t="Include" />
+            <e p="Dto" t="Include">
+              <e p="InputDtoAddAddress.cs" t="Include" />
+              <e p="InputDtoDeleteByIdAddress.cs" t="Include" />
+              <e p="InputDtoGetByIdAddress.cs" t="Include" />
+              <e p="InputDtoUpdateAddress.cs" t="Include" />
+              <e p="OutputDtoAddAddress.cs" t="Include" />
+              <e p="OutputDtoGetByIdAddress.cs" t="Include" />
+              <e p="OutputDtoQueryAddress.cs" t="Include" />
+            </e>
+            <e p="IAddressService.cs" t="Include" />
+          </e>
           <e p="Cars" t="Include">
             <e p="CarService.cs" t="Include" />
             <e p="Dto" t="Include">
@@ -50,6 +64,12 @@
         </e>
       </e>
       <e p="Domain" t="IncludeRecursive">
+        <e p="Address" t="Include">
+          <e p="Address.cs" t="Include" />
+          <e p="AddressFactory.cs" t="Include" />
+          <e p="IAddress.cs" t="Include" />
+          <e p="IAddressFactory.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Cars" t="Include">
           <e p="Car.cs" t="Include" />
@@ -91,11 +111,16 @@
           </e>
         </e>
         <e p="SqlServer" t="Include">
+          <e p="Address" t="Include">
+            <e p="AddressRepository.cs" t="Include" />
+            <e p="AddressSqlServer.cs" t="Include" />
+          </e>
           <e p="Cars" t="Include">
             <e p="CarRepository.cs" t="Include" />
             <e p="CarSqlServer.cs" t="Include" />
           </e>
           <e p="Factory" t="Include">
+            <e p="AddressFactory.cs" t="Include" />
             <e p="CarFactory.cs" t="Include" />
             <e p="IInstanceFromReaderFactory.cs" t="Include" />
             <e p="UserFactory.cs" t="Include" />
@@ -115,6 +140,7 @@
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
+          <e p="AddressController.cs" t="Include" />
           <e p="CarController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
           <e p="WeatherForecastController.cs" t="Include" />
