@@ -1,7 +1,9 @@
 using System.Text;
 using Application.Repositories;
+using Application.Services.Address;
 using Application.Services.Cars;
 using Application.Services.Users;
+using Infrastructure.SqlServer.Address;
 using Infrastructure.SqlServer.Cars;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -44,6 +46,9 @@ namespace pAPI
             
             services.AddSingleton<ICarService, CarService>();
             services.AddSingleton<ICarRepository, CarRepository>();
+            
+            services.AddSingleton<IAddressService, AddressService>();
+            services.AddSingleton<IAddressRepository, AddressRepository>();
             
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
