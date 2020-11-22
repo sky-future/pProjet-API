@@ -17,7 +17,7 @@ namespace Infrastructure.SqlServer.Factory
                 City = reader.GetString(reader.GetOrdinal(AddressSqlServer.ColCity)),
                 Country = reader.GetString(reader.GetOrdinal(AddressSqlServer.ColCountry)),
                 Longitude = reader.GetString(reader.GetOrdinal(AddressSqlServer.ColLongitude)),
-                Latitude = reader.GetString(reader.GetOrdinal(AddressSqlServer.ColLatitude)),
+                Latitude = reader.GetString(reader.GetOrdinal(AddressSqlServer.ColLatitude))
             };
         }
     }
