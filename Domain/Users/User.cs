@@ -2,7 +2,7 @@
 
 namespace Domain.Users
 {
-    public class User : IUser
+    public class   User : IUser
     {
         
         public int Id { get; set; }

@@ -62,12 +62,12 @@ namespace Infrastructure.SqlServer.Address
                 var command = connection.CreateCommand();
                 command.CommandText = AddressSqlServer.ReqCreate;
 
-                command.Parameters.AddWithValue($"@{AddressSqlServer.ColId}", address.Id);
+                //command.Parameters.AddWithValue($"@{AddressSqlServer.ColId}", address.Id);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColStreet}", address.Street);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColNumber}",address.Number);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColPostalCode}", address.PostalCode);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColCity}", address.City);
-                command.Parameters.AddWithValue($"@{AddressSqlServer.ColCountry}",address.Country);
+                command.Parameters.AddWithValue($"@{AddressSqlServer.ColCountry}", address.Country);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColLongitude}", address.Longitude);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColLatitude}", address.Latitude);
 

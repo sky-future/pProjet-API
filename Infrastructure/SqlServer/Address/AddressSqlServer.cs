@@ -15,9 +15,9 @@
         public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
         public static readonly string ReqGet = ReqQuery + $" WHERE {ColId} = @{ColId}";
         public static readonly string ReqCreate = $@"
-            INSERT INTO {TableName}({ColStreet},{ColNumber},{ColPostalCode},{ColCity}, {ColCountry}, {ColLongitude}, {ColLatitude})
+            INSERT INTO {TableName}({ColStreet},{ColNumber},{ColPostalCode},{ColCity},{ColCountry},{ColLongitude},{ColLatitude})
             OUTPUT INSERTED.{ColId}
-            VALUES(@{ColStreet},@{ColNumber},@{ColPostalCode},@{ColCity},@{ColCountry},@{ColLongitude},@{ColLatitude}";
+            VALUES(@{ColStreet},@{ColNumber},@{ColPostalCode},@{ColCity},@{ColCountry},@{ColLongitude},@{ColLatitude})";
 
         public static readonly string ReqDelete = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
         public static readonly string ReqUpdate = $@"
