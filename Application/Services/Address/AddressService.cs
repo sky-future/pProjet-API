@@ -37,18 +37,16 @@ namespace Application.Services.Address
         public OutputDtoAddAddress Create(InputDtoAddAddress inputDtoAddAddress)
         {
             var addressFromDto = _addressFactory.CreateAddress(
-                inputDtoAddAddress.street,
-                inputDtoAddAddress.number,
-                inputDtoAddAddress.postalCode,
-                inputDtoAddAddress.city,
-                inputDtoAddAddress.country,
-                inputDtoAddAddress.longitude,
-                inputDtoAddAddress.latitude);
-
-            Console.WriteLine(addressFromDto);
+                                        inputDtoAddAddress.street,
+                                        inputDtoAddAddress.number,
+                                        inputDtoAddAddress.postalCode,
+                                        inputDtoAddAddress.city,
+                                        inputDtoAddAddress.country,
+                                        inputDtoAddAddress.longitude,
+                                        inputDtoAddAddress.latitude);
 
             var addressInDb = _addressRepository.Create(addressFromDto);
-            
+            Console.WriteLine(addressInDb);
             return new OutputDtoAddAddress
             {
                 id =  addressInDb.Id,
