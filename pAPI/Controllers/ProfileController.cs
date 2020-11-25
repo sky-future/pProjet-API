@@ -1,5 +1,9 @@
+using System;
 using Application.Services.Profile;
 using Application.Services.Profile.DTO;
+using Application.Services.UserProfile;
+using Application.Services.UserProfile.Dto;
+using Domain.UserProfile;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pAPI.Controllers
@@ -10,10 +14,12 @@ namespace pAPI.Controllers
     {
         
          private readonly IProfileService _profileService;
+         private readonly IUserProfileService _userProfileService;
 
-        public ProfileController(IProfileService profileService)
+        public ProfileController(IProfileService profileService, IUserProfileService userProfileService)
         {
             _profileService = profileService;
+            _userProfileService = userProfileService;
         }
 
         //ActionResult renvoie un code http et entre <> c'est les données qui vont être renvoyées
@@ -71,6 +77,18 @@ namespace pAPI.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPost]
+        [Route("{idUser}/users")]
+        public ActionResult<OutputDtoCreateUserProfile> CreateUserProfile(int idUser, [FromBody]InputDtoProfileCreateUserProfile inputDtoProfileCreateUserProfile)
+        {
+            Console.WriteLine(idUser);
+            var inputDtoIdUserCreateUserProfile = new InputDtoIdUserCreateUserProfile()
+            {
+                IdUser = idUser
+            };
+            return Ok(_userProfileService.CreateUserProfile(inputDtoIdUserCreateUserProfile,inputDtoProfileCreateUserProfile));
         }
         
     }

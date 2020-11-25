@@ -19,5 +19,19 @@ namespace Domain.Profile
             };
         }
 
+        public IProfile CreateProfileWithId(int id, string lastname, string firstname, string matricule, string telephone,
+            string descript)
+        {
+            return new Profile
+            {
+                Id = id,
+                Lastname = lastname,
+                Firstname = firstname,
+                Matricule = matricule,
+                Telephone =  telephone,
+                Descript = descript
+                
+            };
+        }
     }
 }
