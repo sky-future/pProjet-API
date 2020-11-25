@@ -12,6 +12,8 @@ riderModule.iml
 **/.idea/shelf/*
 **/.idea/dictionaries
 **/.idea/httpRequests/
+.idea/
+.idea/.idea.pAPI/.idea/
 
 # Sensitive or high-churn files
 **/.idea/**/dataSources/
