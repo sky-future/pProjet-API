@@ -23,27 +23,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dabc75a-5d02-403b-a166-a01df15708b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Application/Repositories/IProfileRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoAddProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoDeleteByIdProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoGetByIdProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoUpdateProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoAddProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoGetByIdProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoQueryProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/IProfileService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/ProfileService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Profile/IProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Profile/IProfileFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Profile/Profile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Profile/ProfileFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/ProfileFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileSqlServer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pAPI/Controllers/ProfileController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoGetByidUserProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoUpdateByIdProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoGetByidUserProfile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Repositories/IProfileRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Repositories/IProfileRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoAddProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoAddProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoUpdateProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoUpdateProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoAddProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoAddProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoGetByIdProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoGetByIdProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoQueryProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoQueryProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Profile/IProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Profile/IProfileService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Services/Profile/ProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Profile/ProfileService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Profile/IProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Profile/IProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Profile/IProfileFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Profile/IProfileFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Profile/Profile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Profile/Profile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Profile/ProfileFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Profile/ProfileFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileSqlServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileSqlServer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pAPI/Controllers/ProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/Controllers/ProfileController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pAPI/pAPI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/pAPI/pAPI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,15 +65,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Application/Services/Cars/Dto/OutputDtoQueryCar.cs" />
-        <option value="$PROJECT_DIR$/Application/Repositories/ICarRepository.cs" />
-        <option value="$PROJECT_DIR$/Application/Services/Cars/CarService.cs" />
-        <option value="$PROJECT_DIR$/Application/Services/Cars/ICarService.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Controllers/CarController.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Shared/Database.cs" />
-        <option value="$PROJECT_DIR$/Domain/Address/Address.cs" />
-        <option value="$PROJECT_DIR$/Domain/Address/IAddressFactory.cs" />
         <option value="$PROJECT_DIR$/Domain/Address/AddressFactory.cs" />
         <option value="$PROJECT_DIR$/Domain/Address/IAddress.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Address/UserSqlServer.cs" />
@@ -91,28 +85,37 @@
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Address/AddressRepository.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/AddressFactory.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/ProfileService.cs" />
-        <option value="$PROJECT_DIR$/Domain/Profile/IProfile.cs" />
-        <option value="$PROJECT_DIR$/Domain/Profile/IProfileFactory.cs" />
-        <option value="$PROJECT_DIR$/Application/Repositories/IProfileRepository.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/IProfileService.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoDeleteByIdProfile.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoGetByIdProfile.cs" />
-        <option value="$PROJECT_DIR$/Application/Services/Profile/IProfileService.cs" />
         <option value="$PROJECT_DIR$/pAPI/Startup.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Factory/ProfileFactory.cs" />
-        <option value="$PROJECT_DIR$/pAPI/Controllers/ProfileController.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Address/AddressService.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoUpdateByIdProfile.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserSqlServer.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/OutputDtoGetUserByEmail.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/Dto/InputDtoGetUserByEmail.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Users/UserService.cs" />
+        <option value="$PROJECT_DIR$/pAPI/Controllers/UserController.cs" />
+        <option value="$PROJECT_DIR$/Application/Repositories/IUserRepository.cs" />
+        <option value="$PROJECT_DIR$/Domain/Profile/IProfile.cs" />
+        <option value="$PROJECT_DIR$/Domain/Profile/IProfileFactory.cs" />
         <option value="$PROJECT_DIR$/Domain/Profile/ProfileFactory.cs" />
         <option value="$PROJECT_DIR$/Domain/Profile/Profile.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoAddProfile.cs" />
-        <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoAddProfile.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoUpdateProfile.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoAddProfile.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoGetByIdProfile.cs" />
         <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoQueryProfile.cs" />
-        <option value="$PROJECT_DIR$/Application/Services/Profile/ProfileService.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/InputDtoGetByidUserProfile.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Profile/DTO/OutputDtoGetByidUserProfile.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Profile/IProfileService.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileSqlServer.cs" />
-        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Users/UserRepository.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Profile/ProfileRepository.cs" />
+        <option value="$PROJECT_DIR$/Application/Repositories/IProfileRepository.cs" />
+        <option value="$PROJECT_DIR$/Application/Services/Profile/ProfileService.cs" />
+        <option value="$PROJECT_DIR$/pAPI/Controllers/ProfileController.cs" />
       </list>
     </option>
   </component>
@@ -205,7 +208,12 @@
       <workItem from="1605978144627" duration="592000" />
       <workItem from="1606058730155" duration="3710000" />
       <workItem from="1606068105636" duration="1498000" />
-      <workItem from="1606125005464" duration="8515000" />
+      <workItem from="1606125005464" duration="9284000" />
+      <workItem from="1606204212251" duration="761000" />
+      <workItem from="1606216620754" duration="490000" />
+      <workItem from="1606309683095" duration="6951000" />
+      <workItem from="1606335187526" duration="1706000" />
+      <workItem from="1606377077652" duration="5890000" />
     </task>
     <task id="LOCAL-00001" summary="User Controller-DAO : Step 1">
       <created>1604430913548</created>
@@ -298,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606061232107</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="CRUD profile operationnel">
+      <created>1606151365175</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1606151365175</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,33 +349,51 @@
     <MESSAGE value="Change Database.cs" />
     <MESSAGE value="Add Controller Address" />
     <MESSAGE value="Fix address update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix address update" />
+    <MESSAGE value="CRUD profile operationnel" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD profile operationnel" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="857" height="278" key="GridCell.Tab.0.bottom" timestamp="1606148974151">
-      <screen x="0" y="25" width="1792" height="1037" />
+    <state x="162" y="114" key="DiffContextDialog" timestamp="1606309982045">
+      <screen x="0" y="25" width="1792" height="1036" />
+    </state>
+    <state x="162" y="114" key="DiffContextDialog/0.25.1792.1036@0.25.1792.1036" timestamp="1606309982045" />
+    <state x="162" y="114" key="DiffContextDialog/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606204347971" />
+    <state width="857" height="278" key="GridCell.Tab.0.bottom" timestamp="1606399192669">
+      <screen x="0" y="25" width="1792" height="1038" />
     </state>
     <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606069357699" />
-    <state width="857" height="279" key="GridCell.Tab.0.bottom/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606142617496" />
-    <state width="857" height="278" key="GridCell.Tab.0.bottom/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606148974151" />
-    <state width="857" height="278" key="GridCell.Tab.0.center" timestamp="1606148974150">
-      <screen x="0" y="25" width="1792" height="1037" />
+    <state width="857" height="278" key="GridCell.Tab.0.bottom/0.25.1792.1035@0.25.1792.1035" timestamp="1606344776793" />
+    <state width="857" height="278" key="GridCell.Tab.0.bottom/1792.25.1366.999/0.25.1792.1035@0.25.1792.1035" timestamp="1606152635196" />
+    <state width="857" height="278" key="GridCell.Tab.0.bottom/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606314870551" />
+    <state width="857" height="278" key="GridCell.Tab.0.bottom/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606395589417" />
+    <state width="857" height="278" key="GridCell.Tab.0.bottom/1792.25.1366.999/0.25.1792.1038@0.25.1792.1038" timestamp="1606399192669" />
+    <state width="857" height="278" key="GridCell.Tab.0.center" timestamp="1606399192668">
+      <screen x="0" y="25" width="1792" height="1038" />
     </state>
     <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606069357698" />
-    <state width="857" height="279" key="GridCell.Tab.0.center/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606142617495" />
-    <state width="857" height="278" key="GridCell.Tab.0.center/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606148974150" />
-    <state width="857" height="278" key="GridCell.Tab.0.left" timestamp="1606148974150">
-      <screen x="0" y="25" width="1792" height="1037" />
+    <state width="857" height="278" key="GridCell.Tab.0.center/0.25.1792.1035@0.25.1792.1035" timestamp="1606344776792" />
+    <state width="857" height="278" key="GridCell.Tab.0.center/1792.25.1366.999/0.25.1792.1035@0.25.1792.1035" timestamp="1606152635196" />
+    <state width="857" height="278" key="GridCell.Tab.0.center/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606314870550" />
+    <state width="857" height="278" key="GridCell.Tab.0.center/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606395589417" />
+    <state width="857" height="278" key="GridCell.Tab.0.center/1792.25.1366.999/0.25.1792.1038@0.25.1792.1038" timestamp="1606399192668" />
+    <state width="857" height="278" key="GridCell.Tab.0.left" timestamp="1606399192668">
+      <screen x="0" y="25" width="1792" height="1038" />
     </state>
     <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606069357698" />
-    <state width="857" height="279" key="GridCell.Tab.0.left/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606142617495" />
-    <state width="857" height="278" key="GridCell.Tab.0.left/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606148974150" />
-    <state width="857" height="278" key="GridCell.Tab.0.right" timestamp="1606148974151">
-      <screen x="0" y="25" width="1792" height="1037" />
+    <state width="857" height="278" key="GridCell.Tab.0.left/0.25.1792.1035@0.25.1792.1035" timestamp="1606344776792" />
+    <state width="857" height="278" key="GridCell.Tab.0.left/1792.25.1366.999/0.25.1792.1035@0.25.1792.1035" timestamp="1606152635196" />
+    <state width="857" height="278" key="GridCell.Tab.0.left/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606314870549" />
+    <state width="857" height="278" key="GridCell.Tab.0.left/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606395589416" />
+    <state width="857" height="278" key="GridCell.Tab.0.left/1792.25.1366.999/0.25.1792.1038@0.25.1792.1038" timestamp="1606399192668" />
+    <state width="857" height="278" key="GridCell.Tab.0.right" timestamp="1606399192669">
+      <screen x="0" y="25" width="1792" height="1038" />
     </state>
     <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606069357698" />
-    <state width="857" height="279" key="GridCell.Tab.0.right/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606142617496" />
-    <state width="857" height="278" key="GridCell.Tab.0.right/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606148974151" />
+    <state width="857" height="278" key="GridCell.Tab.0.right/0.25.1792.1035@0.25.1792.1035" timestamp="1606344776792" />
+    <state width="857" height="278" key="GridCell.Tab.0.right/1792.25.1366.999/0.25.1792.1035@0.25.1792.1035" timestamp="1606152635196" />
+    <state width="857" height="278" key="GridCell.Tab.0.right/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606314870550" />
+    <state width="857" height="278" key="GridCell.Tab.0.right/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606395589417" />
+    <state width="857" height="278" key="GridCell.Tab.0.right/1792.25.1366.999/0.25.1792.1038@0.25.1792.1038" timestamp="1606399192669" />
     <state width="1493" height="188" key="GridCell.Tab.1.bottom" timestamp="1605901540681">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -434,14 +467,16 @@
     </state>
     <state x="763" y="94" key="RiderGenerateDialog/0.0.1536.824@0.0.1536.824" timestamp="1605889565717" />
     <state x="890" y="143" key="RiderGenerateDialog/1792.25.1366.999/0.25.1792.1036@0.25.1792.1036" timestamp="1606144061094" />
-    <state x="100" y="125" width="1557" height="835" key="VCS.FileHistoryDialog" timestamp="1606144278585">
-      <screen x="0" y="25" width="1792" height="1037" />
+    <state x="100" y="125" width="1557" height="836" key="VCS.FileHistoryDialog" timestamp="1606397684814">
+      <screen x="0" y="25" width="1792" height="1038" />
     </state>
     <state x="100" y="125" width="1557" height="835" key="VCS.FileHistoryDialog/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606144278585" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606061235474">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="100" y="125" width="1557" height="836" key="VCS.FileHistoryDialog/1792.25.1366.999/0.25.1792.1038@0.25.1792.1038" timestamp="1606397684814" />
+    <state x="421" y="207" key="Vcs.Push.Dialog.v2" timestamp="1606151380205">
+      <screen x="0" y="25" width="1792" height="1037" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606061235474" />
+    <state x="421" y="207" key="Vcs.Push.Dialog.v2/1792.25.1366.999/0.25.1792.1037@0.25.1792.1037" timestamp="1606151380205" />
     <state x="322" y="142" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605285318324">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

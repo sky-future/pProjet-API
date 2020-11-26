@@ -8,6 +8,7 @@ namespace Application.Repositories
     {
         IEnumerable<IProfile> Query();
         IProfile GetById(int id);
+        IProfile GetByIdUser(int idUser);
         IProfile Create(IProfile profile);
         bool DeleteById(int id);
         bool Update(int id, IProfile profile);

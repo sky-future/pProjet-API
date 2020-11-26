@@ -4,7 +4,7 @@ namespace Domain.Profile
 {
     public class ProfileFactory : IProfileFactory
     {
-        public IProfile CreateProfile(string lastname, string firstname, string matricule, string telephone, string descript)
+        public IProfile CreateProfile(string lastname, string firstname, string matricule, string telephone, string descript, int idUser)
         {
         
             
@@ -14,7 +14,8 @@ namespace Domain.Profile
                 Firstname = firstname,
                 Matricule = matricule,
                 Telephone =  telephone,
-                Descript = descript
+                Descript = descript,
+                IdUser = idUser
                 
             };
         }

@@ -50,9 +50,12 @@
               <e p="InputDtoAddProfile.cs" t="Include" />
               <e p="InputDtoDeleteByIdProfile.cs" t="Include" />
               <e p="InputDtoGetByIdProfile.cs" t="Include" />
+              <e p="InputDtoGetByidUserProfile.cs" t="Include" />
+              <e p="InputDtoUpdateByIdProfile.cs" t="Include" />
               <e p="InputDtoUpdateProfile.cs" t="Include" />
               <e p="OutputDtoAddProfile.cs" t="Include" />
               <e p="OutputDtoGetByIdProfile.cs" t="Include" />
+              <e p="OutputDtoGetByidUserProfile.cs" t="Include" />
               <e p="OutputDtoQueryProfile.cs" t="Include" />
             </e>
             <e p="IProfileService.cs" t="Include" />
