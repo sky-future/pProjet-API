@@ -8,8 +8,10 @@ namespace Application.Services.Profile
     {
         IEnumerable<OutputDtoQueryProfile> Query();
         OutputDtoAddProfile Create(InputDtoAddProfile inputDtoAddProfile);
-        bool Update(int id, InputDtoUpdateProfile inputDtoUpdateAddress);
+        bool Update(InputDtoUpdateByIdProfile inputDtoUpdateByIdProfile, InputDtoUpdateProfile inputDtoUpdateProfile);
         OutputDtoGetByIdProfile GetById(InputDtoGetByIdProfile inputDtoGetByIdProfile);
+
+        OutputDtoGetByidUserProfile GetByUserIdProfile(InputDtoGetByidUserProfile inputDtoGetByidUserProfile);
 
         bool DeleteById(InputDtoDeleteByIdProfile inputDtoDeleteByIdProfile);
     }

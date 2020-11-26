@@ -8,8 +8,9 @@ namespace Domain.Profile
         public string Matricule { get; set; }
         public string Telephone { get; set; }
         public string Descript { get; set; }
+        public int IdUser { get; set; }
 
-        public Profile(int id,string lastname, string firstname, string matricule, string telephone, string descript)
+        public Profile(int id,string lastname, string firstname, string matricule, string telephone, string descript, int idUser)
         {
             Id = id;
             Lastname = lastname;
@@ -17,6 +18,7 @@ namespace Domain.Profile
             Matricule = matricule;
             Telephone = telephone;
             Descript = descript;
+            IdUser = idUser;
         }
 
         public Profile()

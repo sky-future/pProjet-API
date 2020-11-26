@@ -56,6 +56,23 @@ namespace Infrastructure.SqlServer.Profile
             }
         }
 
+        public IProfile GetByIdUser(int idUser)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = ProfileSqlServer.ReqGetUser;
+
+                command.Parameters.AddWithValue($"@{ProfileSqlServer.ColIdUser}", idUser);
+
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                return reader.Read() ? _profileFactory.CreateFromReader(reader) : null;
+            }
+            
+        }
+
         public IProfile Create(IProfile profile)
         {
             
@@ -70,6 +87,7 @@ namespace Infrastructure.SqlServer.Profile
                 command.Parameters.AddWithValue($"@{ProfileSqlServer.ColMatricule}", profile.Matricule);
                 command.Parameters.AddWithValue($"@{ProfileSqlServer.ColTelephone}", profile.Telephone);
                 command.Parameters.AddWithValue($"@{ProfileSqlServer.ColDescription}", profile.Descript);
+                command.Parameters.AddWithValue($"@{ProfileSqlServer.ColIdUser}", profile.IdUser);
 
                 try
                 {
@@ -123,6 +141,7 @@ namespace Infrastructure.SqlServer.Profile
                 command.Parameters.AddWithValue($"@{ProfileSqlServer.ColMatricule}", profile.Matricule);
                 command.Parameters.AddWithValue($"@{ProfileSqlServer.ColTelephone}", profile.Telephone);
                 command.Parameters.AddWithValue($"@{ProfileSqlServer.ColDescription}", profile.Descript);
+                command.Parameters.AddWithValue($"@{ProfileSqlServer.ColIdUser}", profile.IdUser);
                 command.Parameters.AddWithValue($"@{ProfileSqlServer.ColId}", id);
 
 

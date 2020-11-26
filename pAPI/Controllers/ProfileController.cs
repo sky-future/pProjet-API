@@ -42,6 +42,19 @@ namespace pAPI.Controllers
             OutputDtoGetByIdProfile profile = _profileService.GetById(inputDtoGetByIdProfile);
             return _profileService!= null ? (ActionResult<OutputDtoGetByIdProfile>) Ok(profile) : NotFound();
         }
+        
+        [HttpGet]
+        [Route("{idUser}/profile")]
+        public ActionResult<OutputDtoGetByidUserProfile> GetByUserIdProfile(int idUser)
+        {
+            var inputDtoGetByidUserProfile = new InputDtoGetByidUserProfile()
+            {
+                IdUser = idUser
+            };
+            
+            OutputDtoGetByidUserProfile profile = _profileService.GetByUserIdProfile(inputDtoGetByidUserProfile);
+            return _profileService!= null ? (ActionResult<OutputDtoGetByidUserProfile>) Ok(profile) : NotFound();
+        }
 
         //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
         [HttpPost]
@@ -69,9 +82,17 @@ namespace pAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public ActionResult UpdateAddress(int id,[FromBody]InputDtoUpdateProfile inputDtoUpdateAddress)
+        public ActionResult UpdateProfile(int id,[FromBody]InputDtoUpdateProfile inputDtoUpdateProfile)
         {
-            if (_profileService.Update(id, inputDtoUpdateAddress))
+            Console.WriteLine(inputDtoUpdateProfile);
+
+            var inputDtoUpdateByIdProfile = new InputDtoUpdateByIdProfile()
+            {
+                Id = id
+            };
+            
+            
+            if (_profileService.Update(inputDtoUpdateByIdProfile, inputDtoUpdateProfile))
             {
                 return Ok();
             }
@@ -90,6 +111,7 @@ namespace pAPI.Controllers
             };
             return Ok(_userProfileService.CreateUserProfile(inputDtoIdUserCreateUserProfile,inputDtoProfileCreateUserProfile));
         }
+        
         
     }
 }

@@ -9,13 +9,16 @@ namespace Infrastructure.SqlServer.Profile
         public static readonly string ColMatricule = "matricule";
         public static readonly string ColTelephone = "telephone";
         public static readonly string ColDescription = "descript";
+        public static readonly string ColIdUser = "idUser";
+
 
         public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
         public static readonly string ReqGet = ReqQuery + $" WHERE {ColId} = @{ColId}";
+        public static readonly string ReqGetUser = ReqQuery + $" WHERE {ColIdUser} = @{ColIdUser}";
         public static readonly string ReqCreate = $@"
-            INSERT INTO {TableName}({ColLastName},{ColFirstName},{ColMatricule},{ColTelephone},{ColDescription})
+            INSERT INTO {TableName}({ColLastName},{ColFirstName},{ColMatricule},{ColTelephone},{ColDescription},{ColIdUser})
             OUTPUT INSERTED.{ColId}
-            VALUES(@{ColLastName},@{ColFirstName},@{ColMatricule},@{ColTelephone},@{ColDescription})";
+            VALUES(@{ColLastName},@{ColFirstName},@{ColMatricule},@{ColTelephone},@{ColDescription},@{ColIdUser})";
 
         public static readonly string ReqDelete = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
         public static readonly string ReqUpdate = $@"
@@ -24,7 +27,8 @@ namespace Infrastructure.SqlServer.Profile
             {ColFirstName} = @{ColFirstName},
             {ColMatricule} = @{ColMatricule},
             {ColTelephone} = @{ColTelephone},
-            {ColDescription} = @{ColDescription}
+            {ColDescription} = @{ColDescription},
+            {ColIdUser} = @{ColIdUser}
             WHERE {ColId} = @{ColId}
         ";
     }

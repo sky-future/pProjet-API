@@ -9,5 +9,6 @@ namespace Domain.Profile
         string Matricule { get; set; }
         string Telephone { get; set; }
         string Descript { get; set; }
+        int IdUser { get; set; }
     }
 }
