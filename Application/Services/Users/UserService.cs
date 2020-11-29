@@ -83,6 +83,7 @@ namespace Application.Services.Users
             {
                 return null;
             }
+            
             return new OutputDtoAuthenticate
             {
                 id = userInDb.Id,
@@ -90,7 +91,8 @@ namespace Application.Services.Users
                 password = userInDb.Password,
                 lastConnexion = userInDb.LastConnexion,
                 admin = userInDb.Admin,
-                token = userInDb.Token
+                token = userInDb.Token,
+                profile = 0,
             };
         }
     }
