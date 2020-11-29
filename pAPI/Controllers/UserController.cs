@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
+using Application.Services.Profile;
+using Application.Services.Profile.DTO;
+using Application.Services.UserProfile;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
+using Domain.Profile;
 using Domain.Shared;
 using Domain.Users;
+using Infrastructure.SqlServer.Profile;
+using Infrastructure.SqlServer.UserProfile;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Mvc;
 
@@ -83,11 +89,19 @@ namespace pAPI.Controllers
         {
             Debug.Assert(_userService != null, nameof(_userService) + " != null");
             var user = _userService.Authenticate(inputDtoAuthenticate);
-
+            
             if (user == null)
             {
                 return BadRequest(new {message = "L'adresse e-mail ou le mot de passe est incorrect."});
             }
+
+            //Vérifie qui profile soit lié au user
+            ProfileRepository pr = new ProfileRepository();
+            IProfile profile = pr.GetByIdUser(user.id);
+
+            if (profile == null) user.profile = 0;
+
+            else user.profile = profile.Id;
 
             return Ok(user);
         }
