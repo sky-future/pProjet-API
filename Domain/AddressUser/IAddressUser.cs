@@ -4,7 +4,7 @@ using Domain.Users;
 
 namespace Domain.AddressUser
 {
-    public interface IAdressUser : IEntity
+    public interface IAddressUser : IEntity
     {
         public IUser User { get; set; }
         public IAddress Address { get; set; }

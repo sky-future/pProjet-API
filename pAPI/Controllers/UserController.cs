@@ -1,16 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using Application.Services.Profile;
-using Application.Services.Profile.DTO;
-using Application.Services.UserProfile;
+﻿using System.Diagnostics;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Domain.Profile;
-using Domain.Shared;
-using Domain.Users;
 using Infrastructure.SqlServer.Profile;
-using Infrastructure.SqlServer.UserProfile;
-using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pAPI.Controllers

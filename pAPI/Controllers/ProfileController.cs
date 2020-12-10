@@ -3,7 +3,6 @@ using Application.Services.Profile;
 using Application.Services.Profile.DTO;
 using Application.Services.UserProfile;
 using Application.Services.UserProfile.Dto;
-using Domain.UserProfile;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pAPI.Controllers

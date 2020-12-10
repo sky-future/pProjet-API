@@ -3,7 +3,7 @@ using Domain.Users;
 
 namespace Domain.AddressUser
 {
-    public class AddressUser : IAdressUser
+    public class AddressUser : IAddressUser
     {
         public int Id { get; set; }
         public IUser User { get; set; }
