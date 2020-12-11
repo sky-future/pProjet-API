@@ -1,5 +1,8 @@
-﻿using Application.Services.Address;
+﻿using System;
+using Application.Services.Address;
 using Application.Services.Address.Dto;
+using Application.Services.AddressUser;
+using Application.Services.AddressUser.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pAPI.Controllers
@@ -9,10 +12,12 @@ namespace pAPI.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
+        private readonly IAddressUserService _addressUserService;
 
-        public AddressController(IAddressService addressService)
+        public AddressController(IAddressService addressService, IAddressUserService addressUserService)
         {
             _addressService= addressService;
+            _addressUserService = addressUserService;
         }
 
         //ActionResult renvoie un code http et entre <> c'est les données qui vont être renvoyées
@@ -78,6 +83,34 @@ namespace pAPI.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpGet]
+        [Route("{idAddress}/users")]
+        public ActionResult<OutputDtoGetByIdAddressAddressUser> GetByIdAdressUser(int idAddress)
+        {
+            var inputDtoGetByIdAddressAddressUser = new InputDtoGetByIdAddressAdressUser
+            {
+                IdAddress = idAddress
+            };
+
+            return Ok(_addressUserService.GetByIdAddressAddressUser(inputDtoGetByIdAddressAddressUser));
+        }
+        
+        [HttpPost]
+        [Route("{idUser}/{idAddress}/users")]
+        public ActionResult<OutputDtoCreateAddressUser> CreateUserProfile(int idUser, int idAddress)
+        {
+            var inputDtoIdUserCreateAddressUser = new InputDtoIdUserCreateAddressUser
+            {
+                IdUser = idUser
+            };
+            var inputDtoIdAddressCreateAddressUser = new InputDtoIdAddressCreateAddressUser
+            {
+                IdAddress = idAddress
+            };
+            Console.WriteLine(idUser);
+            return Ok(_addressUserService.CreateAddressUser(inputDtoIdUserCreateAddressUser,inputDtoIdAddressCreateAddressUser));
         }
     }
 }
