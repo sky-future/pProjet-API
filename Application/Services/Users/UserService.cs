@@ -95,5 +95,16 @@ namespace Application.Services.Users
                 profile = 0,
             };
         }
+
+        public bool UpdatePassword( InputDTOUpdateUserPassword inputDTOupdatePassword)
+        {
+            // var id = inputDTOupdatePassword.IdUser;
+            // var newPassword = inputDTOupdatePassword.PasswordNew;
+            // var oldPassword = inputDTOupdatePassword.PasswordOld;
+
+            return _userRepository.UpdatePassword(inputDTOupdatePassword);
+        }
+
+      
     }
 }

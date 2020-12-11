@@ -12,5 +12,7 @@ namespace Application.Services.Users
 
         bool DeleteById(InputDtoDeleteByIdUser inputDtoDeleteById);
         OutputDtoAuthenticate Authenticate(InputDtoAuthenticate inputDtoAuthenticate);
+
+        bool UpdatePassword( InputDTOUpdateUserPassword inputDTOupdatePassword);
     }
 }

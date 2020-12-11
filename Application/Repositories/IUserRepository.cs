@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Application.Services.Users.Dto;
 using Domain.Users;
 
 namespace Application.Repositories
@@ -11,5 +12,6 @@ namespace Application.Repositories
         bool DeleteById(int id);
         bool Update(int id, IUser user);
         IUser Authenticate(string mail, string password);
+        bool UpdatePassword(InputDTOUpdateUserPassword updatepassword);
     }
 }
