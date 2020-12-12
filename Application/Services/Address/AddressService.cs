@@ -4,6 +4,8 @@ using System.Linq;
 using Application.Repositories;
 using Application.Services.Address.Dto;
 using Domain.Address;
+using Domain.AddressUser;
+using Domain.Cars;
 
 namespace Application.Services.Address
 {
@@ -12,10 +14,16 @@ namespace Application.Services.Address
     {
         private readonly IAddressRepository _addressRepository;
         private readonly IAddressFactory _addressFactory = new AddressFactory();
-        
-        public AddressService(IAddressRepository addressRepository)
+        private readonly ICarRepository _carRepository;
+        private readonly ICarFactory _carFactory = new CarFactory();
+        private readonly IAddressUserRepository _addressUserRepository;
+        private readonly IOfferCarpoolingRepository _offerCarpoolingRepository;
+        public AddressService(IAddressRepository addressRepository, ICarRepository carRepository, IAddressUserRepository addressUserRepository, IOfferCarpoolingRepository offerCarpoolingRepository)
         {
             _addressRepository = addressRepository;
+            _carRepository = carRepository;
+            _addressUserRepository = addressUserRepository;
+            _offerCarpoolingRepository = offerCarpoolingRepository;
         }
         
         public IEnumerable<OutputDtoQueryAddress> Query()
@@ -33,6 +41,50 @@ namespace Application.Services.Address
                     longitude = address.Longitude,
                     latitude = address.Latitude
                 });
+        }
+
+        //TODO test addres and car 
+        public OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar, int idUser)
+        {
+            var addressFromDTO = _addressFactory.CreateAddress(
+                inputDtoAddAddressAndCar.Street,
+                inputDtoAddAddressAndCar.Number,
+                inputDtoAddAddressAndCar.PostalCode,
+                inputDtoAddAddressAndCar.City,
+                inputDtoAddAddressAndCar.Country,
+                inputDtoAddAddressAndCar.Longitude,
+                inputDtoAddAddressAndCar.Latitude);
+
+            var carFromDto = _carFactory.createCar(
+                inputDtoAddAddressAndCar.Immatriculation,
+                inputDtoAddAddressAndCar.IdUser,
+                inputDtoAddAddressAndCar.PlaceNb);
+
+            var addressInDb = _addressRepository.Create(addressFromDTO);
+            _addressUserRepository.CreateAddressUser(idUser, addressInDb.Id);
+            var carInDb = _carRepository.Create(carFromDto);
+            var offerCarpooling = new Domain.OfferCarpooling.OfferCarpooling()
+            {
+                IdUser = idUser
+            };
+            _offerCarpoolingRepository.Create(offerCarpooling);
+            return new OutputDTOAddAddressAndCar
+            {
+                Id =  addressInDb.Id,
+                Street = addressInDb.Street,
+                Number = addressInDb.Number,
+                PostalCode = addressInDb.PostalCode,
+                City = addressInDb.City,
+                Country = addressInDb.Country,
+                Longitude = addressInDb.Longitude,
+                Latitude = addressInDb.Latitude,
+                Immatriculation = carInDb.Immatriculation,
+                PlaceNb = carInDb.PlaceNb
+            };
+            
+            
+
+            
         }
 
         public OutputDtoAddAddress Create(InputDtoAddAddress inputDtoAddAddress)
@@ -59,6 +111,8 @@ namespace Application.Services.Address
                 latitude = addressInDb.Latitude
             };
         }
+
+     
 
         public bool Update(int id, InputDtoUpdateAddress inputDtoUpdateAddress)
         {

@@ -69,5 +69,18 @@ namespace Application.Services.Cars
         {
             return _carRepository.DeleteById(inputDtoDeleteByIdCar.id);
         }
+
+        public OutputDtoGetByIdUserCar GetByIdUserCar(InputDtoGetByIdUserCar inputDtoGetByIdUserCar)
+        {
+            var carInDb = _carRepository.GetByIdUserCar(inputDtoGetByIdUserCar.IdUser);
+
+            return new OutputDtoGetByIdUserCar
+            {
+                Id = carInDb.Id,
+                Immatriculation = carInDb.Immatriculation,
+                IdUser = carInDb.IdUser,
+                PlaceNb = carInDb.PlaceNb
+            };
+        }
     }
 }

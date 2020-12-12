@@ -10,6 +10,7 @@
         
         public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
         public static readonly string ReqGet = ReqQuery + $" WHERE {ColId} = @{ColId}";
+        public static readonly string ReqGetUser = ReqQuery + $" WHERE {ColIdUser} = @{ColIdUser}";
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName}({ColImmatriculation},{ColIdUser},{ColPlaceNb})
             OUTPUT INSERTED.{ColId}

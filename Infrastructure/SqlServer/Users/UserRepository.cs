@@ -11,6 +11,7 @@ using Infrastructure.SqlServer.Shared;
 using Microsoft.IdentityModel.Tokens;
 using pAPI.Extensions;
 using Application.Repositories;
+using Application.Services.Users.Dto;
 using UserFactory = Infrastructure.SqlServer.Factory.UserFactory;
 
 namespace Infrastructure.SqlServer.Users
@@ -161,6 +162,28 @@ namespace Infrastructure.SqlServer.Users
             _user.Token = tokenHandler.WriteToken(token);
 
             return _user.WithoutPassword();
+        }
+
+        //TODO test changement password
+        public bool UpdatePassword(InputDTOUpdateUserPassword updateUserPassword)
+        {
+            bool hasBeenChanged = false;
+            
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = UserSqlServer.ReqUpdatePassword;
+                
+                
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColPassword}Old",updateUserPassword.PasswordOld);
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColPassword}New",updateUserPassword.PasswordNew);
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColId}", updateUserPassword.IdUser);
+
+                hasBeenChanged = command.ExecuteNonQuery() == 1;
+            }
+            return hasBeenChanged;
         }
     }
 }

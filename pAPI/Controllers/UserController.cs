@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using Application.Services.Profile;
-using Application.Services.Profile.DTO;
-using Application.Services.UserProfile;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Domain.Profile;
-using Domain.Shared;
-using Domain.Users;
 using Infrastructure.SqlServer.Profile;
-using Infrastructure.SqlServer.UserProfile;
-using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+
+//TODO Renvoyer un message personnalisé pour chaque API en cas d'erreur !!
 
 namespace pAPI.Controllers
 {
@@ -106,14 +102,21 @@ namespace pAPI.Controllers
             return Ok(user);
         }
         
-        //
-        // [HttpPatch("changePassword")]
-        // [Route("{id}/changePassword")]
-        // public IActionResult ChangePassword(int id, [FromBody] Object data)
-        // {
-        //   //  data[0];
-        //
-        //     return Ok(user);
-        // }
+         
+         [HttpPatch]
+         [Route("pwd")]
+          public ActionResult UpdatePassword([FromBody] InputDTOUpdateUserPassword password)
+          {
+              if (_userService.UpdatePassword(password))
+              {
+                  Console.WriteLine("I am big bos ");
+                  return Ok();
+              }
+              
+                  return BadRequest(new {message = "Le mot de passe ne correspond pas !"});;
+          }
+         
+         
+         
     }
 }

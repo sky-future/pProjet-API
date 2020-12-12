@@ -11,5 +11,6 @@ namespace Application.Services.Cars
         OutputDtoGetByIdCar GetById(InputDtoGetByIdCar inputDtoGetByIdCar);
 
         bool DeleteById(InputDtoDeleteByIdCar inputDtoDeleteByIdCar);
+        OutputDtoGetByIdUserCar GetByIdUserCar(InputDtoGetByIdUserCar inputDtoGetByIdUserCar);
     }
 }
