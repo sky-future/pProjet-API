@@ -10,5 +10,6 @@ namespace Application.Repositories
         ICar Create(ICar car);
         bool DeleteById(int id);
         bool Update(int id, ICar car);
+        ICar GetByIdUserCar(int idUser);
     }
 }

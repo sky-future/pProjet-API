@@ -120,5 +120,22 @@ namespace Infrastructure.SqlServer.Cars
             }
             return hasBeenChanged;
         }
+        
+        public ICar GetByIdUserCar(int idUser)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = CarSqlServer.ReqGetUser;
+
+                command.Parameters.AddWithValue($"@{CarSqlServer.ColIdUser}", idUser);
+
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                return reader.Read() ? _carFactory.CreateFromReader(reader) : null;
+            }
+            
+        }
     }
 }

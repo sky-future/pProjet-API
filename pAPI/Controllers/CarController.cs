@@ -73,6 +73,19 @@ namespace pAPI.Controllers
             return NotFound();
         }
 
+        [HttpGet]
+        [Route("{idUser}/user")]
+        public ActionResult<OutputDtoGetByIdUserCar> GetByIdUserCar(int idUser)
+        {
+            var inputDtoGetByIdUserCar = new InputDtoGetByIdUserCar
+            {
+                IdUser = idUser
+            };
+
+            OutputDtoGetByIdUserCar car = _carService.GetByIdUserCar(inputDtoGetByIdUserCar);
+
+            return _carService != null ? (ActionResult<OutputDtoGetByIdUserCar>) Ok(car) : NotFound();
+        }
         
     }
 }
