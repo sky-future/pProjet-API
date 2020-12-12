@@ -44,18 +44,11 @@ namespace Application.Services.AddressUser
         {
             var address = _addressRepository.GetById(inputDtoGetByIdAddressAddressUser.IdAddress);
 
-            var addressUsers = _addressUserRepository.GetByAddress(address);
+            var addressUser = _addressUserRepository.GetByAddress(address);
 
-            IList<IUser> users = new List<IUser>();
-            
-            foreach (var addressUser in addressUsers)
-            {
-                users.Add(addressUser.User);
-            }
-            
             return new OutputDtoGetByIdAddressAddressUser
             {
-                Users = users
+                IdUser = addressUser.User.Id
             };
         }
     }

@@ -5,6 +5,6 @@ namespace Application.Services.AddressUser.Dto
 {
     public class OutputDtoGetByIdAddressAddressUser
     {
-        public IEnumerable<IUser> Users { get; set; }
+        public int IdUser { get; set; }
     }
 }

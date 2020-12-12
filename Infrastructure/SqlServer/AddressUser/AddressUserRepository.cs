@@ -19,9 +19,8 @@ namespace Infrastructure.SqlServer.AddressUser
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IAddressUser> GetByAddress(IAddress address)
+        public IAddressUser GetByAddress(IAddress address)
         {
-            IList<IAddressUser> addressUsers = new List<IAddressUser>();
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
@@ -32,13 +31,10 @@ namespace Infrastructure.SqlServer.AddressUser
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-                while (reader.Read())
-                {
-                    addressUsers.Add(_factory.CreateFromReader(reader));
-                }
+                
+                return reader.Read() ? _factory.CreateFromReader(reader) : null;
+                
             }
-
-            return addressUsers;
         }
         
         public IAddressUser CreateAddressUser(IUser user, IAddress address)
