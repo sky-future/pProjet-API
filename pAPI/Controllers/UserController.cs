@@ -105,5 +105,15 @@ namespace pAPI.Controllers
 
             return Ok(user);
         }
+        
+        //
+        // [HttpPatch("changePassword")]
+        // [Route("{id}/changePassword")]
+        // public IActionResult ChangePassword(int id, [FromBody] Object data)
+        // {
+        //   //  data[0];
+        //
+        //     return Ok(user);
+        // }
     }
 }

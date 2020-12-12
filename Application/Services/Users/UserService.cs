@@ -50,8 +50,8 @@ namespace Application.Services.Users
 
         public bool Update(int id, InputDtoUpdateUser inputDtoUpdateUser)
         {
-            var userFromDto = _userFactory.CreateAdminUser(inputDtoUpdateUser.mail, inputDtoUpdateUser.password,
-                inputDtoUpdateUser.lastConnexion, inputDtoUpdateUser.admin);
+            var userFromDto = _userFactory.CreateSimpleUser(inputDtoUpdateUser.mail, inputDtoUpdateUser.password,
+                inputDtoUpdateUser.lastConnexion);
 
             return _userRepository.Update(id, userFromDto);
         }

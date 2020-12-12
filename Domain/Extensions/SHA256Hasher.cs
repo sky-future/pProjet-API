@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-
+//TODO à supprimer
 namespace pAPI.Extensions
 {
     public class SHA256Hasher
