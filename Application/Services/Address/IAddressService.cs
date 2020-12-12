@@ -7,7 +7,7 @@ namespace Application.Services.Address
     {
         IEnumerable<OutputDtoQueryAddress> Query();
         OutputDtoAddAddress Create(InputDtoAddAddress inputDtoAddAddress);
-        OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar);
+        OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar, int idUser);
         bool Update(int id, InputDtoUpdateAddress inputDtoUpdateAddress);
         OutputDtoGetByIdAddress GetById(InputDtoGetByIdAddress inputDtoGetByIdAddress);
 

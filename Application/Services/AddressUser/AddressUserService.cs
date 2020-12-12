@@ -24,12 +24,7 @@ namespace Application.Services.AddressUser
         public OutputDtoCreateAddressUser CreateAddressUser(InputDtoIdUserCreateAddressUser inputDtoIdUserCreateAddressUser,
             InputDtoIdAddressCreateAddressUser inputDtoIdAddressCreateAddressUser)
         {
-            var user = _userRepository.GetById(inputDtoIdUserCreateAddressUser.IdUser);
-            Console.WriteLine(user);
-            var address = _addressRepository.GetById(inputDtoIdAddressCreateAddressUser.IdAddress);
-            Console.WriteLine(address);
-
-            var addressUserInDb = _addressUserRepository.CreateAddressUser(user, address);
+            var addressUserInDb = _addressUserRepository.CreateAddressUser(inputDtoIdUserCreateAddressUser.IdUser, inputDtoIdAddressCreateAddressUser.IdAddress);
 
             return new OutputDtoCreateAddressUser()
             {

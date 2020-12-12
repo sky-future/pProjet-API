@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
+using Application.Services.Address;
+using Application.Services.Users;
 using Domain.Address;
 using Domain.AddressUser;
 using Domain.Users;
@@ -14,6 +16,15 @@ namespace Infrastructure.SqlServer.AddressUser
     {
         private readonly IInstanceFromReaderFactory<IAddressUser> _factory = new AddressUserFactory();
         
+        private readonly IUserRepository _userRepository;
+        private readonly IAddressRepository _addressRepository;
+
+        public AddressUserRepository(IUserRepository userRepository, IAddressRepository addressRepository)
+        {
+            _userRepository = userRepository;
+            _addressRepository = addressRepository;
+        }
+
         public IEnumerable<IAddressUser> GetByUser(IUser user)
         {
             throw new System.NotImplementedException();
@@ -37,12 +48,12 @@ namespace Infrastructure.SqlServer.AddressUser
             }
         }
         
-        public IAddressUser CreateAddressUser(IUser user, IAddress address)
+        public IAddressUser CreateAddressUser(int idUser, int idAddress)
         {
             var userAddress = new Domain.AddressUser.AddressUser
             {
-                User = user,
-                Address = address
+                User = _userRepository.GetById(idUser),
+                Address = _addressRepository.GetById(idAddress)
             };
             using (var connection = Database.GetConnection())
             {
@@ -50,8 +61,8 @@ namespace Infrastructure.SqlServer.AddressUser
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = AddressUserSqlServer.ReqCreate;
                 
-                cmd.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdUser}", user.Id);
-                cmd.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdAddress}", address.Id);
+                cmd.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdUser}", idUser);
+                cmd.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdAddress}", idAddress);
 
                 userAddress.Id = (int) cmd.ExecuteScalar();
             }

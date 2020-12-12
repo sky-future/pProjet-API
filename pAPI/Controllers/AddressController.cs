@@ -53,7 +53,7 @@ namespace pAPI.Controllers
         [Route("{id}")]
         public ActionResult<OutputDTOAddAddressAndCar> PostByUserId(int id,[FromBody]InputDTOAddAddressAndCar inputDtoAddAddressAndCar)
         {
-            return Ok(_addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar));
+            return Ok(_addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar, id));
         }
 
         [HttpDelete]
@@ -99,7 +99,7 @@ namespace pAPI.Controllers
         
         [HttpPost]
         [Route("{idUser}/{idAddress}/users")]
-        public ActionResult<OutputDtoCreateAddressUser> CreateUserProfile(int idUser, int idAddress)
+        public ActionResult<OutputDtoCreateAddressUser> CreateAddressUser(int idUser, int idAddress)
         {
             var inputDtoIdUserCreateAddressUser = new InputDtoIdUserCreateAddressUser
             {

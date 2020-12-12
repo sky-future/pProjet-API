@@ -9,7 +9,7 @@ namespace Application.Repositories
     {
         IEnumerable<IAddressUser> GetByUser(IUser user);
         IAddressUser GetByAddress(IAddress address);
-        IAddressUser CreateAddressUser( IUser user, IAddress address);
+        IAddressUser CreateAddressUser(int idUser, int idAddress);
         bool Delete(int idUser, int idAddress);
     }
 }
