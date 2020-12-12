@@ -4,6 +4,7 @@ using System.Linq;
 using Application.Repositories;
 using Application.Services.Address.Dto;
 using Domain.Address;
+using Domain.Cars;
 
 namespace Application.Services.Address
 {
@@ -11,10 +12,13 @@ namespace Application.Services.Address
     {
         private readonly IAddressRepository _addressRepository;
         private readonly IAddressFactory _addressFactory = new AddressFactory();
+        private readonly ICarRepository _carRepository;
+        private readonly ICarFactory _carFactory = new CarFactory();
         
-        public AddressService(IAddressRepository addressRepository)
+        public AddressService(IAddressRepository addressRepository, ICarRepository carRepository)
         {
             _addressRepository = addressRepository;
+            _carRepository = carRepository;
         }
         
         public IEnumerable<OutputDtoQueryAddress> Query()
@@ -32,6 +36,45 @@ namespace Application.Services.Address
                     longitude = address.Longitude,
                     latitude = address.Latitude
                 });
+        }
+
+        //TODO test addres and car 
+        public OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar)
+        {
+            var addressFromDTO = _addressFactory.CreateAddress(
+                inputDtoAddAddressAndCar.Street,
+                inputDtoAddAddressAndCar.Number,
+                inputDtoAddAddressAndCar.PostalCode,
+                inputDtoAddAddressAndCar.City,
+                inputDtoAddAddressAndCar.Country,
+                inputDtoAddAddressAndCar.Longitude,
+                inputDtoAddAddressAndCar.Latitude);
+
+            var carFromDto = _carFactory.createCar(
+                inputDtoAddAddressAndCar.Immatriculation,
+                inputDtoAddAddressAndCar.IdUser,
+                inputDtoAddAddressAndCar.PlaceNb);
+
+            var addressInDb = _addressRepository.Create(addressFromDTO);
+            var carInDb = _carRepository.Create(carFromDto);
+            Console.WriteLine(carInDb.Immatriculation);
+            return new OutputDTOAddAddressAndCar
+            {
+                Id =  addressInDb.Id,
+                Street = addressInDb.Street,
+                Number = addressInDb.Number,
+                PostalCode = addressInDb.PostalCode,
+                City = addressInDb.City,
+                Country = addressInDb.Country,
+                Longitude = addressInDb.Longitude,
+                Latitude = addressInDb.Latitude,
+                Immatriculation = carInDb.Immatriculation,
+                PlaceNb = carInDb.PlaceNb
+            };
+            
+            
+
+            
         }
 
         public OutputDtoAddAddress Create(InputDtoAddAddress inputDtoAddAddress)
@@ -59,6 +102,8 @@ namespace Application.Services.Address
                 latitude = addressInDb.Latitude
             };
         }
+
+     
 
         public bool Update(int id, InputDtoUpdateAddress inputDtoUpdateAddress)
         {

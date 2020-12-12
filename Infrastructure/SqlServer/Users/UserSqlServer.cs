@@ -25,5 +25,11 @@
             {ColAdmin} = @{ColAdmin}
             WHERE {ColId} = @{ColId}
         ";
+
+        public static readonly string ReqUpdatePassword = $@"
+             UPDATE {TableName}
+             SET {ColPassword} = @{ColPassword}New
+             WHERE {ColId} = @{ColId}
+             AND {ColPassword} = @{ColPassword}Old";
     }
 }
