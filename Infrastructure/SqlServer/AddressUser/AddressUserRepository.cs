@@ -25,9 +25,22 @@ namespace Infrastructure.SqlServer.AddressUser
             _addressRepository = addressRepository;
         }
 
-        public IEnumerable<IAddressUser> GetByUser(IUser user)
+        public IAddressUser GetByUser(IUser user)
         {
-            throw new System.NotImplementedException();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+
+                cmd.CommandText = AddressUserSqlServer.ReqQueryJoinUsersAndAddress2;
+                cmd.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdUser}", user.Id);
+
+                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                
+                return reader.Read() ? _factory.CreateFromReader(reader) : null;
+                
+            }
         }
 
         public IAddressUser GetByAddress(IAddress address)

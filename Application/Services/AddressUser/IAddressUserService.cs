@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Application.Services.AddressUser.Dto;
 
 namespace Application.Services.AddressUser
@@ -9,5 +10,9 @@ namespace Application.Services.AddressUser
 
         OutputDtoGetByIdAddressAddressUser GetByIdAddressAddressUser(
             InputDtoGetByIdAddressAdressUser inputDtoGetByIdAddressAddressUser);
+        OutputDtoGetByIdUserAddressUser GetByIdUserAddressUser(
+            InputDtoGetByIdUserAddressUser inputDtoGetByIdUserAddressUser);
+
+        IEnumerable<OutputDtoGetAddressListForCarpooling> GetAddressListForCarpooling();
     }
 }

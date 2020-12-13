@@ -1,3 +1,6 @@
+using System;
+using Application.Services.AddressUser;
+using Application.Services.AddressUser.Dto;
 using Application.Services.OfferCarpooling;
 using Application.Services.OfferCarpooling.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +12,12 @@ namespace pAPI.Controllers
     public class OfferCarpoolingController : ControllerBase
     {
         private readonly IOfferCarpoolingService _offerCarpoolingService;
+        private readonly IAddressUserService _addressUserService;
 
-        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService)
+        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService, IAddressUserService addressUserService)
         {
             _offerCarpoolingService = offerCarpoolingService;
+            _addressUserService = addressUserService;
         }
         
         [HttpGet]
@@ -43,6 +48,13 @@ namespace pAPI.Controllers
             }
 
             return NotFound();
+        }
+        
+        [HttpGet]
+        [Route("list")]
+        public ActionResult<OutputDtoGetAddressListForCarpooling> GetAddressListForCarpooling()
+        {
+            return Ok(_addressUserService.GetAddressListForCarpooling());
         }
     }
 }

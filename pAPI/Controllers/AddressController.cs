@@ -97,6 +97,18 @@ namespace pAPI.Controllers
             return Ok(_addressUserService.GetByIdAddressAddressUser(inputDtoGetByIdAddressAddressUser));
         }
         
+        [HttpGet]
+        [Route("{idUser}/address")]
+        public ActionResult<OutputDtoGetByIdUserAddressUser> GetByIdUser(int idUser)
+        {
+            var inputDtoGetByIdUserAddressUser = new InputDtoGetByIdUserAddressUser
+            {
+                IdUser = idUser
+            };
+
+            return Ok(_addressUserService.GetByIdUserAddressUser(inputDtoGetByIdUserAddressUser));
+        }
+
         [HttpPost]
         [Route("{idUser}/{idAddress}/users")]
         public ActionResult<OutputDtoCreateAddressUser> CreateAddressUser(int idUser, int idAddress)
