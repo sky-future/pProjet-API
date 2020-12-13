@@ -48,6 +48,7 @@ namespace pAPI.Controllers
         [HttpPost]
         public ActionResult<OutputDtoAddUser> CreateUser([FromBody]InputDtoAddUser inputDtoAddUser)
         {
+            Console.WriteLine("Test");
             return Ok(_userService.Create(inputDtoAddUser));
         }
 
@@ -109,7 +110,6 @@ namespace pAPI.Controllers
           {
               if (_userService.UpdatePassword(password))
               {
-                  Console.WriteLine("I am big bos ");
                   return Ok();
               }
               
