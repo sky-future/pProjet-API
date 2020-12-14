@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.RequestCarpooling.DTO;
@@ -23,28 +24,24 @@ namespace Application.Services.RequestCarpooling
         public IEnumerable<OutputDtoRequestCarpoolingById> GetByIdReceiver(
             InputDtoGetByIdRequestCarpooling inputDtoGetByIdRequestCarpooling)
         {
-            var requestInDb = _requestCarpoolingRepository.GetByIdReceiver(inputDtoGetByIdRequestCarpooling.IdRequestReceiver);
             
-            IList<IProfile> profiles = new List<IProfile>();
+            var requestInDb = _requestCarpoolingRepository.GetByIdReceiver(inputDtoGetByIdRequestCarpooling.IdRequestReceiver);
+
+            IProfile profile;
+            IList<OutputDtoRequestCarpoolingById> outputDtoRequestCarpoolingByIds = new List<OutputDtoRequestCarpoolingById>();
 
             foreach (var request in requestInDb)
             {
-                profiles.Add(_profileRepository.GetByIdUser(request.IdRequestSender));
-            }
-
-            var outputDtoRequestCarpoolingByIds = profiles.Select( output => new OutputDtoRequestCarpoolingById
-            {
-                IdUser = output.IdUser,
-                Lastname = output.Lastname,
-                Firstname = output.Firstname,
-                Telephone = output.Telephone,
-                Confirmation = requestInDb.GetEnumerator().Current.Confirmation
-            });
-
-            foreach (var request in requestInDb)
-            {
-                Console.WriteLine(outputDtoRequestCarpoolingByIds.GetEnumerator().Current.IdUser);
-                outputDtoRequestCarpoolingByIds.GetEnumerator().Current.Confirmation = request.Confirmation;
+                profile = _profileRepository.GetByIdUser(request.IdRequestSender);
+                var output = new OutputDtoRequestCarpoolingById
+                {
+                    IdUser = request.IdRequestSender,
+                    Firstname = profile.Firstname,
+                    Lastname = profile.Lastname,
+                    Telephone = profile.Telephone,
+                    Confirmation = request.Confirmation
+                };
+                outputDtoRequestCarpoolingByIds.Add(output);
             }
 
             return outputDtoRequestCarpoolingByIds;
