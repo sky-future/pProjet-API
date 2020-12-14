@@ -25,7 +25,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
                 var command = connection.CreateCommand();
                 command.CommandText = RequestCarpoolingSqlServer.RequestCarPoolingProfileById;
 
-                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}", 3);
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}", idReceiver);
 
                 var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 

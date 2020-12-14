@@ -25,7 +25,7 @@ namespace pAPI.Controllers
             InputDtoGetByIdRequestCarpooling inputDtoGetByIdRequestCarpooling = new InputDtoGetByIdRequestCarpooling
             {
                 IdRequestReceiver = idReceiver
-            }; 
+            };
             return Ok(_requestCarpoolingService.GetByIdReceiver(inputDtoGetByIdRequestCarpooling));
         }
 
