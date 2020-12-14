@@ -40,14 +40,12 @@ namespace Infrastructure.SqlServer.RequestCarpooling
 
         public IRequestCarpooling GetReqestByIdSender(int idRequestSender)
         {
-            IRequestCarpooling request = new Domain.RequestCarpooling.RequestCarpooling();
-
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
 
                 var command = connection.CreateCommand();
-                command.CommandText = RequestCarpoolingSqlServer.Req_Query_By_IdRequestSender;
+                command.CommandText = RequestCarpoolingSqlServer.ReqQueryByIdRequestSender;
 
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}", idRequestSender);
 

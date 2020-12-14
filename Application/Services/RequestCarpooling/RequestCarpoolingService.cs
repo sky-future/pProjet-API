@@ -62,8 +62,7 @@ namespace Application.Services.RequestCarpooling
 
         public OutputDtoRequestCarpooling GetSenderById(int idRequestSender)
         {
-            var requestInDb =
-                _requestCarpoolingRepository.GetReqestByIdSender(idRequestSender);
+            var requestInDb = _requestCarpoolingRepository.GetReqestByIdSender(idRequestSender);
             
             return new OutputDtoRequestCarpooling
             {
