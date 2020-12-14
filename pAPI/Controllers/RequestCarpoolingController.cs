@@ -32,15 +32,15 @@ namespace pAPI.Controllers
         [HttpPost]
         public IActionResult CreateRequestCarPooling([FromBody] InputDTOAddCarpoolingRequest inputDtoAddCarpoolingRequest)
         {
-            
+            //Recherche si existe déjà fonctionne
             Boolean requestExist = _requestCarpoolingService.GetSenderById(inputDtoAddCarpoolingRequest.IdRequestSender).IdRequestSender !=0 ;
              Console.WriteLine(requestExist);
              if (requestExist)
             {
                 return BadRequest(new {message = "Vous avez déjà fais une demande !"});
-             }
-
-             _requestCarpoolingService.AddCarPoolingRequest(inputDtoAddCarpoolingRequest);
+            }
+             
+             _requestCarpoolingService.AddCarPoolingRequest(inputDtoAddCarpoolingRequest); 
              return Ok(new {message = "La demande a bien été enregistré"});
         }
 
