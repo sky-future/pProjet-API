@@ -6,7 +6,7 @@ namespace Application.Repositories
     public interface IRequestCarpoolingRepository
     {
         IEnumerable<IRequestCarpooling> GetByIdReceiver(int idUser);
-        IRequestCarpooling GetReqestByIdSender(int idRequestSender);
+        IRequestCarpooling GetRequestByIdSender(int idRequestSender);
 
         bool Create(IRequestCarpooling requestCarpooling);
     }

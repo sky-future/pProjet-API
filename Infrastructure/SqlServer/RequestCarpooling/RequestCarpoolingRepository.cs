@@ -38,7 +38,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
             return requestCarpoolings;
         }
 
-        public IRequestCarpooling GetReqestByIdSender(int idRequestSender)
+        public IRequestCarpooling GetRequestByIdSender(int idRequestSender)
         {
             using (var connection = Database.GetConnection())
             {

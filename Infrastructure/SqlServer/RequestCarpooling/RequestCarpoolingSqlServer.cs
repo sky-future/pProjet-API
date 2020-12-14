@@ -18,7 +18,8 @@
                 VALUES(@{ColIdRequestSender}, @{ColIdRequestReceiver}, @{ColConfirmation})";
 
         public static readonly string ReqQueryByIdRequestSender = $@"
-                SELECT * FROM {TableName} WHERE {ColIdRequestSender} = @{ColIdRequestSender}";
+                SELECT * FROM {TableName}
+                WHERE {ColIdRequestSender} = @{ColIdRequestSender}";
 
     }
 }
