@@ -9,7 +9,7 @@ namespace Application.Services.RequestCarpooling
         IEnumerable<OutputDtoRequestCarpoolingById> GetByIdReceiver(
             InputDtoGetByIdRequestCarpooling inputDtoGetByIdRequestCarpooling);
 
-        bool AddCarPoolingRequest(InputDTOAddCarpoolingRequest inputDtoAddCarpoolingRequest);
+        bool AddCarPoolingRequest(InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest);
 
         OutputDtoRequestCarpooling GetSenderById(int idRequestSender);
     }

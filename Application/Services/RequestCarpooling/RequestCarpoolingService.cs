@@ -47,10 +47,10 @@ namespace Application.Services.RequestCarpooling
             return outputDtoRequestCarpoolingByIds;
         }
 
-        public bool AddCarPoolingRequest(InputDTOAddCarpoolingRequest inputDtoAddCarpoolingRequest)
+        public bool AddCarPoolingRequest(InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest)
         {
             
-            var requestFromDto = _requestCarpoolingFactory.createRequest(
+            var requestFromDto = _requestCarpoolingFactory.CreateRequest(
                         inputDtoAddCarpoolingRequest.IdRequestSender,
                         inputDtoAddCarpoolingRequest.IdRequestReceiver,
                         inputDtoAddCarpoolingRequest.Confirmation);

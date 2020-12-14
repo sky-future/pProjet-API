@@ -30,7 +30,7 @@ namespace pAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateRequestCarPooling([FromBody] InputDTOAddCarpoolingRequest inputDtoAddCarpoolingRequest)
+        public IActionResult CreateRequestCarPooling([FromBody] InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest)
         {
             var requestExist = _requestCarpoolingService.GetSenderById(inputDtoAddCarpoolingRequest.IdRequestSender);
             //Recherche si existe déjà fonctionne

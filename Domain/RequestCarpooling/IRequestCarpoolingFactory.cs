@@ -2,6 +2,6 @@
 {
     public interface IRequestCarpoolingFactory
     {
-        IRequestCarpooling createRequest(int idRequestSender, int idRequestReceiver, bool confirmation);
+        IRequestCarpooling CreateRequest(int idRequestSender, int idRequestReceiver, int confirmation);
     }
 }

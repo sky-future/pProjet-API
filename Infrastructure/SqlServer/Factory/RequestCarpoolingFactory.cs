@@ -14,7 +14,7 @@ namespace Infrastructure.SqlServer.Factory
                 Id = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColIdCarPoolingRequest)),
                 IdRequestSender = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColIdRequestSender)),
                 IdRequestReceiver = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColIdRequestReceiver)),
-                Confirmation = reader.GetBoolean(reader.GetOrdinal(RequestCarpoolingSqlServer.ColConfirmation))
+                Confirmation = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColConfirmation))
             };
         }
     }

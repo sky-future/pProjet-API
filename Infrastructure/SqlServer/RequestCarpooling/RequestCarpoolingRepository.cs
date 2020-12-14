@@ -76,6 +76,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     return false;
                 }
 

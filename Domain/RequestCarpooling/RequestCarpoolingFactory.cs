@@ -2,7 +2,7 @@
 {
     public class RequestCarpoolingFactory : IRequestCarpoolingFactory
     {
-        public IRequestCarpooling createRequest(int idRequestSender, int idRequestReceiver, bool confirmation)
+        public IRequestCarpooling CreateRequest(int idRequestSender, int idRequestReceiver, int confirmation)
         {
             return new RequestCarpooling
             {
