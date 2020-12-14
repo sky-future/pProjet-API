@@ -51,5 +51,34 @@ namespace Application.Services.RequestCarpooling
                 Confirmation = output.Confirmation
             });
         }
+
+        public bool AddCarPoolingRequest(InputDTOAddCarpoolingRequest inputDtoAddCarpoolingRequest)
+        {
+            
+            var requestFromDto = _requestCarpoolingFactory.createRequest(
+                        inputDtoAddCarpoolingRequest.IdRequestSender,
+                        inputDtoAddCarpoolingRequest.IdRequestReceiver,
+                        inputDtoAddCarpoolingRequest.Confirmation);
+
+            return _requestCarpoolingRepository.Create(requestFromDto);
+            
+        }
+        
+
+        public OutputDtoRequestCarpooling GetSenderById(int idRequestSender)
+        {
+            var requestInDb =
+                _requestCarpoolingRepository.GetReqestByIdSender(idRequestSender);
+            
+            return new OutputDtoRequestCarpooling
+            {
+                Id = requestInDb.Id,
+                IdRequestSender = requestInDb.IdRequestSender,
+                IdRequestReceiver = requestInDb.IdRequestReceiver,
+                Confirmation = requestInDb.Confirmation
+            };
+        }
+
+       
     }
 }

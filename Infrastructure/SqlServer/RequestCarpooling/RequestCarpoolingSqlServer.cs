@@ -18,6 +18,11 @@
                 SELECT * FROM {TableName}
                 WHERE {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
 
+        public static readonly string ReqCreate = $@"
+                INSERT INTO {TableName} VALUES ({ColIdRequestSender},{ColIdRequestReceiver},{ColConfirmation})";
+
+        public static readonly string Req_Query_By_IdRequestSender = $@"
+                SELECT * FROM {TableName} WHERE {ColIdRequestSender} = @{ColIdRequestSender}";
 
     }
 }
