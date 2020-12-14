@@ -76,6 +76,10 @@ namespace Application.Services.RequestCarpooling
             };
         }
 
-       
+        public bool DeleteRequestCarpooling(InputDtoDeleteRequestCarpooling inputDtoDeleteRequestCarpooling)
+        {
+            return _requestCarpoolingRepository.Delete(inputDtoDeleteRequestCarpooling.IdSender,
+                inputDtoDeleteRequestCarpooling.IdReceiver);
+        }
     }
 }

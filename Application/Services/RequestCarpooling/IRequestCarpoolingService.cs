@@ -12,5 +12,6 @@ namespace Application.Services.RequestCarpooling
         bool AddCarPoolingRequest(InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest);
 
         OutputDtoRequestCarpooling GetSenderById(int idRequestSender);
+        bool DeleteRequestCarpooling(InputDtoDeleteRequestCarpooling inputDtoDeleteRequestCarpooling);
     }
 }

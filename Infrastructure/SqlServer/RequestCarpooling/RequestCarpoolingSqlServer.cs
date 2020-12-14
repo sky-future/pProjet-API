@@ -21,5 +21,7 @@
                 SELECT * FROM {TableName}
                 WHERE {ColIdRequestSender} = @{ColIdRequestSender}";
 
+        public static readonly string ReqDel = $@"DELETE FROM {TableName} WHERE {ColIdRequestSender} = @{ColIdRequestSender} AND {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
+
     }
 }

@@ -84,6 +84,26 @@ namespace Infrastructure.SqlServer.RequestCarpooling
 
             return true;
         }
+
+        public bool Delete(int idSender, int idReceiver)
+        {
+            bool hasBeenDeleted = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = RequestCarpoolingSqlServer.ReqDel;
+
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}", idSender);
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}", idReceiver);
+                
+                hasBeenDeleted = command.ExecuteNonQuery() == 1;
+
+            }
+            
+            return hasBeenDeleted;
+        }
     }
     
 }

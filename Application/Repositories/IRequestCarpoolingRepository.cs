@@ -9,5 +9,6 @@ namespace Application.Repositories
         IRequestCarpooling GetRequestByIdSender(int idRequestSender);
 
         bool Create(IRequestCarpooling requestCarpooling);
+        bool Delete(int idSender, int idReceiver);
     }
 }

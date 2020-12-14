@@ -44,5 +44,23 @@ namespace pAPI.Controllers
             
         }
 
+        [HttpDelete]
+        [Route("{idSender}/{idReceiver}")]
+        public IActionResult DeleteRequestCarpooling(int idSender, int idReceiver)
+        {
+            InputDtoDeleteRequestCarpooling inputDtoDeleteRequestCarpooling = new InputDtoDeleteRequestCarpooling
+            {
+                IdSender = idSender,
+                IdReceiver = idReceiver
+            };
+
+            if (_requestCarpoolingService.DeleteRequestCarpooling(inputDtoDeleteRequestCarpooling))
+            {
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
     }
 }
