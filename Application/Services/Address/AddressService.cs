@@ -9,6 +9,7 @@ using Domain.Cars;
 
 namespace Application.Services.Address
 {
+    //TODO Library automapper convertir objet en un autre
     public class AddressService : IAddressService
     {
         private readonly IAddressRepository _addressRepository;
@@ -98,7 +99,6 @@ namespace Application.Services.Address
                                         inputDtoAddAddress.latitude);
 
             var addressInDb = _addressRepository.Create(addressFromDto);
-            Console.WriteLine(addressInDb);
             return new OutputDtoAddAddress
             {
                 id =  addressInDb.Id,

@@ -48,8 +48,9 @@ namespace pAPI.Controllers
         [HttpPost]
         public ActionResult<OutputDtoAddUser> CreateUser([FromBody]InputDtoAddUser inputDtoAddUser)
         {
-            Console.WriteLine("Test");
-            return Ok(_userService.Create(inputDtoAddUser));
+            OutputDtoAddUser user = _userService.Create(inputDtoAddUser);
+
+            return user != null ? (ActionResult<OutputDtoAddUser>) Ok(user) : BadRequest();
         }
 
         [HttpDelete]
@@ -96,10 +97,9 @@ namespace pAPI.Controllers
             ProfileRepository pr = new ProfileRepository();
             IProfile profile = pr.GetByIdUser(user.id);
 
-            if (profile == null) user.profile = 0;
+            if (profile == null) return BadRequest("User not linked to a profile");
 
-            else user.profile = profile.Id;
-
+            user.profile = profile.Id;
             return Ok(user);
         }
         
