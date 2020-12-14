@@ -110,7 +110,7 @@ namespace pAPI.Controllers
           {
               if (_userService.UpdatePassword(password))
               {
-                  Console.WriteLine("I am big bos ");
+                  
                   return Ok();
               }
               

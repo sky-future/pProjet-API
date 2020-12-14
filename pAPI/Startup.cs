@@ -5,6 +5,7 @@ using Application.Services.AddressUser;
 using Application.Services.Cars;
 using Application.Services.OfferCarpooling;
 using Application.Services.Profile;
+using Application.Services.RequestCarpooling;
 using Application.Services.UserProfile;
 using Application.Services.Users;
 using Infrastructure.SqlServer.Address;
@@ -12,6 +13,7 @@ using Infrastructure.SqlServer.AddressUser;
 using Infrastructure.SqlServer.Cars;
 using Infrastructure.SqlServer.OfferCarpooling;
 using Infrastructure.SqlServer.Profile;
+using Infrastructure.SqlServer.RequestCarpooling;
 using Infrastructure.SqlServer.UserProfile;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -78,6 +80,9 @@ namespace pAPI
             
             services.AddSingleton<IOfferCarpoolingService, OfferCarpoolingService>();
             services.AddSingleton<IOfferCarpoolingRepository, OfferCarpoolingRepository>();
+            
+            services.AddSingleton<IRequestCarpoolingRepository, RequestCarpoolingRepository>();
+            services.AddSingleton<IRequestCarpoolingService, RequestCarpoolingService>();
             
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
