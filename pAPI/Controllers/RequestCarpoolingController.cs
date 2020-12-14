@@ -6,28 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 namespace pAPI.Controllers
 {
     [ApiController]
-    [Route("api/requestcarpooling")]
+    [Route("api/requestCarpooling")]
     public class RequestCarpoolingController : ControllerBase
     {
 
         private readonly IRequestCarpoolingService _requestCarpoolingService;
 
-        private RequestCarpoolingController(IRequestCarpoolingService requestCarpoolingService)
+        public RequestCarpoolingController(IRequestCarpoolingService requestCarpoolingService)
         {
             _requestCarpoolingService = requestCarpoolingService;
         }
 
         [HttpGet]
         [Route("{idReceiver}")]
-        public ActionResult<OutputDTORequestCarpoolingByID> GetByIdRequest(int idReceiver)
+        public ActionResult<OutputDtoRequestCarpoolingById> GetByIdRequest(int idReceiver)
         {
-            InputDTOGetByIDRequestCarpooling inputDtoGetByIdRequestCarpooling = new InputDTOGetByIDRequestCarpooling
+            InputDtoGetByIdRequestCarpooling inputDtoGetByIdRequestCarpooling = new InputDtoGetByIdRequestCarpooling
             {
-                idRequestReceiver = idReceiver
+                IdRequestReceiver = idReceiver
             }; 
-            Console.WriteLine(inputDtoGetByIdRequestCarpooling.idRequestReceiver);
             return Ok(_requestCarpoolingService.GetByIdReceiver(inputDtoGetByIdRequestCarpooling));
         }
-
     }
 }

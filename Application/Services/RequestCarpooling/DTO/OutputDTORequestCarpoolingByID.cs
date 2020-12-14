@@ -1,6 +1,8 @@
-﻿namespace Application.Services.RequestCarpooling.DTO
+﻿using System.Collections.Generic;
+
+namespace Application.Services.RequestCarpooling.DTO
 {
-    public class OutputDTORequestCarpoolingByID
+    public class OutputDtoRequestCarpoolingById
     {
         public int IdUser { get; set; }
         public string Lastname { get; set; }
