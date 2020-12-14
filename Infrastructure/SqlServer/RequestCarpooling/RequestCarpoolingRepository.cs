@@ -17,7 +17,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
         public IEnumerable<IRequestCarpooling> GetByIdReceiver(int idReceiver)
         {
             IList<IRequestCarpooling> requestCarpoolings = new List<IRequestCarpooling>();
-                
+
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
@@ -25,11 +25,13 @@ namespace Infrastructure.SqlServer.RequestCarpooling
                 var command = connection.CreateCommand();
                 command.CommandText = RequestCarpoolingSqlServer.RequestCarPoolingProfileById;
 
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}", 3);
+
                 var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (reader.Read())
                 {
-                       requestCarpoolings.Add(_requestCarpoolingFactory.CreateFromReader(reader));
+                    requestCarpoolings.Add(_requestCarpoolingFactory.CreateFromReader(reader));
                 }
             }
 
@@ -84,6 +86,5 @@ namespace Infrastructure.SqlServer.RequestCarpooling
             return true;
         }
     }
-    
     
 }
