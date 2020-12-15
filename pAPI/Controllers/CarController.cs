@@ -62,10 +62,10 @@ namespace pAPI.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public ActionResult UpdateCar(int id,[FromBody]InputDtoUpdateCar inputDtoUpdateCar)
+        [Route("{idUser}")]
+        public ActionResult UpdateCar(int idUser,[FromBody]InputDtoUpdateCar inputDtoUpdateCar)
         {
-            if (_carService.Update(id, inputDtoUpdateCar))
+            if (_carService.Update(idUser, inputDtoUpdateCar))
             {
                 return Ok();
             }
