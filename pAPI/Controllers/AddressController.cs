@@ -60,7 +60,7 @@ namespace pAPI.Controllers
             {
                 IdUser = inputDtoAddAddressAndCar.IdUser
             };
-            if (_addressUserService.GetByIdUserAddressUser(inputDtoGetByIdUserAddressUser) == null)
+            if (_addressUserService.GetByIdUserAddressUser(inputDtoGetByIdUserAddressUser) != null)
                 return BadRequest(new {message = "Vous êtes déjà enregistré en tant que covoitureur"});
             return Ok(_addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar));
             
