@@ -61,12 +61,9 @@ namespace pAPI.Controllers
                 IdUser = inputDtoAddAddressAndCar.IdUser
             };
             if (_addressUserService.GetByIdUserAddressUser(inputDtoGetByIdUserAddressUser) == null)
-                return BadRequest();
+                return BadRequest(new {message = "Vous êtes déjà enregistré en tant que covoitureur"});
             return Ok(_addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar));
-            OutputDTOAddAddressAndCar user = _addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar);
-
-            if (user == null) return BadRequest(new {message = "Vous êtes déjà enregistré en tant que covoitureur"});
-            return Ok(user);
+            
         }
 
         [HttpDelete]
