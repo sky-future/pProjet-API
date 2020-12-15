@@ -95,6 +95,19 @@ namespace Application.Services.RequestCarpooling
             
             _carRepository.PatchPlaceNb(_carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb - 1,
                 confirmation.IdRequestReceiver);
+
+            if (_carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb == 0)
+            {
+                var requestReceiver = _requestCarpoolingRepository.GetByIdReceiver(confirmation.IdRequestReceiver);
+
+                foreach (var request in requestReceiver)
+                {
+                    if (request.Confirmation == 0)
+                    {
+                        _requestCarpoolingRepository.Delete(request.IdRequestSender, request.IdRequestReceiver);
+                    }
+                }
+            }
             
             return _requestCarpoolingRepository.UpdateConfirmationRequest(confirmation);
         }
