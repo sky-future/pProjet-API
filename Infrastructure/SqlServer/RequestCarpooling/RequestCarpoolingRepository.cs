@@ -119,6 +119,8 @@ namespace Infrastructure.SqlServer.RequestCarpooling
 
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}",
                     confirmation.idRequestSender);
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}",
+                    confirmation.idRequestReceiver);
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColConfirmation}New",
                     confirmation.confirmation);
 

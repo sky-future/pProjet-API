@@ -63,9 +63,16 @@ namespace pAPI.Controllers
         }
 
         [HttpPatch]
-        [Route("confirmation")]
-        public ActionResult UpdateConfirmation([FromBody] InputDtoUpdateConfirmation confirmation)
+        [Route("confirmation/{idSender}/{idReceiver}")]
+        public ActionResult UpdateConfirmation( int idSender, int idReceiver)
         {
+            InputDtoUpdateConfirmation confirmation = new InputDtoUpdateConfirmation
+            {
+                idRequestSender = idSender,
+                idRequestReceiver = idReceiver,
+                confirmation = 1
+            };
+            
             if (_requestCarpoolingService.UpdateConfirmation(confirmation))
             {
                 Console.WriteLine("It works");
