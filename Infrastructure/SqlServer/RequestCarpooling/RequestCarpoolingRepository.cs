@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
+using Application.Services.RequestCarpooling.DTO;
 using Domain.RequestCarpooling;
 using Infrastructure.SqlServer.Factory;
 using Infrastructure.SqlServer.Shared;
+using Infrastructure.SqlServer.Users;
 using RequestCarpoolingFactory = Infrastructure.SqlServer.Factory.RequestCarpoolingFactory;
 
 
@@ -103,6 +105,28 @@ namespace Infrastructure.SqlServer.RequestCarpooling
             }
             
             return hasBeenDeleted;
+        }
+
+        public bool UpdateConfirmationRequest(InputDtoUpdateConfirmation confirmation)
+        {
+            bool hasBeenChanged = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = RequestCarpoolingSqlServer.Req_Update_Confirmation;
+
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}",
+                    confirmation.idRequestSender);
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColConfirmation}New",
+                    confirmation.confirmation);
+
+                hasBeenChanged = command.ExecuteNonQuery() == 1;
+
+            }
+
+            return hasBeenChanged;
         }
     }
     

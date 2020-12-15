@@ -13,5 +13,7 @@ namespace Application.Services.RequestCarpooling
 
         OutputDtoRequestCarpooling GetSenderById(int idRequestSender);
         bool DeleteRequestCarpooling(InputDtoDeleteRequestCarpooling inputDtoDeleteRequestCarpooling);
+
+        bool UpdateConfirmation(InputDtoUpdateConfirmation confirmation);
     }
 }

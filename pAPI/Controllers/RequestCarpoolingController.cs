@@ -62,5 +62,18 @@ namespace pAPI.Controllers
             return NotFound();
         }
 
+        [HttpPatch]
+        [Route("confirmation")]
+        public ActionResult UpdateConfirmation([FromBody] InputDtoUpdateConfirmation confirmation)
+        {
+            if (_requestCarpoolingService.UpdateConfirmation(confirmation))
+            {
+                Console.WriteLine("It works");
+                return Ok(new {message = "La demande a été confirmé"});
+            }
+
+            return BadRequest(new {message = "Le demande n'a pas pus être envoyé."});
+        }
+
     }
 }

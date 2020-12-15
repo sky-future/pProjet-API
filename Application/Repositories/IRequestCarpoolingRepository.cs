@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Application.Services.RequestCarpooling.DTO;
 using Domain.RequestCarpooling;
 
 namespace Application.Repositories
@@ -10,5 +11,7 @@ namespace Application.Repositories
 
         bool Create(IRequestCarpooling requestCarpooling);
         bool Delete(int idSender, int idReceiver);
+
+        bool UpdateConfirmationRequest(InputDtoUpdateConfirmation confirmation);
     }
 }
