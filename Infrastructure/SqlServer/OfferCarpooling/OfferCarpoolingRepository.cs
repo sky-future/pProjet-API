@@ -80,5 +80,24 @@ namespace Infrastructure.SqlServer.OfferCarpooling
 
             return hasBeenDeleted;
         }
+
+        public bool DeleteByIdUser(int idUser)
+        {
+            bool hasBeenDeleted = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = OfferCarpoolingSqlServer.ReqDeleteIdUser;
+
+                command.Parameters.AddWithValue($"@{OfferCarpoolingSqlServer.ColIdUser}", idUser);
+
+                hasBeenDeleted = command.ExecuteNonQuery() == 1;
+
+            }
+
+            return hasBeenDeleted;
+        }
     }
 }

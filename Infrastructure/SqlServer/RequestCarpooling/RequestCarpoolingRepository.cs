@@ -118,11 +118,11 @@ namespace Infrastructure.SqlServer.RequestCarpooling
                 command.CommandText = RequestCarpoolingSqlServer.Req_Update_Confirmation;
 
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}",
-                    confirmation.idRequestSender);
+                    confirmation.IdRequestSender);
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}",
-                    confirmation.idRequestReceiver);
+                    confirmation.IdRequestReceiver);
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColConfirmation}New",
-                    confirmation.confirmation);
+                    confirmation.Confirmation);
 
                 hasBeenChanged = command.ExecuteNonQuery() == 1;
 
@@ -130,6 +130,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
 
             return hasBeenChanged;
         }
+
     }
     
 }

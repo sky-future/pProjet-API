@@ -18,12 +18,14 @@ namespace Application.Services.Address
         private readonly ICarFactory _carFactory = new CarFactory();
         private readonly IAddressUserRepository _addressUserRepository;
         private readonly IOfferCarpoolingRepository _offerCarpoolingRepository;
-        public AddressService(IAddressRepository addressRepository, ICarRepository carRepository, IAddressUserRepository addressUserRepository, IOfferCarpoolingRepository offerCarpoolingRepository)
+        private readonly IUserRepository _userRepository;
+        public AddressService(IAddressRepository addressRepository, ICarRepository carRepository, IAddressUserRepository addressUserRepository, IOfferCarpoolingRepository offerCarpoolingRepository, IUserRepository userRepository)
         {
             _addressRepository = addressRepository;
             _carRepository = carRepository;
             _addressUserRepository = addressUserRepository;
             _offerCarpoolingRepository = offerCarpoolingRepository;
+            _userRepository = userRepository;
         }
         
         public IEnumerable<OutputDtoQueryAddress> Query()
@@ -44,7 +46,7 @@ namespace Application.Services.Address
         }
 
         //TODO test addres and car 
-        public OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar, int idUser)
+        public OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar)
         {
             var addressFromDTO = _addressFactory.CreateAddress(
                 inputDtoAddAddressAndCar.Street,
@@ -61,11 +63,11 @@ namespace Application.Services.Address
                 inputDtoAddAddressAndCar.PlaceNb);
 
             var addressInDb = _addressRepository.Create(addressFromDTO);
-            _addressUserRepository.CreateAddressUser(idUser, addressInDb.Id);
+            _addressUserRepository.CreateAddressUser(inputDtoAddAddressAndCar.IdUser, addressInDb.Id);
             var carInDb = _carRepository.Create(carFromDto);
             var offerCarpooling = new Domain.OfferCarpooling.OfferCarpooling()
             {
-                IdUser = idUser
+                IdUser = inputDtoAddAddressAndCar.IdUser
             };
             _offerCarpoolingRepository.Create(offerCarpooling);
             return new OutputDTOAddAddressAndCar
@@ -114,9 +116,11 @@ namespace Application.Services.Address
 
      
 
-        public bool Update(int id, InputDtoUpdateAddress inputDtoUpdateAddress)
+        public bool Update(int idUser, InputDtoUpdateAddress inputDtoUpdateAddress)
         {
             var addressFromDto = _addressFactory.CreateAddress(inputDtoUpdateAddress.street, inputDtoUpdateAddress.number, inputDtoUpdateAddress.postalCode, inputDtoUpdateAddress.city, inputDtoUpdateAddress.country, inputDtoUpdateAddress.longitude, inputDtoUpdateAddress.latitude);
+
+            var id = _addressUserRepository.GetByUser(_userRepository.GetById(idUser)).Address.Id;
             
             return _addressRepository.Update(id, addressFromDto);
         }

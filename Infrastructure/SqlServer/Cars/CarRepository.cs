@@ -137,5 +137,24 @@ namespace Infrastructure.SqlServer.Cars
             }
             
         }
+        
+        public bool PatchPlaceNb(int placeNb, int idUser)
+        {
+            bool hasBeenChanged = false;
+            
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = CarSqlServer.ReqModifPlace;
+                
+                command.Parameters.AddWithValue($"@{CarSqlServer.ColPlaceNb}New", placeNb);
+                command.Parameters.AddWithValue($"@{CarSqlServer.ColIdUser}",idUser);
+
+                hasBeenChanged = command.ExecuteNonQuery() == 1;
+            }
+            return hasBeenChanged;
+        }
     }
 }
