@@ -23,5 +23,8 @@
             {ColPlaceNb} = @{ColPlaceNb}
             WHERE {ColId} = @{ColId}
         ";
+
+        public static readonly string ReqModifPlace =
+            $"UPDATE {TableName} SET {ColPlaceNb} = @{ColPlaceNb}New WHERE {ColIdUser} = @{ColIdUser}";
     }
 }

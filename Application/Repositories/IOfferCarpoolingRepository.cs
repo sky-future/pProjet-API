@@ -8,6 +8,7 @@ namespace Application.Repositories
         IEnumerable<IOfferCarpooling> Query();
         IOfferCarpooling Create(IOfferCarpooling offerCarpooling);
         bool DeleteById(int id);
+        bool DeleteByIdUser(int idUser);
 
     }
 }
