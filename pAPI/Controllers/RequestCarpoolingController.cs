@@ -63,19 +63,12 @@ namespace pAPI.Controllers
         }
 
         [HttpPatch]
-        [Route("confirmation/{idSender}/{idReceiver}")]
-        public ActionResult UpdateConfirmation( int idSender, int idReceiver)
+        [Route("confirmation")]
+        public ActionResult UpdateConfirmation([FromBody] InputDtoUpdateConfirmation confirmation)
         {
-            InputDtoUpdateConfirmation confirmation = new InputDtoUpdateConfirmation
-            {
-                idRequestSender = idSender,
-                idRequestReceiver = idReceiver,
-                confirmation = 1
-            };
             
             if (_requestCarpoolingService.UpdateConfirmation(confirmation))
             {
-                Console.WriteLine("It works");
                 return Ok(new {message = "La demande a été confirmé"});
             }
 

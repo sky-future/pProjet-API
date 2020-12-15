@@ -25,7 +25,7 @@
 
         public static readonly string Req_Update_Confirmation = $@"
                 UPDATE {TableName}
-                SET {ColConfirmation} = @{ColConfirmation}NEW
+                SET {ColConfirmation} = @{ColConfirmation}New
                 WHERE {ColIdRequestSender} = @{ColIdRequestSender}
                 AND {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
     }
