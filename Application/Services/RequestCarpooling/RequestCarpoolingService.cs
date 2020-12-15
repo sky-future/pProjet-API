@@ -95,6 +95,8 @@ namespace Application.Services.RequestCarpooling
             
             _carRepository.PatchPlaceNb(_carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb - 1,
                 confirmation.IdRequestReceiver);
+            
+            bool done = _requestCarpoolingRepository.UpdateConfirmationRequest(confirmation);
 
             if (_carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb == 0)
             {
@@ -108,8 +110,8 @@ namespace Application.Services.RequestCarpooling
                     }
                 }
             }
-            
-            return _requestCarpoolingRepository.UpdateConfirmationRequest(confirmation);
+
+            return done;
         }
     }
 }
