@@ -7,17 +7,21 @@
         public static readonly string ColIdRequestSender = "idRequestSender";
         public static readonly string ColIdRequestReceiver = "idRequestReceiver";
         public static readonly string ColConfirmation = "confirmation";
-        public static readonly string TableNameProfile = "profile";
-        public static readonly string ColLastName = "lastname";
-        public static readonly string ColFirstName = "firstname";
-        public static readonly string ColTelephone = "telephone";
-        public static readonly string ColIdProfile = "id";
-       
 
         public static readonly string RequestCarPoolingProfileById = $@"
                 SELECT * FROM {TableName}
                 WHERE {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
 
+        public static readonly string ReqCreate = $@"
+                INSERT INTO {TableName} ({ColIdRequestSender},{ColIdRequestReceiver},{ColConfirmation})
+                OUTPUT INSERTED.{ColIdCarPoolingRequest} 
+                VALUES(@{ColIdRequestSender}, @{ColIdRequestReceiver}, @{ColConfirmation})";
+
+        public static readonly string ReqQueryByIdRequestSender = $@"
+                SELECT * FROM {TableName}
+                WHERE {ColIdRequestSender} = @{ColIdRequestSender}";
+
+        public static readonly string ReqDel = $@"DELETE FROM {TableName} WHERE {ColIdRequestSender} = @{ColIdRequestSender} AND {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
 
     }
 }

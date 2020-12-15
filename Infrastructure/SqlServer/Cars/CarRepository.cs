@@ -66,7 +66,7 @@ namespace Infrastructure.SqlServer.Cars
                 command.Parameters.AddWithValue($"@{CarSqlServer.ColImmatriculation}", car.Immatriculation);
                 command.Parameters.AddWithValue($"@{CarSqlServer.ColIdUser}",car.IdUser);
                 command.Parameters.AddWithValue($"@{CarSqlServer.ColPlaceNb}", car.PlaceNb);
-
+            // vérifie si la voiture a bien été créé, en verifiant la valeur contenu dans l'id de la voiture crée.                                 
                 try
                 {
                     car.Id = (int) command.ExecuteScalar();

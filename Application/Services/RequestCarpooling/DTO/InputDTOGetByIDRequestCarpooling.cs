@@ -1,7 +1,7 @@
 ﻿namespace Application.Services.RequestCarpooling.DTO
 {
-    public class InputDTOGetByIDRequestCarpooling
+    public class InputDtoGetByIdRequestCarpooling
     {
-        public int idRequestReceiver { get; set; }
+        public int IdRequestReceiver { get; set; }
     }
 }

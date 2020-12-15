@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.RequestCarpooling.DTO;
+using Domain.Profile;
 using Domain.RequestCarpooling;
 
 namespace Application.Services.RequestCarpooling
@@ -18,38 +21,65 @@ namespace Application.Services.RequestCarpooling
             _profileRepository = profileRepository;
         }
         
-        public IEnumerable<OutputDTORequestCarpoolingByID> GetByIdReceiver(
-            InputDTOGetByIDRequestCarpooling inputDtoGetByIdRequestCarpooling)
+        public IEnumerable<OutputDtoRequestCarpoolingById> GetByIdReceiver(
+            InputDtoGetByIdRequestCarpooling inputDtoGetByIdRequestCarpooling)
         {
-            var requestInDb = _requestCarpoolingRepository.GetByIdReceiver(inputDtoGetByIdRequestCarpooling.idRequestReceiver);
             
-            IList<int> idSenderLists = new List<int>();
-            
-            IList<OutputDTORequestCarpoolingByID> outputDtoRequestCarpoolingByIds = new List<OutputDTORequestCarpoolingByID>();
-            
+            var requestInDb = _requestCarpoolingRepository.GetByIdReceiver(inputDtoGetByIdRequestCarpooling.IdRequestReceiver);
+
+            IProfile profile;
+            IList<OutputDtoRequestCarpoolingById> outputDtoRequestCarpoolingByIds = new List<OutputDtoRequestCarpoolingById>();
+
             foreach (var request in requestInDb)
             {
-                var profile = _profileRepository.GetByIdUser(request.IdRequestSender);
-                OutputDTORequestCarpoolingByID test = new OutputDTORequestCarpoolingByID
+                profile = _profileRepository.GetByIdUser(request.IdRequestSender);
+                var output = new OutputDtoRequestCarpoolingById
                 {
                     IdUser = request.IdRequestSender,
-                    Lastname = profile.Lastname,
                     Firstname = profile.Firstname,
+                    Lastname = profile.Lastname,
                     Telephone = profile.Telephone,
                     Confirmation = request.Confirmation
                 };
-                outputDtoRequestCarpoolingByIds.Add(test);
-                // idSenderLists.Add(request.IdRequestSender);   
+                outputDtoRequestCarpoolingByIds.Add(output);
             }
+
+            return outputDtoRequestCarpoolingByIds;
+        }
+
+        public bool AddCarPoolingRequest(InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest)
+        {
             
-            return outputDtoRequestCarpoolingByIds.Select( output => new OutputDTORequestCarpoolingByID
+            var requestFromDto = _requestCarpoolingFactory.CreateRequest(
+                        inputDtoAddCarpoolingRequest.IdRequestSender,
+                        inputDtoAddCarpoolingRequest.IdRequestReceiver,
+                        inputDtoAddCarpoolingRequest.Confirmation);
+
+            return _requestCarpoolingRepository.Create(requestFromDto);
+            
+        }
+        
+
+        public OutputDtoRequestCarpooling GetSenderById(int idRequestSender)
+        {
+            var requestInDb = _requestCarpoolingRepository.GetRequestByIdSender(idRequestSender);
+
+            if (requestInDb == null)
+                return null;
+            
+            return new OutputDtoRequestCarpooling
             {
-                IdUser = output.IdUser,
-                Lastname = output.Lastname,
-                Firstname = output.Firstname,
-                Telephone = output.Telephone,
-                Confirmation = output.Confirmation
-            });
+                Id = requestInDb.Id,
+                IdRequestSender = requestInDb.IdRequestSender,
+                IdRequestReceiver = requestInDb.IdRequestReceiver,
+                Confirmation = requestInDb.Confirmation
+            };
+        }
+
+        public bool DeleteRequestCarpooling(InputDtoDeleteRequestCarpooling inputDtoDeleteRequestCarpooling)
+        {
+            return _requestCarpoolingRepository.Delete(inputDtoDeleteRequestCarpooling.IdSender,
+                inputDtoDeleteRequestCarpooling.IdReceiver);
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Infrastructure.SqlServer.Factory
             return new Domain.RequestCarpooling.RequestCarpooling
             {
                 Id = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColIdCarPoolingRequest)),
-                Confirmation = reader.GetBoolean(reader.GetOrdinal(RequestCarpoolingSqlServer.ColConfirmation)),
+                IdRequestSender = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColIdRequestSender)),
                 IdRequestReceiver = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColIdRequestReceiver)),
-                IdRequestSender = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColIdRequestSender))
+                Confirmation = reader.GetInt32(reader.GetOrdinal(RequestCarpoolingSqlServer.ColConfirmation))
             };
         }
     }
