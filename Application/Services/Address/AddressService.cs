@@ -46,7 +46,7 @@ namespace Application.Services.Address
         }
 
         //TODO test addres and car 
-        public OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar, int idUser)
+        public OutputDTOAddAddressAndCar CreateAddressAndCarByid(InputDTOAddAddressAndCar inputDtoAddAddressAndCar)
         {
             var addressFromDTO = _addressFactory.CreateAddress(
                 inputDtoAddAddressAndCar.Street,
@@ -63,11 +63,11 @@ namespace Application.Services.Address
                 inputDtoAddAddressAndCar.PlaceNb);
 
             var addressInDb = _addressRepository.Create(addressFromDTO);
-            _addressUserRepository.CreateAddressUser(idUser, addressInDb.Id);
+            _addressUserRepository.CreateAddressUser(inputDtoAddAddressAndCar.IdUser, addressInDb.Id);
             var carInDb = _carRepository.Create(carFromDto);
             var offerCarpooling = new Domain.OfferCarpooling.OfferCarpooling()
             {
-                IdUser = idUser
+                IdUser = inputDtoAddAddressAndCar.IdUser
             };
             _offerCarpoolingRepository.Create(offerCarpooling);
             return new OutputDTOAddAddressAndCar
