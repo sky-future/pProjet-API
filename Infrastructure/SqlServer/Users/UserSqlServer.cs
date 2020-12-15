@@ -31,5 +31,6 @@
              SET {ColPassword} = @{ColPassword}New
              WHERE {ColId} = @{ColId}
              AND {ColPassword} = @{ColPassword}Old";
+        
     }
 }

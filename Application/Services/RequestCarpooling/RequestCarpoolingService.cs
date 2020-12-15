@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.RequestCarpooling.DTO;
 using Domain.Profile;
 using Domain.RequestCarpooling;
+using static System.Console;
 
 namespace Application.Services.RequestCarpooling
 {
@@ -14,11 +14,15 @@ namespace Application.Services.RequestCarpooling
         private readonly IRequestCarpoolingRepository _requestCarpoolingRepository;
         private readonly IRequestCarpoolingFactory _requestCarpoolingFactory = new RequestCarpoolingFactory();
         private readonly IProfileRepository _profileRepository;
+        private readonly ICarRepository _carRepository;
+        private readonly IOfferCarpoolingRepository _offerCarpoolingRepository;
         
-        public RequestCarpoolingService(IRequestCarpoolingRepository requestCarpoolingRepository, IProfileRepository profileRepository)
+        public RequestCarpoolingService(IRequestCarpoolingRepository requestCarpoolingRepository, IProfileRepository profileRepository, ICarRepository carRepository, IOfferCarpoolingRepository offerCarpoolingRepository)
         {
             _requestCarpoolingRepository = requestCarpoolingRepository;
             _profileRepository = profileRepository;
+            _carRepository = carRepository;
+            _offerCarpoolingRepository = offerCarpoolingRepository;
         }
         
         public IEnumerable<OutputDtoRequestCarpoolingById> GetByIdReceiver(
@@ -80,6 +84,34 @@ namespace Application.Services.RequestCarpooling
         {
             return _requestCarpoolingRepository.Delete(inputDtoDeleteRequestCarpooling.IdSender,
                 inputDtoDeleteRequestCarpooling.IdReceiver);
+        }
+
+        public bool UpdateConfirmation(InputDtoUpdateConfirmation confirmation)
+        {
+            if (confirmation.Confirmation == 1 &&  _carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb - 1 == 0)
+            {
+                _offerCarpoolingRepository.DeleteByIdUser(confirmation.IdRequestReceiver);
+            }
+            
+            _carRepository.PatchPlaceNb(_carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb - 1,
+                confirmation.IdRequestReceiver);
+            
+            bool done = _requestCarpoolingRepository.UpdateConfirmationRequest(confirmation);
+
+            if (_carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb == 0)
+            {
+                var requestReceiver = _requestCarpoolingRepository.GetByIdReceiver(confirmation.IdRequestReceiver);
+
+                foreach (var request in requestReceiver)
+                {
+                    if (request.Confirmation == 0)
+                    {
+                        _requestCarpoolingRepository.Delete(request.IdRequestSender, request.IdRequestReceiver);
+                    }
+                }
+            }
+
+            return done;
         }
     }
 }

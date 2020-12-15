@@ -11,5 +11,6 @@ namespace Application.Repositories
         bool DeleteById(int id);
         bool Update(int id, ICar car);
         ICar GetByIdUserCar(int idUser);
+        bool PatchPlaceNb(int placeNb, int idUser);
     }
 }

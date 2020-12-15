@@ -23,5 +23,10 @@
 
         public static readonly string ReqDel = $@"DELETE FROM {TableName} WHERE {ColIdRequestSender} = @{ColIdRequestSender} AND {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
 
+        public static readonly string Req_Update_Confirmation = $@"
+                UPDATE {TableName}
+                SET {ColConfirmation} = @{ColConfirmation}New
+                WHERE {ColIdRequestSender} = @{ColIdRequestSender}
+                AND {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
     }
 }
