@@ -53,7 +53,7 @@ namespace pAPI.Controllers
         
         //Post pour l'enregistrement d'une voiture et d'une adresse d'un utilisateur
         [HttpPost]
-        [Route("/adressCar")]
+        [Route("addressCar")]
         public ActionResult<OutputDTOAddAddressAndCar> PostByUserId([FromBody]InputDTOAddAddressAndCar inputDtoAddAddressAndCar)
         {
             InputDtoGetByIdUserAddressUser inputDtoGetByIdUserAddressUser = new InputDtoGetByIdUserAddressUser
@@ -63,6 +63,10 @@ namespace pAPI.Controllers
             if (_addressUserService.GetByIdUserAddressUser(inputDtoGetByIdUserAddressUser) == null)
                 return BadRequest();
             return Ok(_addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar));
+            OutputDTOAddAddressAndCar user = _addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar);
+
+            if (user == null) return BadRequest(new {message = "Vous êtes déjà enregistré en tant que covoitureur"});
+            return Ok(user);
         }
 
         [HttpDelete]
