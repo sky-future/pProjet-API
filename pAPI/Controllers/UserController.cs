@@ -90,14 +90,14 @@ namespace pAPI.Controllers
             
             if (user == null)
             {
-                return BadRequest(new {message = "L'adresse e-mail ou le mot de passe est incorrect."});
+                return NotFound(new {message = "L'adresse e-mail ou le mot de passe est incorrect."});
             }
 
             //Vérifie qui profile soit lié au user
             ProfileRepository pr = new ProfileRepository();
             IProfile profile = pr.GetByIdUser(user.id);
 
-            if (profile == null) return BadRequest("User not linked to a profile");
+            if (profile == null) return BadRequest(user);
 
             user.profile = profile.Id;
             return Ok(user);
