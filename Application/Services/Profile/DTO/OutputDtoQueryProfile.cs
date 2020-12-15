@@ -8,7 +8,6 @@ namespace Application.Services.Profile.DTO
         public string Matricule { get; set; }
         public string Telephone { get; set; }
         public string Description { get; set; }
-        
         public int IdUser { get; set; }
     }
 }
