@@ -50,6 +50,8 @@ namespace pAPI
                 {
                     builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
                     builder.WithOrigins("http://localhost:6205").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                    builder.WithOrigins("https://infallible-spence-01c804.netlify.app").AllowAnyMethod()
+                        .AllowAnyHeader().AllowCredentials();
                 });
             });
 

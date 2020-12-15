@@ -10,7 +10,7 @@ namespace Application.Services.Cars
     {
         private readonly ICarRepository _carRepository;
         private readonly ICarFactory _carFactory = new CarFactory();
-
+        
         public CarService(ICarRepository carRepository)
         {
             _carRepository = carRepository;
@@ -44,10 +44,12 @@ namespace Application.Services.Cars
             };
         }
 
-        public bool Update(int id, InputDtoUpdateCar inputDtoUpdateCar)
+        public bool Update(int idUser, InputDtoUpdateCar inputDtoUpdateCar)
         {
             var carFromDto = _carFactory.createCar(inputDtoUpdateCar.immatriculation, inputDtoUpdateCar.idUser,
                 inputDtoUpdateCar.placeNb);
+
+            var id = _carRepository.GetByIdUserCar(idUser).Id;
             
             return _carRepository.Update(id, carFromDto);
         }
