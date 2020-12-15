@@ -18,12 +18,14 @@ namespace Application.Services.Address
         private readonly ICarFactory _carFactory = new CarFactory();
         private readonly IAddressUserRepository _addressUserRepository;
         private readonly IOfferCarpoolingRepository _offerCarpoolingRepository;
-        public AddressService(IAddressRepository addressRepository, ICarRepository carRepository, IAddressUserRepository addressUserRepository, IOfferCarpoolingRepository offerCarpoolingRepository)
+        private readonly IUserRepository _userRepository;
+        public AddressService(IAddressRepository addressRepository, ICarRepository carRepository, IAddressUserRepository addressUserRepository, IOfferCarpoolingRepository offerCarpoolingRepository, IUserRepository userRepository)
         {
             _addressRepository = addressRepository;
             _carRepository = carRepository;
             _addressUserRepository = addressUserRepository;
             _offerCarpoolingRepository = offerCarpoolingRepository;
+            _userRepository = userRepository;
         }
         
         public IEnumerable<OutputDtoQueryAddress> Query()
@@ -114,9 +116,11 @@ namespace Application.Services.Address
 
      
 
-        public bool Update(int id, InputDtoUpdateAddress inputDtoUpdateAddress)
+        public bool Update(int idUser, InputDtoUpdateAddress inputDtoUpdateAddress)
         {
             var addressFromDto = _addressFactory.CreateAddress(inputDtoUpdateAddress.street, inputDtoUpdateAddress.number, inputDtoUpdateAddress.postalCode, inputDtoUpdateAddress.city, inputDtoUpdateAddress.country, inputDtoUpdateAddress.longitude, inputDtoUpdateAddress.latitude);
+
+            var id = _addressUserRepository.GetByUser(_userRepository.GetById(idUser)).Address.Id;
             
             return _addressRepository.Update(id, addressFromDto);
         }

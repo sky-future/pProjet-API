@@ -77,10 +77,10 @@ namespace pAPI.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public ActionResult UpdateAddress(int id,[FromBody]InputDtoUpdateAddress inputDtoUpdateAddress)
+        [Route("{idUser}")]
+        public ActionResult UpdateAddress(int idUser,[FromBody]InputDtoUpdateAddress inputDtoUpdateAddress)
         {
-            if (_addressService.Update(id, inputDtoUpdateAddress))
+            if (_addressService.Update(idUser, inputDtoUpdateAddress))
             {
                 return Ok();
             }
