@@ -56,6 +56,12 @@ namespace pAPI.Controllers
         [Route("/adressCar")]
         public ActionResult<OutputDTOAddAddressAndCar> PostByUserId([FromBody]InputDTOAddAddressAndCar inputDtoAddAddressAndCar)
         {
+            InputDtoGetByIdUserAddressUser inputDtoGetByIdUserAddressUser = new InputDtoGetByIdUserAddressUser
+            {
+                IdUser = inputDtoAddAddressAndCar.IdUser
+            };
+            if (_addressUserService.GetByIdUserAddressUser(inputDtoGetByIdUserAddressUser) == null)
+                return BadRequest();
             return Ok(_addressService.CreateAddressAndCarByid(inputDtoAddAddressAndCar));
         }
 
