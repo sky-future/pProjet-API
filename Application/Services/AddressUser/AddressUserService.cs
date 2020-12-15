@@ -61,6 +61,9 @@ namespace Application.Services.AddressUser
 
             var addressUser = _addressUserRepository.GetByUser(user);
 
+            if (user == null || addressUser == null)
+                return null;
+
             return new OutputDtoGetByIdUserAddressUser
             {
                 Id = addressUser.Address.Id,
