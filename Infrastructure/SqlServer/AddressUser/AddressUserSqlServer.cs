@@ -31,7 +31,15 @@ namespace Infrastructure.SqlServer.AddressUser
             INNER JOIN {AddressSqlServer.TableName} address ON {ColIdAddress} = address.{AddressSqlServer.ColId}
             WHERE {ColIdUser} = @{ColIdUser}";
         
-        public static readonly string reqDelete = $@"DELETE FROM {TableName}
+        public static readonly string ReqDelete = $@"DELETE FROM {TableName}
             WHERE {ColIdUser} = @{ColIdUser} AND {ColId} = @{ColId}";
+
+        public static readonly string ReqQuery = $@"SELECT *, userLa.mail, userLa.lastConnexion, address.street, address.number, address.postalCode,
+            address.city, address.country, address.longitude, address.latitude FROM {TableName}
+            INNER JOIN {UserSqlServer.TableName} userLa ON {ColIdUser} = userLa.{UserSqlServer.ColId}
+            INNER JOIN {AddressSqlServer.TableName} address ON {ColIdAddress} = address.{AddressSqlServer.ColId}";
+        
+        public static readonly string ReqDeleteAddress = $@"DELETE FROM {TableName}
+            WHERE {ColIdAddress} = @{ColIdAddress}";
     }
 }

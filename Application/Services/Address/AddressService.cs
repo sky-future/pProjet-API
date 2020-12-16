@@ -128,8 +128,13 @@ namespace Application.Services.Address
         public OutputDtoGetByIdAddress GetById(InputDtoGetByIdAddress inputDtoGetByIdAddress)
         {
             var addressInDb = _addressRepository.GetById(inputDtoGetByIdAddress.id);
+
+            if (addressInDb == null)
+            {
+                return null;
+            }
             
-            return new OutputDtoGetByIdAddress
+            OutputDtoGetByIdAddress outputDtoGetByIdAddress = new OutputDtoGetByIdAddress
             {
                 id =  addressInDb.Id,
                 street = addressInDb.Street,
@@ -140,6 +145,8 @@ namespace Application.Services.Address
                 longitude = addressInDb.Longitude,
                 latitude = addressInDb.Latitude
             };
+                
+            return outputDtoGetByIdAddress;
         }
 
         public bool DeleteById(InputDtoDeleteByIdAddress inputDtoDeleteByIdAddress)

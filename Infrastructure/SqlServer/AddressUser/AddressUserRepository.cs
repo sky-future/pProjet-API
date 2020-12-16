@@ -1,24 +1,21 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
-using Application.Services.Address;
-using Application.Services.Users;
 using Domain.Address;
 using Domain.AddressUser;
 using Domain.Users;
 using Infrastructure.SqlServer.Factory;
 using Infrastructure.SqlServer.Shared;
+using AddressUserFactory = Infrastructure.SqlServer.Factory.AddressUserFactory;
+
 
 namespace Infrastructure.SqlServer.AddressUser
 {
     public class AddressUserRepository : IAddressUserRepository
     {
-        private readonly IInstanceFromReaderFactory<IAddressUser> _factory = new AddressUserFactory();
-        
+        private readonly IInstanceFromReaderFactory<IAddressUser> _addressUserFactory = new AddressUserFactory();
         private readonly IUserRepository _userRepository;
         private readonly IAddressRepository _addressRepository;
-
         public AddressUserRepository(IUserRepository userRepository, IAddressRepository addressRepository)
         {
             _userRepository = userRepository;
@@ -38,7 +35,7 @@ namespace Infrastructure.SqlServer.AddressUser
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 
-                return reader.Read() ? _factory.CreateFromReader(reader) : null;
+                return reader.Read() ? _addressUserFactory.CreateFromReader(reader) : null;
                 
             }
         }
@@ -56,7 +53,7 @@ namespace Infrastructure.SqlServer.AddressUser
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 
-                return reader.Read() ? _factory.CreateFromReader(reader) : null;
+                return reader.Read() ? _addressUserFactory.CreateFromReader(reader) : null;
                 
             }
         }
@@ -86,6 +83,50 @@ namespace Infrastructure.SqlServer.AddressUser
         public bool Delete(int idUser, int idAddress)
         {
             throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<IAddressUser> Query()
+        {
+            IList<IAddressUser> addressUsers = new List<IAddressUser>();
+            
+            using (var connection = Database.GetConnection())
+            {
+                //Connection à la base de donnée
+                connection.Open();
+                //Crée une commande qui contiendra la requête demandée
+                var command = connection.CreateCommand();
+                command.CommandText = AddressUserSqlServer.ReqQuery;
+
+                //Création d'un reader qui fermera la connection à la fin de la lecture
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                //Pour chaque ligne lue, crée un user que l'on rajoute dans la liste users
+                while (reader.Read())
+                {
+                    addressUsers.Add(_addressUserFactory.CreateFromReader(reader));
+                }
+            }
+
+            return addressUsers;
+        }
+
+        public bool DeleteAddress(int idAddress)
+        {
+            bool hasBeenDeleted = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = AddressUserSqlServer.ReqDeleteAddress;
+
+                command.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdAddress}", idAddress);
+
+                hasBeenDeleted = command.ExecuteNonQuery() == 1;
+
+            }
+
+            return hasBeenDeleted;
         }
     }
 }

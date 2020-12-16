@@ -4,10 +4,7 @@ using Application.Services.Address;
 using Application.Services.Address.Dto;
 using Application.Services.AddressUser;
 using Application.Services.AddressUser.Dto;
-using Application.Services.Users;
 using Microsoft.AspNetCore.Mvc;
-using NUnit.Framework.Constraints;
-
 namespace pAPI.Controllers
 {
     //TODO regarder code http pour gérer dans les méthodes
@@ -21,13 +18,17 @@ namespace pAPI.Controllers
         private readonly IAddressUserService _addressUserService;
         private readonly IUserRepository _userRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly IAddressUserRepository _addressUserRepository;
+        private readonly ICarRepository _carRepository;
 
-        public AddressController(IAddressService addressService, IAddressUserService addressUserService, IUserRepository userRepository, IAddressRepository addressRepository)
+        public AddressController(IAddressService addressService, IAddressUserService addressUserService, IUserRepository userRepository, IAddressRepository addressRepository, IAddressUserRepository addressUserRepository, ICarRepository carRepository)
         {
             _addressService= addressService;
             _addressUserService = addressUserService;
             _userRepository = userRepository;
             _addressRepository = addressRepository;
+            _addressUserRepository = addressUserRepository;
+            _carRepository = carRepository;
         }
 
         //ActionResult renvoie un code http et entre <> c'est les données qui vont être renvoyées
@@ -57,7 +58,7 @@ namespace pAPI.Controllers
             };
             
             OutputDtoGetByIdAddress address = _addressService.GetById(inputDtoGetByIdAddress);
-            return _addressService!= null ? (ActionResult<OutputDtoGetByIdAddress>) Ok(address) : BadRequest(new {message = "Aucune adresse ne correspond à l'id envoyé."});
+            return address != null ? (ActionResult<OutputDtoGetByIdAddress>) Ok(address) : BadRequest(new {message = "Aucune adresse ne correspond à l'id envoyé."});
         }
 
         //TODO Vérifier l'intégralité des données envoyées pour le post
@@ -116,9 +117,17 @@ namespace pAPI.Controllers
                     {message = "L'adresse n'existe pas."});
             }
 
-            if (_addressService.DeleteById(inputDtoDeleteByIdAddress))
+            //TODO Ne gère pas le rajout des éléments supprimés dans le cas ou il ne finit pas la condition
+            if (
+                _carRepository.DeleteById(_carRepository
+                    .GetByIdUserCar(_addressUserRepository
+                        .GetByAddress(_addressRepository
+                            .GetById(inputDtoDeleteByIdAddress.id)).User.Id).Id) 
+                && _addressUserRepository.DeleteAddress(inputDtoDeleteByIdAddress.id) 
+                && _addressService.DeleteById(inputDtoDeleteByIdAddress)
+                )
             {
-                return Ok();
+                return Ok(new {message = "L'adresse a bien été suprimée"});
             }
 
             return BadRequest(new {message = "L'adresse n'a pas été supprimée"});
@@ -191,7 +200,7 @@ namespace pAPI.Controllers
 
             if (address == null)
             {
-                BadRequest(new {message = "Aucune n'adresse ne correspond à l'utilisateur donné"});
+                return BadRequest(new {message = "Aucune adresse ne correspond à l'utilisateur donné"});
             }
 
             return Ok(address);
@@ -227,6 +236,17 @@ namespace pAPI.Controllers
                     {message = "L'adresse n'existe pas."});
             }
 
+            var queryAddressUser = _addressUserRepository.Query();
+
+            foreach (var query in queryAddressUser)
+            {
+                Console.WriteLine(query);
+                if (query.User.Id == idUser)
+                {
+                    return BadRequest(new {message = "L'utilisateur a déjà une adresse."});
+                }
+            }
+            
             var addressuser = _addressUserService.CreateAddressUser(inputDtoIdUserCreateAddressUser,
                 inputDtoIdAddressCreateAddressUser);
 

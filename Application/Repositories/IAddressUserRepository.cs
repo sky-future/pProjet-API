@@ -11,5 +11,7 @@ namespace Application.Repositories
         IAddressUser GetByAddress(IAddress address);
         IAddressUser CreateAddressUser(int idUser, int idAddress);
         bool Delete(int idUser, int idAddress);
+        IEnumerable<IAddressUser> Query();
+        bool DeleteAddress(int idAddress);
     }
 }
