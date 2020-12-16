@@ -256,5 +256,37 @@ namespace pAPI.Controllers
             
             return Ok(addressuser);
         }
+
+        [HttpGet]
+        [Route("{idUser}/exist")]
+
+        public ActionResult<Boolean> UserHaveAddress(int idUser)
+        {
+            if (idUser < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
+            var inputDtoGetByIdUserAddressUser = new InputDtoGetByIdUserAddressUser
+            {
+                IdUser = idUser
+            };
+            
+            if (_userRepository.GetById(inputDtoGetByIdUserAddressUser.IdUser) == null)
+            {
+                return BadRequest(new
+                    {message = "L'utilisateur n'existe pas."});
+            }
+
+            var address = _addressUserService.GetByIdUserAddressUser(inputDtoGetByIdUserAddressUser);
+
+            if (address == null)
+            {
+                return false;
+            }
+
+            return true;
+
+        }
     }
 }
