@@ -110,8 +110,7 @@ namespace pAPI.Controllers
           {
               if (_userService.UpdatePassword(password))
               {
-                  Console.WriteLine("I am big bos ");
-                  return Ok();
+                  return Ok(new {message = "Le mot de passe a été changé"});
               }
               
                   return BadRequest(new {message = "Le mot de passe ne correspond pas !"});;
