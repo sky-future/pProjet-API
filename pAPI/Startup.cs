@@ -120,10 +120,12 @@ namespace pAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            if (env.IsProduction())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseCors(MyOrigins);
-            
 
             app.UseRouting();
 
