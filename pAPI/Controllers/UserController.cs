@@ -5,7 +5,6 @@ using Application.Services.Users.Dto;
 using Domain.Profile;
 using Infrastructure.SqlServer.Profile;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 
 //TODO Renvoyer un message personnalisé pour chaque API en cas d'erreur !!
 
@@ -113,7 +112,7 @@ namespace pAPI.Controllers
                   return Ok(new {message = "Le mot de passe a été changé"});
               }
               
-                  return BadRequest(new {message = "Le mot de passe ne correspond pas !"});;
+              return BadRequest(new {message = "Le mot de passe ne correspond pas !"});;
           }
          
          
