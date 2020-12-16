@@ -27,6 +27,7 @@ namespace pAPI.Controllers
             return Ok(_requestCarpoolingService.GetRequestProfileByIdReceiver(inputDtoGetRequestByIdReceiver));
         }
         
+        //TODO Gérer qu'on ne puisse pas envoyée de demande si on est chauffeur
         [HttpPost]
         public IActionResult CreateRequestCarPooling([FromBody] InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest)
         {
@@ -42,7 +43,7 @@ namespace pAPI.Controllers
             
             var requestExist = _requestCarpoolingService.GetRequestByIdSenderReceiver(inputDtoGetRequestByIdSender, inputDtoGetRequestByIdReceiver);
             //Recherche si existe déjà fonctionne
-             if (requestExist == null)
+             if (requestExist != null)
             {
                 return BadRequest(new {message = "Vous avez déjà fais une demande à cette personne !"});
             }
