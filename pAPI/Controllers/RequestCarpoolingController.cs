@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using Application.Services.RequestCarpooling;
+﻿using Application.Services.RequestCarpooling;
 using Application.Services.RequestCarpooling.DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,21 +20,31 @@ namespace pAPI.Controllers
         [Route("{idReceiver}")]
         public ActionResult<OutputDtoRequestCarpoolingById> GetByIdRequest(int idReceiver)
         {
-            InputDtoGetByIdRequestCarpooling inputDtoGetByIdRequestCarpooling = new InputDtoGetByIdRequestCarpooling
+            InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver = new InputDtoGetRequestByIdReceiver
             {
                 IdRequestReceiver = idReceiver
             };
-            return Ok(_requestCarpoolingService.GetByIdReceiver(inputDtoGetByIdRequestCarpooling));
+            return Ok(_requestCarpoolingService.GetRequestProfileByIdReceiver(inputDtoGetRequestByIdReceiver));
         }
-
+        
         [HttpPost]
         public IActionResult CreateRequestCarPooling([FromBody] InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest)
         {
-            var requestExist = _requestCarpoolingService.GetSenderById(inputDtoAddCarpoolingRequest.IdRequestSender);
-            //Recherche si existe déjà fonctionne
-             if (requestExist != null)
+            InputDtoGetRequestByIdSender inputDtoGetRequestByIdSender = new InputDtoGetRequestByIdSender
             {
-                return BadRequest(new {message = "Vous avez déjà fais une demande !"});
+                IdSender = inputDtoAddCarpoolingRequest.IdRequestSender
+            };
+            
+            InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver = new InputDtoGetRequestByIdReceiver
+            {
+                IdRequestReceiver = inputDtoAddCarpoolingRequest.IdRequestReceiver
+            };
+            
+            var requestExist = _requestCarpoolingService.GetRequestByIdSenderReceiver(inputDtoGetRequestByIdSender, inputDtoGetRequestByIdReceiver);
+            //Recherche si existe déjà fonctionne
+             if (requestExist == null)
+            {
+                return BadRequest(new {message = "Vous avez déjà fais une demande à cette personne !"});
             }
              
             _requestCarpoolingService.AddCarPoolingRequest(inputDtoAddCarpoolingRequest); 

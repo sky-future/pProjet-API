@@ -6,7 +6,6 @@ using Application.Services.RequestCarpooling.DTO;
 using Domain.RequestCarpooling;
 using Infrastructure.SqlServer.Factory;
 using Infrastructure.SqlServer.Shared;
-using Infrastructure.SqlServer.Users;
 using RequestCarpoolingFactory = Infrastructure.SqlServer.Factory.RequestCarpoolingFactory;
 
 
@@ -16,7 +15,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
     {
         private readonly IInstanceFromReaderFactory<IRequestCarpooling> _requestCarpoolingFactory = new RequestCarpoolingFactory();
         //IEnumerable car on retourne une liste de CarpoolingRequests
-        public IEnumerable<IRequestCarpooling> GetByIdReceiver(int idReceiver)
+        public IEnumerable<IRequestCarpooling> GetRequestByIdReceiver(int idReceiver)
         {
             IList<IRequestCarpooling> requestCarpoolings = new List<IRequestCarpooling>();
 
@@ -40,20 +39,46 @@ namespace Infrastructure.SqlServer.RequestCarpooling
             return requestCarpoolings;
         }
 
-        public IRequestCarpooling GetRequestByIdSender(int idRequestSender)
+        public IEnumerable<IRequestCarpooling> GetRequestByIdSender(int idRequestSender)
+        {
+            IList<IRequestCarpooling> requestCarpoolings = new List<IRequestCarpooling>();
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = RequestCarpoolingSqlServer.ReqGetByIdSender;
+
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}", idRequestSender);
+
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                {
+                    requestCarpoolings.Add(_requestCarpoolingFactory.CreateFromReader(reader));
+                }
+
+                return requestCarpoolings;
+            }
+        }
+
+        public IRequestCarpooling GetRequestByTwoId(int idSender, int idReceiver)
         {
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
 
                 var command = connection.CreateCommand();
-                command.CommandText = RequestCarpoolingSqlServer.ReqQueryByIdRequestSender;
+                command.CommandText = RequestCarpoolingSqlServer.ReqGetByIdSenderReceiver;
 
-                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}", idRequestSender);
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}", idSender);
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}", idReceiver);
 
                 var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
+                
                 return reader.Read() ? _requestCarpoolingFactory.CreateFromReader(reader) : null;
+
             }
         }
 
@@ -89,7 +114,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
 
         public bool Delete(int idSender, int idReceiver)
         {
-            bool hasBeenDeleted = false;
+            var hasBeenDeleted = false;
 
             using (var connection = Database.GetConnection())
             {
@@ -109,13 +134,13 @@ namespace Infrastructure.SqlServer.RequestCarpooling
 
         public bool UpdateConfirmationRequest(InputDtoUpdateConfirmation confirmation)
         {
-            bool hasBeenChanged = false;
+            var hasBeenChanged = false;
 
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
                 var command = connection.CreateCommand();
-                command.CommandText = RequestCarpoolingSqlServer.Req_Update_Confirmation;
+                command.CommandText = RequestCarpoolingSqlServer.ReqUpdateConfirmation;
 
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestSender}",
                     confirmation.IdRequestSender);

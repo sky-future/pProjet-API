@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.RequestCarpooling.DTO;
 using Domain.Profile;
 using Domain.RequestCarpooling;
-using static System.Console;
 
 namespace Application.Services.RequestCarpooling
 {
@@ -25,11 +23,11 @@ namespace Application.Services.RequestCarpooling
             _offerCarpoolingRepository = offerCarpoolingRepository;
         }
         
-        public IEnumerable<OutputDtoRequestCarpoolingById> GetByIdReceiver(
-            InputDtoGetByIdRequestCarpooling inputDtoGetByIdRequestCarpooling)
+        public IEnumerable<OutputDtoRequestCarpoolingById> GetRequestProfileByIdReceiver(
+            InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver)
         {
             
-            var requestInDb = _requestCarpoolingRepository.GetByIdReceiver(inputDtoGetByIdRequestCarpooling.IdRequestReceiver);
+            var requestInDb = _requestCarpoolingRepository.GetRequestByIdReceiver(inputDtoGetRequestByIdReceiver.IdRequestReceiver);
 
             IProfile profile;
             IList<OutputDtoRequestCarpoolingById> outputDtoRequestCarpoolingByIds = new List<OutputDtoRequestCarpoolingById>();
@@ -51,6 +49,22 @@ namespace Application.Services.RequestCarpooling
             return outputDtoRequestCarpoolingByIds;
         }
 
+        public IEnumerable<OutputDtoRequestCarpooling> GetRequestByIdReceiver(InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver)
+        {
+            var requestInDb = _requestCarpoolingRepository.GetRequestByIdReceiver(inputDtoGetRequestByIdReceiver.IdRequestReceiver);
+
+            if (requestInDb == null)
+                return null;
+            
+            return requestInDb.Select( output => new OutputDtoRequestCarpooling
+            {
+                Id = output.Id,
+                IdRequestSender = output.IdRequestSender,
+                IdRequestReceiver = output.IdRequestReceiver,
+                Confirmation = output.Confirmation
+            });
+        }
+
         public bool AddCarPoolingRequest(InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest)
         {
             
@@ -62,11 +76,27 @@ namespace Application.Services.RequestCarpooling
             return _requestCarpoolingRepository.Create(requestFromDto);
             
         }
-        
 
-        public OutputDtoRequestCarpooling GetSenderById(int idRequestSender)
+
+        public IEnumerable<OutputDtoRequestCarpooling> GetRequestByIdSender(InputDtoGetRequestByIdSender inputDtoGetRequestByIdSender)
         {
-            var requestInDb = _requestCarpoolingRepository.GetRequestByIdSender(idRequestSender);
+            var requestInDb = _requestCarpoolingRepository.GetRequestByIdSender(inputDtoGetRequestByIdSender.IdSender);
+
+            if (requestInDb == null)
+                return null;
+            
+            return requestInDb.Select( output => new OutputDtoRequestCarpooling
+            {
+                Id = output.Id,
+                IdRequestSender = output.IdRequestSender,
+                IdRequestReceiver = output.IdRequestReceiver,
+                Confirmation = output.Confirmation
+            });
+        }
+
+        public OutputDtoRequestCarpooling GetRequestByIdSenderReceiver(InputDtoGetRequestByIdSender inputDtoGetRequestByIdSender, InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver)
+        {
+            var requestInDb = _requestCarpoolingRepository.GetRequestByTwoId(inputDtoGetRequestByIdSender.IdSender, inputDtoGetRequestByIdReceiver.IdRequestReceiver);
 
             if (requestInDb == null)
                 return null;
@@ -100,7 +130,7 @@ namespace Application.Services.RequestCarpooling
 
             if (_carRepository.GetByIdUserCar(confirmation.IdRequestReceiver).PlaceNb == 0)
             {
-                var requestReceiver = _requestCarpoolingRepository.GetByIdReceiver(confirmation.IdRequestReceiver);
+                var requestReceiver = _requestCarpoolingRepository.GetRequestByIdReceiver(confirmation.IdRequestReceiver);
 
                 foreach (var request in requestReceiver)
                 {

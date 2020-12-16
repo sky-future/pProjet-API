@@ -1,6 +1,4 @@
-using System;
 using Application.Repositories;
-using Application.Services.Address;
 using Application.Services.AddressUser;
 using Application.Services.AddressUser.Dto;
 using Application.Services.OfferCarpooling;
@@ -15,14 +13,12 @@ namespace pAPI.Controllers
     {
         private readonly IOfferCarpoolingService _offerCarpoolingService;
         private readonly IAddressUserService _addressUserService;
-        private readonly IAddressService _addressService;
         private readonly IAddressRepository _addressRepository;
 
-        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService, IAddressUserService addressUserService, IAddressService addressService, IAddressRepository addressRepository)
+        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService, IAddressUserService addressUserService, IAddressRepository addressRepository)
         {
             _offerCarpoolingService = offerCarpoolingService;
             _addressUserService = addressUserService;
-            _addressService = addressService;
             _addressRepository = addressRepository;
         }
         
