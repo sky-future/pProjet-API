@@ -9,6 +9,7 @@ namespace Application.Repositories
         IOfferCarpooling Create(IOfferCarpooling offerCarpooling);
         bool DeleteById(int id);
         bool DeleteByIdUser(int idUser);
+        IOfferCarpooling GetByIdUser(int idUser);
 
     }
 }

@@ -99,5 +99,24 @@ namespace Infrastructure.SqlServer.OfferCarpooling
 
             return hasBeenDeleted;
         }
+
+        public IOfferCarpooling GetByIdUser(int idUser)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                //Connection à la base de donnée
+                connection.Open();
+                //Crée une commande qui contiendra la requête demandée
+                var command = connection.CreateCommand();
+                command.CommandText = OfferCarpoolingSqlServer.ReqGetByIdUser;
+
+                command.Parameters.AddWithValue($"@{OfferCarpoolingSqlServer.ColIdUser}", idUser);
+
+                var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                return reader.Read() ? _offerCarpoolingFactory.CreateFromReader(reader) : null;
+                
+            }
+        }
     }
 }

@@ -1,8 +1,12 @@
 using Application.Repositories;
 using Application.Services.AddressUser;
 using Application.Services.AddressUser.Dto;
+using Application.Services.Cars;
+using Application.Services.Cars.Dto;
 using Application.Services.OfferCarpooling;
 using Application.Services.OfferCarpooling.DTO;
+using Application.Services.Users;
+using Application.Services.Users.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pAPI.Controllers
@@ -14,12 +18,16 @@ namespace pAPI.Controllers
         private readonly IOfferCarpoolingService _offerCarpoolingService;
         private readonly IAddressUserService _addressUserService;
         private readonly IAddressRepository _addressRepository;
+        private readonly IUserService _userService;
+        private readonly ICarService _carService;
 
-        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService, IAddressUserService addressUserService, IAddressRepository addressRepository)
+        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService, IAddressUserService addressUserService, IAddressRepository addressRepository, IUserService userService, ICarService carService)
         {
             _offerCarpoolingService = offerCarpoolingService;
             _addressUserService = addressUserService;
             _addressRepository = addressRepository;
+            _userService = userService;
+            _carService = carService;
         }
         
         [HttpGet]
@@ -37,8 +45,50 @@ namespace pAPI.Controllers
         
         //TODO intégralité des données
         [HttpPost]
-        public ActionResult<OutputDtoAddOfferCarpooling> CreateOfferCarpooling([FromBody]InputDtoAddOfferCarpooling inputDtoAddOfferCarpooling)
+        [Route("{idUser}")]
+        public ActionResult<OutputDtoAddOfferCarpooling> CreateOfferCarpooling(int idUser)
         {
+            if (idUser < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
+            var inputDtoGetByIdUser = new InputDtoGetByIdUser
+            {
+                id = idUser
+            };
+            
+            if (_userService.GetById(inputDtoGetByIdUser) == null)
+            {
+                return BadRequest(new
+                    {message = "L'utilisateur n'existe pas."});
+            }
+            
+            var inputDtoAddOfferCarpooling = new InputDtoAddOfferCarpooling
+            {
+                IdUser = idUser
+            };
+
+            var offerInDb =_offerCarpoolingService.GetByIdUser(inputDtoAddOfferCarpooling);
+
+            if (offerInDb != null)
+            {
+                return BadRequest(new
+                    {message = "Vous êtes déjà dans la liste des personnes qui proposent leurs co-voiturage."});
+            }
+
+            var inputDtoGetByIdUserCar = new InputDtoGetByIdUserCar
+            {
+                IdUser = idUser
+            };
+
+            var carUser = _carService.GetByIdUserCar(inputDtoGetByIdUserCar);
+
+            if (carUser.PlaceNb <= 0)
+            {
+                return BadRequest(new {message = "Vous n'avez pas assez de place dans votre voiture"});
+            }
+            
             return Ok(_offerCarpoolingService.Create(inputDtoAddOfferCarpooling));
         }
         

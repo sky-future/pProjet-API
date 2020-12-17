@@ -94,5 +94,21 @@ namespace Application.Services.OfferCarpooling
 
             return infoModal;
         }
+
+        public OutputDtoQueryCarpooling GetByIdUser(InputDtoAddOfferCarpooling inputDtoAddOfferCarpooling)
+        {
+            var offerInDb = _offerCarpoolingRepository.GetByIdUser(inputDtoAddOfferCarpooling.IdUser);
+            
+            if (offerInDb == null)
+            {
+                return null;
+            }
+
+            return new OutputDtoQueryCarpooling
+            {
+                Id = offerInDb.Id,
+                IdUser = offerInDb.IdUser
+            };
+        }
     }
 }
