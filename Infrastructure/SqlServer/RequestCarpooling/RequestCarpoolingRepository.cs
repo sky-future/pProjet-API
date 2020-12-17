@@ -164,7 +164,7 @@ namespace Infrastructure.SqlServer.RequestCarpooling
             {
                 connection.Open();
                 var command = connection.CreateCommand();
-                command.CommandText = RequestCarpoolingSqlServer.ReqDel;
+                command.CommandText = RequestCarpoolingSqlServer.ReqDelAllByIdReceiver;
                 
                 command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}", idReceiver);
                 

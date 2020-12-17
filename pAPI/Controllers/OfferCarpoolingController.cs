@@ -128,7 +128,11 @@ namespace pAPI.Controllers
             //Est ce qu'il a une offre ?
             if (_offerCarpoolingService.GetByIdUser(inputDtoAddOfferCarpooling) == null)
             {
-                return BadRequest(new {message="L'utilisateur n'est pas dans la liste des utilisateurs qui proposent leurs services de covoiturage."})
+                return BadRequest(new
+                {
+                    message =
+                        "L'utilisateur n'est pas dans la liste des utilisateurs qui proposent leurs services de covoiturage."
+                });
             }
 
             var inputDtoGetRequestByIdReceiver = new InputDtoGetRequestByIdReceiver
@@ -161,6 +165,13 @@ namespace pAPI.Controllers
                     return BadRequest(new {message = "Il y a eu un problème lors de la suppresion des requêtes."});
                 }
             }
+
+            var offerInDb = _offerCarpoolingService.GetByIdUser(inputDtoAddOfferCarpooling);
+            var inputDtoDeleteById = new InputDtoDeleteById
+            {
+                Id = offerInDb.Id
+            };
+            var delInDb = _offerCarpoolingService.DeleteById(inputDtoDeleteById);
 
             return Ok("Votre demande a bien été effectuée.");
         }
