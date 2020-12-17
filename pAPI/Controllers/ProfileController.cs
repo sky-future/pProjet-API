@@ -3,6 +3,8 @@ using Application.Services.Profile;
 using Application.Services.Profile.DTO;
 using Application.Services.UserProfile;
 using Application.Services.UserProfile.Dto;
+using Application.Services.Users;
+using Application.Services.Users.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -15,58 +17,95 @@ namespace pAPI.Controllers
         
          private readonly IProfileService _profileService;
          private readonly IUserProfileService _userProfileService;
+         private readonly IUserService _userService;
 
-        public ProfileController(IProfileService profileService, IUserProfileService userProfileService)
+        public ProfileController(IProfileService profileService, IUserProfileService userProfileService, IUserService userService)
         {
             _profileService = profileService;
             _userProfileService = userProfileService;
+            _userService = userService;
         }
 
         //ActionResult renvoie un code http et entre <> c'est les données qui vont être renvoyées
         [HttpGet]
         public ActionResult<OutputDtoQueryProfile> QueryProfile()
         {
+            var query = _profileService.Query();
+
+            if (query == null)
+            {
+                return BadRequest(new {message = "Aucune données n'a été trouvées."});
+
+            }
+            
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
-            return Ok(_profileService.Query());
+            return Ok(query);
         }
 
         [HttpGet]
         [Route("{id}")]
         public ActionResult<OutputDtoGetByIdProfile> GetByIdProfile(int id)
         {
+            if (id < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoGetByIdProfile = new InputDtoGetByIdProfile()
             {
                 Id = id
             };
             
             OutputDtoGetByIdProfile profile = _profileService.GetById(inputDtoGetByIdProfile);
-            return _profileService!= null ? (ActionResult<OutputDtoGetByIdProfile>) Ok(profile) : NotFound();
+            return profile!= null ? (ActionResult<OutputDtoGetByIdProfile>) Ok(profile) : BadRequest(new {message = "Le profile n'existe pas."});
         }
         
         [HttpGet]
         [Route("{idUser}/profile")]
         public ActionResult<OutputDtoGetByidUserProfile> GetByUserIdProfile(int idUser)
         {
+            if (idUser < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoGetByidUserProfile = new InputDtoGetByidUserProfile()
             {
                 IdUser = idUser
             };
             
+            var inputDtoGetByIdUser = new InputDtoGetByIdUser
+            {
+                id = idUser
+            };
+            
+            if (_userService.GetById(inputDtoGetByIdUser) == null)
+            {
+                return BadRequest(new
+                    {message = "L'utilisateur n'existe pas."});
+            }
+            
             OutputDtoGetByidUserProfile profile = _profileService.GetByUserIdProfile(inputDtoGetByidUserProfile);
-            return _profileService!= null ? (ActionResult<OutputDtoGetByidUserProfile>) Ok(profile) : NotFound();
+            return profile != null ? (ActionResult<OutputDtoGetByidUserProfile>) Ok(profile) : BadRequest(new {message = "Aucun profile n'a été trouvé pour cet utilisateur."});
         }
 
+        //TODO vérifier intégralité
         //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
         [HttpPost]
-        public ActionResult<OutputDtoAddProfile> CreateAddress([FromBody]InputDtoAddProfile inputDtoAddProfile)
+        public ActionResult<OutputDtoAddProfile> CreateProfile([FromBody]InputDtoAddProfile inputDtoAddProfile)
         {
             return Ok(_profileService.Create(inputDtoAddProfile));
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public ActionResult DeleteByIdAddress(int id)
+        public ActionResult DeleteByIdProfile(int id)
         {
+            if (id < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoDeleteByIdProfile = new InputDtoDeleteByIdProfile()
             {
                 Id = id
@@ -74,12 +113,13 @@ namespace pAPI.Controllers
             
             if (_profileService.DeleteById(inputDtoDeleteByIdProfile))
             {
-                return Ok();
+                return Ok("Vous avez supprimé le profile.");
             }
 
             return NotFound();
         }
 
+        //TODO Vérifier intégralité
         [HttpPut]
         [Route("{id}")]
         public ActionResult UpdateProfile(int id,[FromBody]InputDtoUpdateProfile inputDtoUpdateProfile)
@@ -100,6 +140,7 @@ namespace pAPI.Controllers
             return NotFound();
         }
 
+        //TODO Vérifier intégralité
         [HttpPost]
         [Route("{idUser}/users")]
         public ActionResult<OutputDtoCreateUserProfile> CreateUserProfile(int idUser, [FromBody]InputDtoProfileCreateUserProfile inputDtoProfileCreateUserProfile)

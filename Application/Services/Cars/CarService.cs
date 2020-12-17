@@ -17,9 +17,14 @@ namespace Application.Services.Cars
         }
         public IEnumerable<OutputDtoQueryCar> Query()
         {
-            return _carRepository
-                .Query()
-                .Select(car => new OutputDtoQueryCar
+            var queryInDb = _carRepository.Query();
+
+            if (queryInDb == null)
+            {
+                return null;
+            }
+            
+            return queryInDb.Select(car => new OutputDtoQueryCar
                 {
                     id =  car.Id,
                     immatriculation = car.Immatriculation,
@@ -58,6 +63,11 @@ namespace Application.Services.Cars
         {
             var carInDb = _carRepository.GetById(inputDtoGetByIdCar.id);
             
+            if (carInDb == null)
+            {
+                return null;
+            }
+            
             return new OutputDtoGetByIdCar
             {
                 id =  carInDb.Id,
@@ -75,6 +85,11 @@ namespace Application.Services.Cars
         public OutputDtoGetByIdUserCar GetByIdUserCar(InputDtoGetByIdUserCar inputDtoGetByIdUserCar)
         {
             var carInDb = _carRepository.GetByIdUserCar(inputDtoGetByIdUserCar.IdUser);
+            
+            if (carInDb == null)
+            {
+                return null;
+            }
 
             return new OutputDtoGetByIdUserCar
             {

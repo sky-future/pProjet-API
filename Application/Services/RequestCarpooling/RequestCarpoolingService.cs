@@ -29,12 +29,21 @@ namespace Application.Services.RequestCarpooling
             
             var requestInDb = _requestCarpoolingRepository.GetRequestByIdReceiver(inputDtoGetRequestByIdReceiver.IdRequestReceiver);
 
+            if (requestInDb == null)
+            {
+                return null;
+            }
+            
             IProfile profile;
             IList<OutputDtoRequestCarpoolingById> outputDtoRequestCarpoolingByIds = new List<OutputDtoRequestCarpoolingById>();
 
             foreach (var request in requestInDb)
             {
                 profile = _profileRepository.GetByIdUser(request.IdRequestSender);
+                if (profile == null)
+                {
+                    return null;
+                }
                 var output = new OutputDtoRequestCarpoolingById
                 {
                     IdUser = request.IdRequestSender,

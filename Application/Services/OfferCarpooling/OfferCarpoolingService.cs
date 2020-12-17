@@ -25,9 +25,14 @@ namespace Application.Services.OfferCarpooling
 
         public IEnumerable<OutputDtoQueryCarpooling> Query()
         {
-            return _offerCarpoolingRepository
-                .Query()
-                .Select(offerCarpooling => new OutputDtoQueryCarpooling()
+            var queryInDb = _offerCarpoolingRepository.Query();
+
+            if (queryInDb == null)
+            {
+                return null;
+            }
+            
+            return queryInDb.Select(offerCarpooling => new OutputDtoQueryCarpooling()
                 {
                     Id = offerCarpooling.Id,
                     IdUser = offerCarpooling.IdUser

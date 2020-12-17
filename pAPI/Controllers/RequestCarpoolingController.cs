@@ -1,5 +1,7 @@
 ﻿using Application.Services.RequestCarpooling;
 using Application.Services.RequestCarpooling.DTO;
+using Application.Services.Users;
+using Application.Services.Users.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pAPI.Controllers
@@ -10,23 +12,50 @@ namespace pAPI.Controllers
     {
 
         private readonly IRequestCarpoolingService _requestCarpoolingService;
+        private readonly IUserService _userService;
 
-        public RequestCarpoolingController(IRequestCarpoolingService requestCarpoolingService)
+        public RequestCarpoolingController(IRequestCarpoolingService requestCarpoolingService, IUserService userService)
         {
             _requestCarpoolingService = requestCarpoolingService;
+            _userService = userService;
         }
 
         [HttpGet]
         [Route("{idReceiver}")]
         public ActionResult<OutputDtoRequestCarpoolingById> GetByIdRequest(int idReceiver)
         {
+            if (idReceiver < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
+            var inputDtoGetByIdUser = new InputDtoGetByIdUser
+            {
+                id = idReceiver
+            };
+            
+            if (_userService.GetById(inputDtoGetByIdUser) == null)
+            {
+                return BadRequest(new
+                    {message = "L'utilisateur n'existe pas."});
+            }
+            
             InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver = new InputDtoGetRequestByIdReceiver
             {
                 IdRequestReceiver = idReceiver
             };
-            return Ok(_requestCarpoolingService.GetRequestProfileByIdReceiver(inputDtoGetRequestByIdReceiver));
+
+            var get = _requestCarpoolingService.GetRequestProfileByIdReceiver(inputDtoGetRequestByIdReceiver);
+
+            if (get == null)
+            {
+                return BadRequest(new {message = "Aucune requête n'a été trouvée pour cet utilisateur"});
+            }
+            
+            return Ok(get);
         }
         
+        //TODO Vérifier intégralité des données
         //TODO Gérer qu'on ne puisse pas envoyée de demande si on est chauffeur
         [HttpPost]
         public IActionResult CreateRequestCarPooling([FromBody] InputDtoAddCarpoolingRequest inputDtoAddCarpoolingRequest)
@@ -71,6 +100,7 @@ namespace pAPI.Controllers
             return NotFound();
         }
 
+        //TODO Vérifier intégralité des données
         [HttpPatch]
         [Route("confirmation")]
         public ActionResult UpdateConfirmation([FromBody] InputDtoUpdateConfirmation confirmation)

@@ -25,8 +25,14 @@ namespace pAPI.Controllers
         [HttpGet]
         public ActionResult<OutputDtoQueryUser> QueryUser()
         {
+            var query = _userService.Query();
+
+            if (query == null)
+            {
+                return BadRequest(new {message = "Aucune données n'a été trouvées."});
+            }
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
-            return Ok(_userService.Query());
+            return Ok(query);
         }
 
         //TODO : Vérifier le passage de l'id par la route sans utiliser inputDto
@@ -34,15 +40,21 @@ namespace pAPI.Controllers
         [Route("{id}")]
         public ActionResult<OutputDtoGetByIdUser> GetByIdUser(int id)
         {
+            if (id < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoGetById = new InputDtoGetByIdUser
             {
                 id = id
             };
             
             OutputDtoGetByIdUser user = _userService.GetById(inputDtoGetById);
-            return _userService!= null ? (ActionResult<OutputDtoGetByIdUser>) Ok(user) : NotFound();
+            return user != null ? (ActionResult<OutputDtoGetByIdUser>) Ok(user) : BadRequest(new {message = "Aucun n'utilisateur ne correspond à cet id."});
         }
 
+        //TODO Vérifier intégralité données
         //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
         [HttpPost]
         public ActionResult<OutputDtoAddUser> CreateUser([FromBody]InputDtoAddUser inputDtoAddUser)
@@ -56,6 +68,11 @@ namespace pAPI.Controllers
         [Route("{id}")]
         public ActionResult DeleteByIdUser(int id)
         {
+            if (id < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoDeleteById = new InputDtoDeleteByIdUser()
             {
                 id = id
@@ -68,7 +85,8 @@ namespace pAPI.Controllers
 
             return NotFound();
         }
-
+        
+        //TODO Intégralité données
         [HttpPut]
         [Route("{id}")]
         public ActionResult UpdateUser(int id,[FromBody]InputDtoUpdateUser inputDtoUpdateUser)
@@ -81,6 +99,7 @@ namespace pAPI.Controllers
             return NotFound();
         }
 
+        //TODO Intégralité données
         [HttpPost("authenticate")]
         public IActionResult AuthenticateUser([FromBody] InputDtoAuthenticate inputDtoAuthenticate)
         {
@@ -102,7 +121,7 @@ namespace pAPI.Controllers
             return Ok(user);
         }
         
-         
+         //TODO Intégralité données
          [HttpPatch]
          [Route("pwd")]
           public ActionResult UpdatePassword([FromBody] InputDTOUpdateUserPassword password)
@@ -115,8 +134,5 @@ namespace pAPI.Controllers
               
               return BadRequest(new {message = "Le mot de passe ne correspond pas !"});;
           }
-         
-         
-         
     }
 }

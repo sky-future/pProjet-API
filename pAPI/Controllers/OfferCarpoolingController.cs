@@ -25,10 +25,17 @@ namespace pAPI.Controllers
         [HttpGet]
         public ActionResult<OutputDtoQueryCarpooling> QueryOfferCarpooling()
         {
+            var query = _offerCarpoolingService.Query();
+
+            if (query == null)
+            {
+                return BadRequest(new {message = "Aucune données n'a été trouvées."});
+            }
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
-            return Ok(_offerCarpoolingService.Query());
+            return Ok(query);
         }
         
+        //TODO intégralité des données
         [HttpPost]
         public ActionResult<OutputDtoAddOfferCarpooling> CreateOfferCarpooling([FromBody]InputDtoAddOfferCarpooling inputDtoAddOfferCarpooling)
         {
@@ -39,6 +46,11 @@ namespace pAPI.Controllers
         [Route("{id}")]
         public ActionResult DeleteByIdOfferCarpooling(int id)
         {
+            if (id < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoDeleteByIdOfferCarpooling = new InputDtoDeleteById()
             {
                 Id = id
@@ -56,7 +68,14 @@ namespace pAPI.Controllers
         [Route("list")]
         public ActionResult<OutputDtoGetAddressListForCarpooling> GetAddressListForCarpooling()
         {
-            return Ok(_addressUserService.GetAddressListForCarpooling());
+            var get = _addressUserService.GetAddressListForCarpooling();
+
+            if (get == null)
+            {
+                return BadRequest(new {message = "Aucune liste n'a été trouvée."});
+            }
+            
+            return Ok(get);
         }
 
         [HttpGet]
