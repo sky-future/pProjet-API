@@ -15,5 +15,6 @@ namespace Application.Repositories
         bool Delete(int idSender, int idReceiver);
 
         bool UpdateConfirmationRequest(InputDtoUpdateConfirmation confirmation);
+        bool DeleteAllByIdReceiver(int idReceiver);
     }
 }

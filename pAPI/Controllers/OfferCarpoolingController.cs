@@ -5,6 +5,8 @@ using Application.Services.Cars;
 using Application.Services.Cars.Dto;
 using Application.Services.OfferCarpooling;
 using Application.Services.OfferCarpooling.DTO;
+using Application.Services.RequestCarpooling;
+using Application.Services.RequestCarpooling.DTO;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -20,14 +22,16 @@ namespace pAPI.Controllers
         private readonly IAddressRepository _addressRepository;
         private readonly IUserService _userService;
         private readonly ICarService _carService;
+        private readonly IRequestCarpoolingService _requestCarpoolingService;
 
-        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService, IAddressUserService addressUserService, IAddressRepository addressRepository, IUserService userService, ICarService carService)
+        public OfferCarpoolingController(IOfferCarpoolingService offerCarpoolingService, IAddressUserService addressUserService, IAddressRepository addressRepository, IUserService userService, ICarService carService, IRequestCarpoolingService requestCarpoolingService)
         {
             _offerCarpoolingService = offerCarpoolingService;
             _addressUserService = addressUserService;
             _addressRepository = addressRepository;
             _userService = userService;
             _carService = carService;
+            _requestCarpoolingService = requestCarpoolingService;
         }
         
         [HttpGet]
@@ -93,25 +97,72 @@ namespace pAPI.Controllers
         }
         
         [HttpDelete]
-        [Route("{id}")]
-        public ActionResult DeleteByIdOfferCarpooling(int id)
+        [Route("{idUser}")]
+        public ActionResult DeleteByIdOfferCarpooling(int idUser)
         {
-            if (id < 0)
+            if (idUser < 0)
             {
                 return BadRequest(new {message = "L'id n'est pas conforme."});
             }
             
-            var inputDtoDeleteByIdOfferCarpooling = new InputDtoDeleteById()
+            var inputDtoGetByIdUser = new InputDtoGetByIdUser
             {
-                Id = id
+                id = idUser
             };
             
-            if (_offerCarpoolingService.DeleteById(inputDtoDeleteByIdOfferCarpooling))
+            if (_userService.GetById(inputDtoGetByIdUser) == null)
             {
-                return Ok();
+                return BadRequest(new {message = "L'utilisateur n'existe pas."});
+            }
+            
+            var inputDtoDeleteByIdOfferCarpooling = new InputDtoDeleteById()
+            {
+                Id = idUser
+            };
+
+            var inputDtoAddOfferCarpooling = new InputDtoAddOfferCarpooling
+            {
+                IdUser = idUser
+            };
+
+            //Est ce qu'il a une offre ?
+            if (_offerCarpoolingService.GetByIdUser(inputDtoAddOfferCarpooling) == null)
+            {
+                return BadRequest(new {message="L'utilisateur n'est pas dans la liste des utilisateurs qui proposent leurs services de covoiturage."})
             }
 
-            return NotFound();
+            var inputDtoGetRequestByIdReceiver = new InputDtoGetRequestByIdReceiver
+            {
+                IdRequestReceiver = idUser
+            };
+            //Supprimer toutes les requêtes ou idUser est le sender
+            var requestByIdReceiver = _requestCarpoolingService.GetRequestByIdReceiver(inputDtoGetRequestByIdReceiver);
+
+            if (requestByIdReceiver == null)
+            {
+                if (_offerCarpoolingService.DeleteById(inputDtoDeleteByIdOfferCarpooling))
+                {
+                    return Ok("Vous êtes bel et bien désinscrit de la liste de co-voiturage.");
+                }
+
+                return BadRequest("Votre demande n'a pas pu être effectuée.");
+            }
+
+            foreach (var request in requestByIdReceiver)
+            {
+                var input = new InputDtoGetRequestByIdReceiver
+                {
+                    IdRequestReceiver = request.IdRequestReceiver
+                };
+                var isDone = _requestCarpoolingService.DeleteAllByIdReceiver(input);
+
+                if (!isDone)
+                {
+                    return BadRequest(new {message = "Il y a eu un problème lors de la suppresion des requêtes."});
+                }
+            }
+
+            return Ok("Votre demande a bien été effectuée.");
         }
         
         [HttpGet]

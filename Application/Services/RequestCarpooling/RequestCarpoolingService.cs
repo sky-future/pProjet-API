@@ -58,6 +58,11 @@ namespace Application.Services.RequestCarpooling
             return outputDtoRequestCarpoolingByIds;
         }
 
+        public bool DeleteAllByIdReceiver(InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver)
+        {
+            return _requestCarpoolingRepository.DeleteAllByIdReceiver(inputDtoGetRequestByIdReceiver.IdRequestReceiver);
+        }
+
         public IEnumerable<OutputDtoRequestCarpooling> GetRequestByIdReceiver(InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver)
         {
             var requestInDb = _requestCarpoolingRepository.GetRequestByIdReceiver(inputDtoGetRequestByIdReceiver.IdRequestReceiver);

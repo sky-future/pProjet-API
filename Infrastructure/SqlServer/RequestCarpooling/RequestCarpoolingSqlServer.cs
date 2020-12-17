@@ -36,5 +36,7 @@
         public static readonly string ReqGetByIdSenderReceiver = $@"
                 SELECT * FROM {TableName}
                 WHERE {ColIdRequestSender} = @{ColIdRequestSender} AND {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
+
+        public static readonly string ReqDelAllByIdReceiver = $@"DELETE FROM {TableName} WHERE {ColIdRequestReceiver} = @{ColIdRequestReceiver}";
     }
 }

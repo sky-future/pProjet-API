@@ -156,6 +156,24 @@ namespace Infrastructure.SqlServer.RequestCarpooling
             return hasBeenChanged;
         }
 
+        public bool DeleteAllByIdReceiver(int idReceiver)
+        {
+            var hasBeenDeleted = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = RequestCarpoolingSqlServer.ReqDel;
+                
+                command.Parameters.AddWithValue($"@{RequestCarpoolingSqlServer.ColIdRequestReceiver}", idReceiver);
+                
+                hasBeenDeleted = command.ExecuteNonQuery() == 1;
+
+            }
+            
+            return hasBeenDeleted;
+        }
     }
     
 }
