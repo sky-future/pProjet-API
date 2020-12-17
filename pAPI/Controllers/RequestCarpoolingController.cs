@@ -55,6 +55,41 @@ namespace pAPI.Controllers
             return Ok(get);
         }
         
+        [HttpGet]
+        [Route("{idSender}/sender")]
+        public ActionResult<OutputDtoRequestCarpoolingById> GetByIdSender(int idSender)
+        {
+            if (idSender < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
+            var inputDtoGetByIdUser = new InputDtoGetByIdUser
+            {
+                id = idSender
+            };
+            
+            if (_userService.GetById(inputDtoGetByIdUser) == null)
+            {
+                return BadRequest(new
+                    {message = "L'utilisateur n'existe pas."});
+            }
+            
+            InputDtoGetRequestByIdSender inputDtoGetRequestByIdSender = new InputDtoGetRequestByIdSender
+            {
+                IdSender = idSender
+            };
+
+            var get = _requestCarpoolingService.GetRequestProfileByIdSender(inputDtoGetRequestByIdSender);
+
+            if (get == null)
+            {
+                return BadRequest(new {message = "Aucune requête n'a été trouvée pour cet utilisateur"});
+            }
+            
+            return Ok(get);
+        }
+        
         //TODO Vérifier intégralité des données
         //TODO Gérer qu'on ne puisse pas envoyée de demande si on est chauffeur
         [HttpPost]
