@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\pApi.UnitTests\pApi.UnitTests.csproj" />
     </ItemGroup>
 
 </Project>
