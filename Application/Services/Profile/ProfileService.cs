@@ -19,9 +19,14 @@ namespace Application.Services.Profile
 
         public IEnumerable<OutputDtoQueryProfile> Query()
         {
-            return _profileRepository
-                .Query()
-                .Select(profile => new OutputDtoQueryProfile()
+            var queryInDb = _profileRepository.Query();
+
+            if (queryInDb == null)
+            {
+                return null;
+            }
+            
+            return queryInDb.Select(profile => new OutputDtoQueryProfile()
                 {
                     Id = profile.Id,
                     Lastname = profile.Lastname,
@@ -78,6 +83,11 @@ namespace Application.Services.Profile
         {
             var profileInDb = _profileRepository.GetById(inputDtoGetByIdProfile.Id);
 
+            if (profileInDb == null)
+            {
+                return null;
+            }
+
             return new OutputDtoGetByIdProfile()
             {
                 Id = profileInDb.Id,
@@ -94,6 +104,11 @@ namespace Application.Services.Profile
         public OutputDtoGetByidUserProfile GetByUserIdProfile(InputDtoGetByidUserProfile inputDtoGetByidUserProfile)
         {
             var profileInDb = _profileRepository.GetByIdUser(inputDtoGetByidUserProfile.IdUser);
+
+            if (profileInDb == null)
+            {
+                return null;
+            }
 
             return new OutputDtoGetByidUserProfile()
             {

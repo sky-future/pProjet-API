@@ -18,9 +18,14 @@ namespace Application.Services.Users
         
         public IEnumerable<OutputDtoQueryUser> Query()
         {
-            return _userRepository
-                .Query()
-                .Select(user => new OutputDtoQueryUser
+            var queryInDb = _userRepository.Query();
+
+            if (queryInDb == null)
+            {
+                return null;
+            }
+            
+            return queryInDb.Select(user => new OutputDtoQueryUser
             {
                 id =  user.Id,
                 mail = user.Mail,
@@ -59,6 +64,11 @@ namespace Application.Services.Users
         public OutputDtoGetByIdUser GetById(InputDtoGetByIdUser inputDtoGetById)
         {
             var userInDb = _userRepository.GetById(inputDtoGetById.id);
+            
+            if (userInDb == null)
+            {
+                return null;
+            }
             
             return new OutputDtoGetByIdUser
             {
@@ -105,6 +115,17 @@ namespace Application.Services.Users
             return _userRepository.UpdatePassword(inputDTOupdatePassword);
         }
 
-      
+        public bool UpdateLastConnexion(InputDtoUpdateLastConnexion lastConnexion)
+        {
+            return _userRepository.UpdateLastConnexion(lastConnexion);
+        }
+
+        public bool CreateAdminUser(InputDtoAddAdminUser inputDtoAddAdminUser)
+        {
+            var userFromDto = _userFactory.CreateAdminUser(inputDtoAddAdminUser.Mail, inputDtoAddAdminUser.Password,
+                inputDtoAddAdminUser.LastConnexion, inputDtoAddAdminUser.Admin);
+
+            return _userRepository.CreateAdminUser(userFromDto);
+        }
     }
 }

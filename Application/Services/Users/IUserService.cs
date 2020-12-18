@@ -14,5 +14,9 @@ namespace Application.Services.Users
         OutputDtoAuthenticate Authenticate(InputDtoAuthenticate inputDtoAuthenticate);
 
         bool UpdatePassword( InputDTOUpdateUserPassword inputDTOupdatePassword);
+
+        bool UpdateLastConnexion(InputDtoUpdateLastConnexion lastConnexion);
+
+        bool CreateAdminUser(InputDtoAddAdminUser inputDtoAddAdminUser);
     }
 }

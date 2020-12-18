@@ -29,12 +29,21 @@ namespace Application.Services.RequestCarpooling
             
             var requestInDb = _requestCarpoolingRepository.GetRequestByIdReceiver(inputDtoGetRequestByIdReceiver.IdRequestReceiver);
 
+            if (requestInDb == null)
+            {
+                return null;
+            }
+            
             IProfile profile;
             IList<OutputDtoRequestCarpoolingById> outputDtoRequestCarpoolingByIds = new List<OutputDtoRequestCarpoolingById>();
 
             foreach (var request in requestInDb)
             {
                 profile = _profileRepository.GetByIdUser(request.IdRequestSender);
+                if (profile == null)
+                {
+                    return null;
+                }
                 var output = new OutputDtoRequestCarpoolingById
                 {
                     IdUser = request.IdRequestSender,
@@ -47,6 +56,46 @@ namespace Application.Services.RequestCarpooling
             }
 
             return outputDtoRequestCarpoolingByIds;
+        }
+        
+        public IEnumerable<OutputDtoRequestCarpoolingById> GetRequestProfileByIdSender(
+            InputDtoGetRequestByIdSender inputDtoGetRequestByIdSender)
+        {
+            
+            var requestInDb = _requestCarpoolingRepository.GetRequestByIdSender(inputDtoGetRequestByIdSender.IdSender);
+
+            if (requestInDb == null)
+            {
+                return null;
+            }
+            
+            IProfile profile;
+            IList<OutputDtoRequestCarpoolingById> outputDtoRequestCarpoolingByIds = new List<OutputDtoRequestCarpoolingById>();
+
+            foreach (var request in requestInDb)
+            {
+                profile = _profileRepository.GetByIdUser(request.IdRequestReceiver);
+                if (profile == null)
+                {
+                    return null;
+                }
+                var output = new OutputDtoRequestCarpoolingById
+                {
+                    IdUser = request.IdRequestReceiver,
+                    Firstname = profile.Firstname,
+                    Lastname = profile.Lastname,
+                    Telephone = profile.Telephone,
+                    Confirmation = request.Confirmation
+                };
+                outputDtoRequestCarpoolingByIds.Add(output);
+            }
+
+            return outputDtoRequestCarpoolingByIds;
+        }
+
+        public bool DeleteAllByIdReceiver(InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver)
+        {
+            return _requestCarpoolingRepository.DeleteAllByIdReceiver(inputDtoGetRequestByIdReceiver.IdRequestReceiver);
         }
 
         public IEnumerable<OutputDtoRequestCarpooling> GetRequestByIdReceiver(InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver)

@@ -46,7 +46,17 @@ namespace Application.Services.AddressUser
         {
             var address = _addressRepository.GetById(inputDtoGetByIdAddressAddressUser.IdAddress);
 
+            if (address == null)
+            {
+                return null;
+            }
+
             var addressUser = _addressUserRepository.GetByAddress(address);
+
+            if (addressUser == null)
+            {
+                return null;
+            }
 
             return new OutputDtoGetByIdAddressAddressUser
             {
@@ -80,6 +90,11 @@ namespace Application.Services.AddressUser
         public IEnumerable<OutputDtoGetAddressListForCarpooling> GetAddressListForCarpooling()
         {
             var carpoolingOfferList = _offerCarpoolingRepository.Query();
+
+            if (carpoolingOfferList == null)
+            {
+                return null;
+            }
             IList<int> userList = new List<int>();
             foreach (var offerCarpooling in carpoolingOfferList)
             {
@@ -90,7 +105,15 @@ namespace Application.Services.AddressUser
             foreach (var userListFor in userList)
             {
                 user = (User) _userRepository.GetById(userListFor);
+                if (user == null)
+                {
+                    return null;
+                }
                 IAddressUser addressUser = _addressUserRepository.GetByUser(user);
+                if (addressUser == null)
+                {
+                    return null;
+                }
                 addressList.Add(addressUser.Address);
             }
 

@@ -31,6 +31,10 @@
              SET {ColPassword} = @{ColPassword}New
              WHERE {ColId} = @{ColId}
              AND {ColPassword} = @{ColPassword}Old";
-        
+
+        public static readonly string REQ_Update_LastConnexion = $@"
+            UPDATE {TableName}
+            SET {ColLastConnexion} = @{ColLastConnexion}
+            WHERE {ColId} = @{ColId}";
     }
 }

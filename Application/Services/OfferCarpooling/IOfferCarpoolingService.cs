@@ -9,5 +9,6 @@ namespace Application.Services.OfferCarpooling
         OutputDtoAddOfferCarpooling Create(InputDtoAddOfferCarpooling inputDtoAddOfferCarpooling);
         public bool DeleteById(InputDtoDeleteById inputDtoDeleteById);
         public OutputDtoInfoModal GetInfoModal(InputDtoIdAddress inputDtoIdAddress);
+        public OutputDtoQueryCarpooling GetByIdUser(InputDtoAddOfferCarpooling inputDtoAddOfferCarpooling);
     }
 }

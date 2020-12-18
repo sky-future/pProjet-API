@@ -16,6 +16,7 @@ namespace Infrastructure.SqlServer.OfferCarpooling
         
         public static readonly string ReqDelete = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
         public static readonly string ReqDeleteIdUser = $"DELETE FROM {TableName} WHERE {ColIdUser} = @{ColIdUser}";
+        public static readonly string ReqGetByIdUser = $"SELECT * FROM {TableName} WHERE {ColIdUser} = @{ColIdUser}";
 
     }
 }

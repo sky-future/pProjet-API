@@ -185,5 +185,54 @@ namespace Infrastructure.SqlServer.Users
             }
             return hasBeenChanged;
         }
+
+        public bool UpdateLastConnexion(InputDtoUpdateLastConnexion lastConnexion)
+        {
+            bool hasBeenChanged = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = UserSqlServer.REQ_Update_LastConnexion;
+
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColLastConnexion}", lastConnexion.LastConnexion);
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColId}", lastConnexion.Id);
+
+                hasBeenChanged = command.ExecuteNonQuery() == 1;
+            }
+
+            return hasBeenChanged;
+        }
+
+        public bool CreateAdminUser(IUser adminUser)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = UserSqlServer.ReqCreate;
+
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColMail}", adminUser.Mail);
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColPassword}",adminUser.Password);
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColLastConnexion}", adminUser.LastConnexion);
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColAdmin}", adminUser.Admin);
+
+                try
+                {
+                    adminUser.Id = (int) command.ExecuteScalar();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        
     }
 }

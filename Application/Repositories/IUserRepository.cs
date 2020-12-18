@@ -13,5 +13,7 @@ namespace Application.Repositories
         bool Update(int id, IUser user);
         IUser Authenticate(string mail, string password);
         bool UpdatePassword(InputDTOUpdateUserPassword updatepassword);
+        bool UpdateLastConnexion(InputDtoUpdateLastConnexion lastConnexion);
+        bool CreateAdminUser(IUser adminUser);
     }
 }

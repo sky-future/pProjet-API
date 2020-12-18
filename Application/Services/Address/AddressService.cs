@@ -30,9 +30,14 @@ namespace Application.Services.Address
         
         public IEnumerable<OutputDtoQueryAddress> Query()
         {
-            return _addressRepository
-                .Query()
-                .Select(address => new OutputDtoQueryAddress
+            var queryInDb = _addressRepository.Query();
+
+            if (queryInDb == null)
+            {
+                return null;
+            }
+            
+            return queryInDb.Select(address => new OutputDtoQueryAddress
                 {
                     id =  address.Id,
                     street = address.Street,

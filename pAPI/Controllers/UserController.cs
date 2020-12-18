@@ -25,8 +25,14 @@ namespace pAPI.Controllers
         [HttpGet]
         public ActionResult<OutputDtoQueryUser> QueryUser()
         {
+            var query = _userService.Query();
+
+            if (query == null)
+            {
+                return BadRequest(new {message = "Aucune données n'a été trouvées."});
+            }
             //Renvoie les données avec un code 200 -> Tout s'est bien passé
-            return Ok(_userService.Query());
+            return Ok(query);
         }
 
         //TODO : Vérifier le passage de l'id par la route sans utiliser inputDto
@@ -34,15 +40,21 @@ namespace pAPI.Controllers
         [Route("{id}")]
         public ActionResult<OutputDtoGetByIdUser> GetByIdUser(int id)
         {
+            if (id < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoGetById = new InputDtoGetByIdUser
             {
                 id = id
             };
             
             OutputDtoGetByIdUser user = _userService.GetById(inputDtoGetById);
-            return _userService!= null ? (ActionResult<OutputDtoGetByIdUser>) Ok(user) : NotFound();
+            return user != null ? (ActionResult<OutputDtoGetByIdUser>) Ok(user) : BadRequest(new {message = "Aucun n'utilisateur ne correspond à cet id."});
         }
 
+        //TODO Vérifier intégralité données
         //[FromBody] le user qu'on enverra, résidera dans le corps de la requête
         [HttpPost]
         public ActionResult<OutputDtoAddUser> CreateUser([FromBody]InputDtoAddUser inputDtoAddUser)
@@ -52,23 +64,66 @@ namespace pAPI.Controllers
             return user != null ? (ActionResult<OutputDtoAddUser>) Ok(user) : BadRequest();
         }
 
+        [HttpPost]
+        [Route("admin")]
+        public ActionResult CreateAdminUser([FromBody] InputDtoAddAdminUser inputDtoAddAdminUser)
+        {
+            var inputDtoGetById = new InputDtoGetByIdUser
+            {
+                id = inputDtoAddAdminUser.Id
+            };
+
+            var userList = _userService.Query();
+
+            foreach (var user in userList)
+            {
+                if (user.mail == inputDtoAddAdminUser.Mail)
+                {
+                    return BadRequest(new {message = "Cet utilisateur est déjà administrateur !"});
+                }
+            }
+            
+            OutputDtoGetByIdUser userAdmin = _userService.GetById(inputDtoGetById);
+
+            if (userAdmin.admin)
+            {
+                if (inputDtoAddAdminUser.Admin)
+                {
+                    _userService.CreateAdminUser(inputDtoAddAdminUser);
+                    return Ok(new {message = "Un nouvel administrateur a été crée."});
+                }
+                _userService.CreateAdminUser(inputDtoAddAdminUser);
+                return Ok(new {message = "Un nouveau utilisateur a été crée."});
+            }
+            
+            return BadRequest(new {message = "Vous n'avez pas les autorisations pour ajouter un administrateur !"});
+
+        }
+        
+        
         [HttpDelete]
         [Route("{id}")]
         public ActionResult DeleteByIdUser(int id)
         {
+            if (id < 0)
+            {
+                return BadRequest(new {message = "L'id n'est pas conforme."});
+            }
+            
             var inputDtoDeleteById = new InputDtoDeleteByIdUser()
             {
                 id = id
             };
             
-            if (_userService.DeleteById(inputDtoDeleteById))
+            if (_userService.DeleteById(inputDtoDeleteById)) 
             {
                 return Ok();
             }
 
             return NotFound();
         }
-
+        
+        //TODO Intégralité données
         [HttpPut]
         [Route("{id}")]
         public ActionResult UpdateUser(int id,[FromBody]InputDtoUpdateUser inputDtoUpdateUser)
@@ -81,6 +136,7 @@ namespace pAPI.Controllers
             return NotFound();
         }
 
+        //TODO Intégralité données
         [HttpPost("authenticate")]
         public IActionResult AuthenticateUser([FromBody] InputDtoAuthenticate inputDtoAuthenticate)
         {
@@ -102,20 +158,30 @@ namespace pAPI.Controllers
             return Ok(user);
         }
         
-         
+         //TODO Intégralité données
          [HttpPatch]
          [Route("pwd")]
           public ActionResult UpdatePassword([FromBody] InputDTOUpdateUserPassword password)
           {
               if (_userService.UpdatePassword(password))
               {
-                  return Ok(new {message = "Le mot de passe a été changé"});
+                  
+                  return Ok(new {message = "Le mot de passe à bien été changé !"});
               }
               
               return BadRequest(new {message = "Le mot de passe ne correspond pas !"});;
           }
-         
-         
-         
+
+          [HttpPatch]
+          [Route("lastConnexion")]
+          public ActionResult UpdateLastConnexion([FromBody] InputDtoUpdateLastConnexion lastConnexion)
+          {
+              if (_userService.UpdateLastConnexion(lastConnexion))
+              {
+                  return Ok(new {message = "Last connexion est à jour !"});
+              }
+
+              return BadRequest(new {message = "Il y a eu un problème avec lastconnexion"});
+          }
     }
 }

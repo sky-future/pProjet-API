@@ -25,9 +25,14 @@ namespace Application.Services.OfferCarpooling
 
         public IEnumerable<OutputDtoQueryCarpooling> Query()
         {
-            return _offerCarpoolingRepository
-                .Query()
-                .Select(offerCarpooling => new OutputDtoQueryCarpooling()
+            var queryInDb = _offerCarpoolingRepository.Query();
+
+            if (queryInDb == null)
+            {
+                return null;
+            }
+            
+            return queryInDb.Select(offerCarpooling => new OutputDtoQueryCarpooling()
                 {
                     Id = offerCarpooling.Id,
                     IdUser = offerCarpooling.IdUser
@@ -88,6 +93,22 @@ namespace Application.Services.OfferCarpooling
             };
 
             return infoModal;
+        }
+
+        public OutputDtoQueryCarpooling GetByIdUser(InputDtoAddOfferCarpooling inputDtoAddOfferCarpooling)
+        {
+            var offerInDb = _offerCarpoolingRepository.GetByIdUser(inputDtoAddOfferCarpooling.IdUser);
+            
+            if (offerInDb == null)
+            {
+                return null;
+            }
+
+            return new OutputDtoQueryCarpooling
+            {
+                Id = offerInDb.Id,
+                IdUser = offerInDb.IdUser
+            };
         }
     }
 }
