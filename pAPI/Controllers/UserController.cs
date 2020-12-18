@@ -64,6 +64,43 @@ namespace pAPI.Controllers
             return user != null ? (ActionResult<OutputDtoAddUser>) Ok(user) : BadRequest();
         }
 
+        [HttpPost]
+        [Route("admin")]
+        public ActionResult CreateAdminUser([FromBody] InputDtoAddAdminUser inputDtoAddAdminUser)
+        {
+            var inputDtoGetById = new InputDtoGetByIdUser
+            {
+                id = inputDtoAddAdminUser.Id
+            };
+
+            var userList = _userService.Query();
+
+            foreach (var user in userList)
+            {
+                if (user.mail == inputDtoAddAdminUser.Mail)
+                {
+                    return BadRequest(new {message = "Cet utilisateur est déjà administrateur !"});
+                }
+            }
+            
+            OutputDtoGetByIdUser userAdmin = _userService.GetById(inputDtoGetById);
+
+            if (userAdmin.admin)
+            {
+                if (inputDtoAddAdminUser.Admin)
+                {
+                    _userService.CreateAdminUser(inputDtoAddAdminUser);
+                    return Ok(new {message = "Un nouvel administrateur a été crée."});
+                }
+                _userService.CreateAdminUser(inputDtoAddAdminUser);
+                return Ok(new {message = "Un nouveau utilisateur a été crée."});
+            }
+            
+            return BadRequest(new {message = "Vous n'avez pas les autorisations pour ajouter un administrateur !"});
+
+        }
+        
+        
         [HttpDelete]
         [Route("{id}")]
         public ActionResult DeleteByIdUser(int id)
