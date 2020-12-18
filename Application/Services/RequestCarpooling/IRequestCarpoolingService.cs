@@ -16,5 +16,8 @@ namespace Application.Services.RequestCarpooling
         bool UpdateConfirmation(InputDtoUpdateConfirmation confirmation);
         IEnumerable<OutputDtoRequestCarpoolingById> GetRequestProfileByIdReceiver(InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver);
         bool DeleteAllByIdReceiver(InputDtoGetRequestByIdReceiver inputDtoGetRequestByIdReceiver);
+
+        IEnumerable<OutputDtoRequestCarpoolingById> GetRequestProfileByIdSender(
+            InputDtoGetRequestByIdSender inputDtoGetRequestByIdSender);
     }
 }
