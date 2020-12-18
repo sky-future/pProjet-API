@@ -153,9 +153,13 @@ namespace pAPI.Controllers
             ProfileRepository pr = new ProfileRepository();
             IProfile profile = pr.GetByIdUser(user.id);
 
-            if (profile == null) return BadRequest(user);
+            // if (profile == null)
+            // {
+            //     
+            //     return BadRequest(user);
+            // }
 
-            user.profile = profile.Id;
+            // user.profile = profile.Id;
             return Ok(user);
         }
         
