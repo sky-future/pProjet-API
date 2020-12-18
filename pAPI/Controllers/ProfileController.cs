@@ -94,7 +94,22 @@ namespace pAPI.Controllers
         [HttpPost]
         public ActionResult<OutputDtoAddProfile> CreateProfile([FromBody]InputDtoAddProfile inputDtoAddProfile)
         {
-            return Ok(_profileService.Create(inputDtoAddProfile));
+            var queryProfile = _profileService.Query();
+
+            foreach (var query in queryProfile)
+            {
+                if (query.Matricule == inputDtoAddProfile.Matricule)
+                    return BadRequest(new {message ="Ce matricule existe déjà !"});
+            }
+            
+            var profile = _profileService.Create(inputDtoAddProfile);
+
+            if (profile == null)
+            {
+                return BadRequest(new {message = "Le profile n'a pas été créé."});
+            }
+            
+            return Ok(profile);
         }
 
         [HttpDelete]
