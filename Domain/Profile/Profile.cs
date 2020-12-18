@@ -1,3 +1,5 @@
+using System;
+
 namespace Domain.Profile
 {
     public class Profile : IProfile
@@ -25,6 +27,22 @@ namespace Domain.Profile
         {
         }
 
-       
+        protected bool Equals(Profile other)
+        {
+            return Id == other.Id && Lastname == other.Lastname && Firstname == other.Firstname && Matricule == other.Matricule && Telephone == other.Telephone && Descript == other.Descript && IdUser == other.IdUser;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Profile) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Lastname, Firstname, Matricule, Telephone, Descript, IdUser);
+        }
     }
 }

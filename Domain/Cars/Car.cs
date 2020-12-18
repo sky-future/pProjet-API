@@ -1,4 +1,6 @@
-﻿namespace Domain.Cars
+﻿using System;
+
+namespace Domain.Cars
 {
     public class Car : ICar
     {
@@ -18,6 +20,24 @@
             Immatriculation = immatriculation;
             IdUser = idUser;
             PlaceNb = placeNb;
+        }
+
+        protected bool Equals(Car other)
+        {
+            return Id == other.Id && Immatriculation == other.Immatriculation && IdUser == other.IdUser && PlaceNb == other.PlaceNb;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Car) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Immatriculation, IdUser, PlaceNb);
         }
     }
 }

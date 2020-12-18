@@ -1,3 +1,4 @@
+using System;
 using Domain.Address;
 using Domain.Users;
 
@@ -12,6 +13,24 @@ namespace Domain.AddressUser
         public AddressUser()
         {
             
+        }
+
+        protected bool Equals(AddressUser other)
+        {
+            return Id == other.Id && Equals(User, other.User) && Equals(Address, other.Address);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((AddressUser) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, User, Address);
         }
     }
 }

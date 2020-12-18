@@ -82,7 +82,22 @@ namespace Infrastructure.SqlServer.AddressUser
 
         public bool Delete(int idUser, int idAddress)
         {
-            throw new System.NotImplementedException();
+            bool hasBeenDeleted = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = AddressUserSqlServer.ReqDelete;
+
+                command.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdUser}", idUser);
+                command.Parameters.AddWithValue($"@{AddressUserSqlServer.ColIdUser}", idAddress);
+
+                hasBeenDeleted = command.ExecuteNonQuery() == 1;
+
+            }
+
+            return hasBeenDeleted;
         }
 
         public IEnumerable<IAddressUser> Query()

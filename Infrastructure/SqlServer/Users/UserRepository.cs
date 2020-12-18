@@ -164,7 +164,6 @@ namespace Infrastructure.SqlServer.Users
             return _user.WithoutPassword();
         }
 
-        //TODO test changement password
         public bool UpdatePassword(InputDTOUpdateUserPassword updateUserPassword)
         {
             bool hasBeenChanged = false;

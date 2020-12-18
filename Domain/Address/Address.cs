@@ -1,4 +1,6 @@
-﻿namespace Domain.Address
+﻿using System;
+
+namespace Domain.Address
 {
     public class Address : IAddress
     {
@@ -26,6 +28,24 @@
             Country = country;
             Longitude = longitude;
             Latitude = latitude;
+        }
+
+        protected bool Equals(Address other)
+        {
+            return Id == other.Id && Street == other.Street && Number == other.Number && PostalCode == other.PostalCode && City == other.City && Country == other.Country && Longitude == other.Longitude && Latitude == other.Latitude;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Address) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Street, Number, PostalCode, City, Country, Longitude, Latitude);
         }
     }
 }
