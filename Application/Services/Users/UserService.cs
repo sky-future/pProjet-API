@@ -115,9 +115,9 @@ namespace Application.Services.Users
             return _userRepository.UpdatePassword(inputDTOupdatePassword);
         }
 
-        public bool UpdateLastConnexion(InputDtoUpdateLastConnexion lastConnexion)
+        public bool UpdateLastConnexion(int id)
         {
-            return _userRepository.UpdateLastConnexion(lastConnexion);
+            return _userRepository.UpdateLastConnexion(id);
         }
 
         public bool CreateAdminUser(InputDtoAddAdminUser inputDtoAddAdminUser)

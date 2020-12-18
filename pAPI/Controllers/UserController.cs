@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Domain.Profile;
@@ -173,10 +174,10 @@ namespace pAPI.Controllers
           }
 
           [HttpPatch]
-          [Route("lastConnexion")]
-          public ActionResult UpdateLastConnexion([FromBody] InputDtoUpdateLastConnexion lastConnexion)
+          [Route("lastConnexion/{id}")]
+          public ActionResult UpdateLastConnexion(int id)
           {
-              if (_userService.UpdateLastConnexion(lastConnexion))
+              if (_userService.UpdateLastConnexion(id))
               {
                   return Ok(new {message = "Last connexion est à jour !"});
               }

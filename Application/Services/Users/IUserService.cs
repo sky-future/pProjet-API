@@ -15,7 +15,7 @@ namespace Application.Services.Users
 
         bool UpdatePassword( InputDTOUpdateUserPassword inputDTOupdatePassword);
 
-        bool UpdateLastConnexion(InputDtoUpdateLastConnexion lastConnexion);
+        bool UpdateLastConnexion(int id);
 
         bool CreateAdminUser(InputDtoAddAdminUser inputDtoAddAdminUser);
     }
