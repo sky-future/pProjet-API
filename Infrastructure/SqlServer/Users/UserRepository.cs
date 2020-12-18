@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -182,6 +183,29 @@ namespace Infrastructure.SqlServer.Users
 
                 hasBeenChanged = command.ExecuteNonQuery() == 1;
             }
+            return hasBeenChanged;
+        }
+
+        public bool UpdateLastConnexion(int Id)
+        {
+            bool hasBeenChanged = false;
+
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = UserSqlServer.REQ_Update_LastConnexion;
+
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColLastConnexion}",
+                    TimeZoneInfo
+                        .ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"))
+                        .ToString(CultureInfo.CreateSpecificCulture("fr-FR")));
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColId}", Id);
+
+                hasBeenChanged = command.ExecuteNonQuery() == 1;
+            }
+
             return hasBeenChanged;
         }
 

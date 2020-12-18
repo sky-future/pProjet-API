@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Domain.Profile;
@@ -115,7 +116,7 @@ namespace pAPI.Controllers
                 id = id
             };
             
-            if (_userService.DeleteById(inputDtoDeleteById))
+            if (_userService.DeleteById(inputDtoDeleteById)) 
             {
                 return Ok();
             }
@@ -165,11 +166,23 @@ namespace pAPI.Controllers
           {
               if (_userService.UpdatePassword(password))
               {
-                  Console.WriteLine("I am big bos ");
-                  return Ok();
+                  
+                  return Ok(new {message = "Le mot de passe à bien été changé !"});
               }
               
               return BadRequest(new {message = "Le mot de passe ne correspond pas !"});;
+          }
+
+          [HttpPatch]
+          [Route("lastConnexion/{id}")]
+          public ActionResult UpdateLastConnexion(int id)
+          {
+              if (_userService.UpdateLastConnexion(id))
+              {
+                  return Ok(new {message = "Last connexion est à jour !"});
+              }
+
+              return BadRequest(new {message = "Il y a eu un problème avec lastconnexion"});
           }
     }
 }
