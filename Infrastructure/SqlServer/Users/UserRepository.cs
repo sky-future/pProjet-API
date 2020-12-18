@@ -78,7 +78,9 @@ namespace Infrastructure.SqlServer.Users
 
                 command.Parameters.AddWithValue($"@{UserSqlServer.ColMail}", user.Mail);
                 command.Parameters.AddWithValue($"@{UserSqlServer.ColPassword}",user.Password);
-                command.Parameters.AddWithValue($"@{UserSqlServer.ColLastConnexion}", user.LastConnexion);
+                command.Parameters.AddWithValue($"@{UserSqlServer.ColLastConnexion}", TimeZoneInfo
+                    .ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"))
+                    .ToString(CultureInfo.CreateSpecificCulture("fr-FR")));
                 command.Parameters.AddWithValue($"@{UserSqlServer.ColAdmin}", false);
 
                 try
