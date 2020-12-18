@@ -122,7 +122,7 @@ namespace Infrastructure.SqlServer.Address
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColCountry}",address.Country);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColLongitude}", address.Longitude);
                 command.Parameters.AddWithValue($"@{AddressSqlServer.ColLatitude}", address.Latitude);
-                command.Parameters.AddWithValue($"@{AddressSqlServer.ColId}", address.Id);
+                command.Parameters.AddWithValue($"@{AddressSqlServer.ColId}", id);
 
                 hasBeenChanged = command.ExecuteNonQuery() == 1;
             }
