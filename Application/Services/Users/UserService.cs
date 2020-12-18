@@ -115,6 +115,11 @@ namespace Application.Services.Users
             return _userRepository.UpdatePassword(inputDTOupdatePassword);
         }
 
+        public bool UpdateLastConnexion(InputDtoUpdateLastConnexion lastConnexion)
+        {
+            return _userRepository.UpdateLastConnexion(lastConnexion);
+        }
+
         public bool CreateAdminUser(InputDtoAddAdminUser inputDtoAddAdminUser)
         {
             var userFromDto = _userFactory.CreateAdminUser(inputDtoAddAdminUser.Mail, inputDtoAddAdminUser.Password,
